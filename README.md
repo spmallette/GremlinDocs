@@ -4,13 +4,16 @@
 
 Gremlin is an open source project maintained by [TinkerPop](http://tinkerpop.com).  Please join the Gremlin users group at http://groups.google.com/group/gremlin-users for all TinkerPop related discussions.
 
-Unless otherwise noted, all samples are derived from the TinkerPop "toy" graph generated with:
+Unless otherwise noted, all samples are derived from the TinkerPop "toy" graph generated with: 
 
 ```groovy
 gremlin> g = TinkerGraphFactory.createTinkerGraph()
 ```
 
-This produces a hardcoded representation of the graph diagrammed [here](http://github.com/tinkerpop/blueprints/wiki/Property-Graph-Model).
+This produces a hardcoded representation of the graph diagrammed [here](http://github.com/tinkerpop/blueprints/wiki/Property-Graph-Model).  
+
+The documentation and samples presented here attempt to stay current with the most current and stable release of Gremlin (currently 2.1.0).  Please note that this is not the *official* Gremlin documentation.  The official documentation resides in the Gremlin [wiki](https://github.com/tinkerpop/gremlin/wiki).  
+
 
 ## Transform
 
