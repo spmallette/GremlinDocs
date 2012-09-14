@@ -40,7 +40,6 @@ gremlin> g.E.weight
 ==>0.2
 ```
 
-
 ### gather
 
 Collect all objects up to that step and process with the provided closure.
@@ -57,6 +56,30 @@ gremlin> g.v(1).out.gather
 #### See Also
 
 * [scatter](#transform/scatter)
+
+### id
+
+Gets the unique identifier of the element.  
+
+```groovy
+gremlin> v = g.V("name", "marko").next()
+==>v[1]
+gremlin> v.id
+==>1
+gremlin> g.v(1).id
+==>1
+```
+
+### label
+
+Gets the label of an edge.
+
+```groovy
+gremlin> g.v(6).outE.label
+==>created
+gremlin> g.v(1).outE.filter{it.label=='created'}
+==>e[9][1-created->3]
+```
 
 ### scatter
 
