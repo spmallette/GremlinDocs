@@ -19,6 +19,28 @@ The documentation and samples presented here attempt to stay current with the mo
 
 Transform steps take an object and emit a transformation of it.
 
+### E
+
+The edge iterator for the graph.  Utilize this to iterate through all the edges in the graph.  Use with care on large graphs.
+
+```groovy
+gremlin> g.E
+==>e[10][4-created->5]
+==>e[7][1-knows->2]
+==>e[9][1-created->3]
+==>e[8][1-knows->4]
+==>e[11][4-created->3]
+==>e[12][6-created->3]
+gremlin> g.E.weight
+==>1.0
+==>0.5
+==>0.4
+==>1.0
+==>0.4
+==>0.2
+```
+
+
 ### gather
 
 Collect all objects up to that step and process with the provided closure.
@@ -50,6 +72,24 @@ gremlin> g.v(1).out.gather{it[1..2]}
 gremlin> g.v(1).out.gather{it[1..2]}.scatter
 ==>v[4]
 ==>v[3]
+```
+
+### V
+
+The vertex iterator for the graph.  Utilize this to iterate through all the vertices in the graph.  Use with care on large graphs.
+
+```groovy
+gremlin> g.V
+==>v[3]
+==>v[2]
+==>v[1]
+==>v[6]
+==>v[5]
+==>v[4]
+gremlin> g.V("name", "marko")
+==>v[1]
+gremlin> g.V("name", "marko").name
+==>marko
 ```
 
 #### See Also
