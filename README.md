@@ -70,6 +70,52 @@ gremlin> g.v(1).id
 ==>1
 ```
 
+### in
+
+Gets the adjacent vertices to the vertex.
+
+```groovy
+gremlin> v = g.v(4)
+==>v[4]
+gremlin> v.inE.outV
+==>v[1]
+gremlin> v.in
+==>v[1]
+gremlin> v = g.v(3)
+==>v[3]
+gremlin> v.in("created")
+==>v[1]
+==>v[4]
+==>v[6]
+gremlin> v.inE("created").outV
+==>v[1]
+==>v[4]
+==>v[6]
+```
+
+### inE
+
+Gets the incoming edges of the vertex.
+
+```groovy
+gremlin> v = g.v(4)
+==>v[4]
+gremlin> v.inE.outV
+==>v[1]
+gremlin> v.in
+==>v[1]
+gremlin> v = g.v(3)
+==>v[3]
+gremlin> v.in("created")
+==>v[1]
+==>v[4]
+==>v[6]
+gremlin> v.inE("created").outV
+==>v[1]
+==>v[4]
+==>v[6]
+```
+
 ### label
 
 Gets the label of an edge.
@@ -79,6 +125,50 @@ gremlin> g.v(6).outE.label
 ==>created
 gremlin> g.v(1).outE.filter{it.label=='created'}
 ==>e[9][1-created->3]
+```
+
+### out
+
+Gets the out adjacent vertices to the vertex.
+
+```groovy
+gremlin> v = g.v(1)
+==>v[1]
+gremlin> v.outE.inV
+==>v[2]
+==>v[4]
+==>v[3]
+gremlin> v.out
+==>v[2]
+==>v[4]
+==>v[3]
+gremlin> v.outE('knows').inV
+==>v[2]
+==>v[4]
+gremlin> v.out('knows')
+==>v[2]
+==>v[4]
+```
+
+### outE
+
+Gets the outgoing edges to the vertex.
+
+```groovy
+gremlin> v.outE.inV
+==>v[2]
+==>v[4]
+==>v[3]
+gremlin> v.out
+==>v[2]
+==>v[4]
+==>v[3]
+gremlin> v.outE('knows').inV
+==>v[2]
+==>v[4]
+gremlin> v.out('knows')
+==>v[2]
+==>v[4]
 ```
 
 ### scatter
