@@ -29,6 +29,10 @@ gremlin> g.v(1).out.gather
 ==>[v[2], v[4], v[3]]
 ```
 
+#### See Also
+
+* [scatter](#transform/scatter)
+
 ### scatter
 
 Unroll all objects in the iterable at that step. Gather/Scatter is good for breadth-first traversals where the gather closure filters out unwanted elements at the current radius.
@@ -44,6 +48,10 @@ gremlin> g.v(1).out.gather{it[1..2]}.scatter
 ==>v[4]
 ==>v[3]
 ```
+
+#### See Also
+
+* [gather](#transform/gather)
 
 ## Filter
 
@@ -69,8 +77,8 @@ gremlin> x
 
 #### See Also
 
-* [store](#store)
-* [fill](#fill)
+* [store](#side-effect/store)
+* [fill](#methods/fill)
 
 ### store
 
@@ -86,8 +94,8 @@ gremlin> x
 
 #### See Also
 
-* [aggregate](#aggregate)
-* [fill](#fill)
+* [aggregate](#side-effect//aggregate)
+* [fill](#methods/fill)
 
 ## Branch
 
