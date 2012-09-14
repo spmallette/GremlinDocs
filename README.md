@@ -36,6 +36,10 @@ gremlin> v[x]
 ==>lop
 ```
 
+#### See Also
+
+* [key](#transform/key)
+
 ### both
 
 Get both adjacent vertices of the vertex, the in and the out.
@@ -166,6 +170,27 @@ gremlin> v.inE("created").outV
 ==>v[4]
 ==>v[6]
 ```
+
+### key
+
+Get the property value of an element.
+
+```groovy
+gremlin> v.both
+==>v[1]
+==>v[5]
+==>v[3]
+gremlin> v.both('knows')
+==>v[1]
+gremlin> v.both('knows', 'created')
+==>v[1]
+==>v[5]
+==>v[3]
+```
+
+#### See Also
+
+* [['key']](transform/['key'])
 
 ### label
 
