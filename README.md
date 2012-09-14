@@ -53,6 +53,22 @@ gremlin> v.bothE('knows', 'created')
 ==>e[11][4-created->3]
 ```
 
+### bothV
+
+Get both incoming and outgoing vertices of the edge.
+
+```groovy
+gremlin> e = g.e(12)
+==>e[12][6-created->3]
+gremlin> e.outV
+==>v[6]
+gremlin> e.inV
+==>v[3]
+gremlin> e.bothV
+==>v[6]
+==>v[3]
+```
+
 ### E
 
 The edge iterator for the graph.  Utilize this to iterate through all the edges in the graph.  Use with care on large graphs.
@@ -150,6 +166,22 @@ gremlin> v.inE("created").outV
 ==>v[6]
 ```
 
+### inV
+
+Get both incoming head vertex of the edge.
+
+```groovy
+gremlin> e = g.e(12)
+==>e[12][6-created->3]
+gremlin> e.outV
+==>v[6]
+gremlin> e.inV
+==>v[3]
+gremlin> e.bothV
+==>v[6]
+==>v[3]
+```
+
 ### key
 
 Get the property value of an element.  The property value can be obtained by simply appending the name to the end of the element or by referencing it as a Groovy map element with square brackets.  For best performance, drop down to the Blueprints API and use `getProperty(key)`.
@@ -222,6 +254,22 @@ gremlin> v.outE('knows').inV
 gremlin> v.out('knows')
 ==>v[2]
 ==>v[4]
+```
+
+### outV
+
+Get both outgoing tail vertex of the edge.
+
+```groovy
+gremlin> e = g.e(12)
+==>e[12][6-created->3]
+gremlin> e.outV
+==>v[6]
+gremlin> e.inV
+==>v[3]
+gremlin> e.bothV
+==>v[6]
+==>v[3]
 ```
 
 ### scatter
