@@ -1,7 +1,7 @@
 gremlin-docs
 ============
 
-Gremlin is a domain specific language for traversing property graphs. Gremlin makes use of Pipes to perform complex graph traversals. This language has application in the areas of graph query, analysis, and manipulation. Connectors, provided by Blueprints, exist for the following graph management systems:
+[Gremlin](http://gremlin.tinkerpop.com) is a domain specific language for traversing property graphs. This language has application in the areas of graph query, analysis, and manipulation. See the [Getting Started](https://github.com/tinkerpop/gremlin/wiki/Getting-Started) Gremlin wiki page for downloading and installing Gremlin.
 
 Unless otherwise noted, all samples are derived from the TinkerPop "toy" graph generated with:
 
@@ -9,7 +9,7 @@ Unless otherwise noted, all samples are derived from the TinkerPop "toy" graph g
 gremlin> g = TinkerGraphFactory.createTinkerGraph()
 ```
 
-This produces a hardcoded representation of the graph diagrammed [here](https://github.com/tinkerpop/blueprints/wiki/Property-Graph-Model).
+This produces a hardcoded representation of the graph diagrammed [here](http://github.com/tinkerpop/blueprints/wiki/Property-Graph-Model).
 
 ## Transform
 
