@@ -123,5 +123,5 @@ gremlin> m
 
 #### See Also
 
-* [aggregate](#aggregate)
-* [store](#store)
+* [aggregate](#side-effect/aggregate)
+* [store](#side-effect/store)
