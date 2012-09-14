@@ -19,6 +19,57 @@ The documentation and samples presented here attempt to stay current with the mo
 
 Transform steps take an object and emit a transformation of it.
 
+### '[''key'']'
+
+Gets the property value of an element.
+
+```groovy
+gremlin> v = g.v(3)
+==>v[3]
+gremlin> v.name
+==>lop
+gremlin> v['name']
+==>lop
+gremlin> x = 'name'
+==>name
+gremlin> v[x]
+==>lop
+```
+
+### both
+
+Get both adjacent vertices of the vertex, the in and the out.
+
+```groovy
+gremlin> v.both
+==>v[1]
+==>v[5]
+==>v[3]
+gremlin> v.both('knows')
+==>v[1]
+gremlin> v.both('knows', 'created')
+==>v[1]
+==>v[5]
+==>v[3]
+```
+
+### bothE
+
+Get both incoming and outgoing edges of the vertex.
+
+```groovy
+gremlin> v.bothE
+==>e[8][1-knows->4]
+==>e[10][4-created->5]
+==>e[11][4-created->3]
+gremlin> v.bothE('knows')
+==>e[8][1-knows->4]
+gremlin> v.bothE('knows', 'created')
+==>e[8][1-knows->4]
+==>e[10][4-created->5]
+==>e[11][4-created->3]
+```
+
 ### E
 
 The edge iterator for the graph.  Utilize this to iterate through all the edges in the graph.  Use with care on large graphs.
