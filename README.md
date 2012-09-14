@@ -19,7 +19,7 @@ The documentation and samples presented here attempt to stay current with the mo
 
 Transform steps take an object and emit a transformation of it.
 
-### '[''key'']'
+### ['key']
 
 Gets the property value of an element.
 
