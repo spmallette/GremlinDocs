@@ -190,7 +190,7 @@ gremlin> v.both('knows', 'created')
 
 #### See Also
 
-* [['key']](transform/['key'])
+* [['key']](#transform/['key'])
 
 ### label
 
