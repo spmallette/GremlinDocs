@@ -19,27 +19,6 @@ The documentation and samples presented here attempt to stay current with the mo
 
 Transform steps take an object and emit a transformation of it.
 
-### <a id="transform/bracketedkey"></a>['key']
-
-Gets the property value of an element.
-
-```groovy
-gremlin> v = g.v(3)
-==>v[3]
-gremlin> v.name
-==>lop
-gremlin> v['name']
-==>lop
-gremlin> x = 'name'
-==>name
-gremlin> v[x]
-==>lop
-```
-
-#### See Also
-
-* [key](#transform/key)
-
 ### both
 
 Get both adjacent vertices of the vertex, the in and the out.
@@ -173,24 +152,22 @@ gremlin> v.inE("created").outV
 
 ### key
 
-Get the property value of an element.
+Get the property value of an element.  The property value can be obtained by simply appending the name to the end of the element or by referencing it as a Groovy map element with square brackets.  For best performance, drop down to the Blueprints API and use `getProperty(key)`.
 
 ```groovy
-gremlin> v.both
-==>v[1]
-==>v[5]
+gremlin> v = g.v(3)
 ==>v[3]
-gremlin> v.both('knows')
-==>v[1]
-gremlin> v.both('knows', 'created')
-==>v[1]
-==>v[5]
-==>v[3]
+gremlin> v.name
+==>lop
+gremlin> v['name']
+==>lop
+gremlin> x = 'name'
+==>name
+gremlin> v[x]
+==>lop
+gremlin> v.getProperty('name')
+==>lop
 ```
-
-#### See Also
-
-* [['key']](#transform/bracketedkey)
 
 ### label
 
