@@ -210,6 +210,10 @@ gremlin> g.v(6).outE.label
 ==>created
 gremlin> g.v(1).outE.filter{it.label=='created'}
 ==>e[9][1-created->3]
+
+// a more efficient approach to use of label
+gremlin> g.v(1).outE.has('label','created')
+==>e[9][1-created->3]
 ```
 
 ### out
