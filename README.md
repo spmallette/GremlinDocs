@@ -328,6 +328,19 @@ gremlin> g.v(1).out.gather{it[1..2]}.scatter
 ==>v[3]
 ```
 
+### transform
+
+Transform emits the result of a closure.
+
+```groovy
+gremlin> g.E.has('weight', T.gt, 0.5f).outV.map
+==>32
+==>29
+gremlin> g.E.has('weight', T.gt, 0.5f).outV.age.transform{it+2}
+==>34
+==>31
+```
+
 ### V
 
 The vertex iterator for the graph.  Utilize this to iterate through all the vertices in the graph.  Use with care on large graphs.
