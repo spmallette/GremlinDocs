@@ -331,6 +331,29 @@ gremlin> e.bothV
 ==>v[3]
 ```
 
+### path
+
+Gets the path through the pipeline up to this point, where closures are post-processing for each object in the path.  If the path step is provided closures then, in a round robin fashion, the closures are evaluated over each object of the path and that post-processed path is returned.
+
+```groovy
+gremlin> g.v(1).out.path
+==>[v[1], v[2]]
+==>[v[1], v[4]]
+==>[v[1], v[3]]
+gremlin> g.v(1).out.path{it.id}
+==>[1, 2]
+==>[1, 4]
+==>[1, 3]
+gremlin> g.v(1).out.path{it.id}{it.name}
+==>[1, vadas]
+==>[1, josh]
+==>[1, lop]
+gremlin> g.v(1).outE.inV.name.path
+==>[v[1], e[7][1-knows->2], v[2], vadas]
+==>[v[1], e[8][1-knows->4], v[4], josh]
+==>[v[1], e[9][1-created->3], v[3], lop]
+```
+
 ### scatter
 
 Unroll all objects in the iterable at that step. Gather/Scatter is good for breadth-first traversals where the gather closure filters out unwanted elements at the current radius.
