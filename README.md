@@ -240,6 +240,18 @@ gremlin> g.v(1).outE.has('label','created')
 ==>e[9][1-created->3]
 ```
 
+### map
+
+Gets the property map of the graph element.
+
+```groovy
+gremlin> g.v(1).map
+==>{name=marko, age=29}
+gremlin> g.v(1).map()
+==>name=marko
+==>age=29
+```
+
 ### out
 
 Gets the out adjacent vertices to the vertex.
