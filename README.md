@@ -252,6 +252,25 @@ gremlin> g.v(1).map()
 ==>age=29
 ```
 
+### memoize
+
+Remembers a particular mapping from input to output.  Long or expensive expressions with no side effects can use this step to remember a mapping, which helps reduce load when previously processed objects are passed into it.
+
+For situations where memoization may consume large amounts of RAM, consider using an embedded key-value store like [JDBM](http://code.google.com/p/jdbm2/) or some other persistent Map implementation.
+
+```groovy
+gremlin> g.V.out.out.memoize(1).name
+==>ripple
+==>lop
+gremlin> g.V.out.as('here').out.memoize('here').name
+==>ripple
+==>lop
+gremlin> m = [:]
+gremlin> g.V.out.out.memoize(1,m).name
+==>ripple
+==>lop
+```
+
 ### out
 
 Gets the out adjacent vertices to the vertex.
