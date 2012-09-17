@@ -19,6 +19,30 @@ The documentation and samples presented here attempt to stay current with the mo
 
 Transform steps take an object and emit a transformation of it.
 
+### _
+
+Identity turns an arbitrary object into a "pipeline".
+
+```groovy
+gremlin> x = [1,2,3]
+==>1
+==>2
+==>3
+gremlin> x._().transform{it+1}
+==>2
+==>3
+==>4
+gremlin> x = g.E.has('weight', T.gt, 0.5f).toList()
+==>e[10][4-created->5]
+==>e[8][1-knows->4]
+gremlin> x.inV
+==>[StartPipe, InPipe]
+==>[StartPipe, InPipe]
+gremlin> x._().inV
+==>v[5]
+==>v[4]
+```
+
 ### both
 
 Get both adjacent vertices of the vertex, the in and the out.
