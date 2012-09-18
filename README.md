@@ -384,6 +384,25 @@ gremlin> g.v(1).out.gather{it[1..2]}.scatter
 ==>v[3]
 ```
 
+### select
+
+Select the named steps to emit after select with post-processing closures.
+
+```groovy
+gremlin> g.v(1).as('x').out('knows').as('y').select
+==>[x:v[1], y:v[2]]
+==>[x:v[1], y:v[4]]
+gremlin> g.v(1).as('x').out('knows').as('y').select(["y"])
+==>[y:v[2]]
+==>[y:v[4]]
+gremlin> g.v(1).as('x').out('knows').as('y').select(["y"]){it.name}
+==>[y:vadas]
+==>[y:josh]
+gremlin>  g.v(1).as('x').out('knows').as('y').select{it.id}{it.name}
+==>[x:1, y:vadas]
+==>[x:1, y:josh]
+```
+
 ### transform
 
 Transform emits the result of a closure.
