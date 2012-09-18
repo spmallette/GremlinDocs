@@ -6,7 +6,7 @@ Gremlin is an open source project maintained by [TinkerPop](http://tinkerpop.com
 
 Unless otherwise noted, all samples are derived from the TinkerPop "toy" graph generated with: 
 
-```groovy
+```text
 gremlin> g = TinkerGraphFactory.createTinkerGraph()
 ```
 
@@ -23,7 +23,7 @@ Transform steps take an object and emit a transformation of it.
 
 Identity turns an arbitrary object into a "pipeline".
 
-```groovy
+```text
 gremlin> x = [1,2,3]
 ==>1
 ==>2
@@ -47,7 +47,7 @@ gremlin> x._().inV
 
 Get both adjacent vertices of the vertex, the in and the out.
 
-```groovy
+```text
 gremlin> v.both
 ==>v[1]
 ==>v[5]
@@ -64,7 +64,7 @@ gremlin> v.both('knows', 'created')
 
 Get both incoming and outgoing edges of the vertex.
 
-```groovy
+```text
 gremlin> v.bothE
 ==>e[8][1-knows->4]
 ==>e[10][4-created->5]
@@ -81,7 +81,7 @@ gremlin> v.bothE('knows', 'created')
 
 Get both incoming and outgoing vertices of the edge.
 
-```groovy
+```text
 gremlin> e = g.e(12)
 ==>e[12][6-created->3]
 gremlin> e.outV
@@ -97,7 +97,7 @@ gremlin> e.bothV
 
 Gets the side-effect of the pipe prior.  In other words, it emits the value of the previous step and not the values that flow through it.
 
-```groovy
+```text
 gremlin> g.V('lang', 'java').in('created').name.groupCount
 ==>marko
 ==>josh
@@ -111,7 +111,7 @@ gremlin> g.V('lang', 'java').in('created').name.groupCount.cap
 
 The edge iterator for the graph.  Utilize this to iterate through all the edges in the graph.  Use with care on large graphs.
 
-```groovy
+```text
 gremlin> g.E
 ==>e[10][4-created->5]
 ==>e[7][1-knows->2]
@@ -132,7 +132,7 @@ gremlin> g.E.weight
 
 Collect all objects up to that step and process with the provided closure.
 
-```groovy
+```text
 gremlin> g.v(1).out
 ==>v[2]
 ==>v[4]
@@ -149,7 +149,7 @@ gremlin> g.v(1).out.gather
 
 Gets the unique identifier of the element.  
 
-```groovy
+```text
 gremlin> v = g.V("name", "marko").next()
 ==>v[1]
 gremlin> v.id
@@ -162,7 +162,7 @@ gremlin> g.v(1).id
 
 Gets the adjacent vertices to the vertex.
 
-```groovy
+```text
 gremlin> v = g.v(4)
 ==>v[4]
 gremlin> v.inE.outV
@@ -185,7 +185,7 @@ gremlin> v.inE("created").outV
 
 Gets the incoming edges of the vertex.
 
-```groovy
+```text
 gremlin> v = g.v(4)
 ==>v[4]
 gremlin> v.inE.outV
@@ -208,7 +208,7 @@ gremlin> v.inE("created").outV
 
 Get both incoming head vertex of the edge.
 
-```groovy
+```text
 gremlin> e = g.e(12)
 ==>e[12][6-created->3]
 gremlin> e.outV
@@ -224,7 +224,7 @@ gremlin> e.bothV
 
 Get the property value of an element.  The property value can be obtained by simply appending the name to the end of the element or by referencing it as a Groovy map element with square brackets.  For best performance, drop down to the Blueprints API and use `getProperty(key)`.
 
-```groovy
+```text
 gremlin> v = g.v(3)
 ==>v[3]
 gremlin> v.name
@@ -243,7 +243,7 @@ gremlin> v.getProperty('name')
 
 Gets the label of an edge.
 
-```groovy
+```text
 gremlin> g.v(6).outE.label
 ==>created
 gremlin> g.v(1).outE.filter{it.label=='created'}
@@ -258,7 +258,7 @@ gremlin> g.v(1).outE.has('label','created')
 
 Gets the property map of the graph element.
 
-```groovy
+```text
 gremlin> g.v(1).map
 ==>{name=marko, age=29}
 gremlin> g.v(1).map()
@@ -272,7 +272,7 @@ Remembers a particular mapping from input to output.  Long or expensive expressi
 
 For situations where memoization may consume large amounts of RAM, consider using an embedded key-value store like [JDBM](http://code.google.com/p/jdbm2/) or some other persistent Map implementation.
 
-```groovy
+```text
 gremlin> g.V.out.out.memoize(1).name
 ==>ripple
 ==>lop
@@ -289,7 +289,7 @@ gremlin> g.V.out.out.memoize(1,m).name
 
 Order the items in the stream according to the closure if provided.  If no closure is provided, then a default sort order is used.
 
-```groovy
+```text
 gremlin> g.V.name.order
 ==>josh
 ==>lop
@@ -313,7 +313,7 @@ gremlin> g.V.order{it.b.name <=> it.a.name}.out('knows')
 
 Gets the out adjacent vertices to the vertex.
 
-```groovy
+```text
 gremlin> v = g.v(1)
 ==>v[1]
 gremlin> v.outE.inV
@@ -336,7 +336,7 @@ gremlin> v.out('knows')
 
 Gets the outgoing edges to the vertex.
 
-```groovy
+```text
 gremlin> v.outE.inV
 ==>v[2]
 ==>v[4]
@@ -357,7 +357,7 @@ gremlin> v.out('knows')
 
 Get both outgoing tail vertex of the edge.
 
-```groovy
+```text
 gremlin> e = g.e(12)
 ==>e[12][6-created->3]
 gremlin> e.outV
@@ -373,7 +373,7 @@ gremlin> e.bothV
 
 Gets the path through the pipeline up to this point, where closures are post-processing for each object in the path.  If the path step is provided closures then, in a round robin fashion, the closures are evaluated over each object of the path and that post-processed path is returned.
 
-```groovy
+```text
 gremlin> g.v(1).out.path
 ==>[v[1], v[2]]
 ==>[v[1], v[4]]
@@ -396,7 +396,7 @@ gremlin> g.v(1).outE.inV.name.path
 
 Unroll all objects in the iterable at that step. Gather/Scatter is good for breadth-first traversals where the gather closure filters out unwanted elements at the current radius.
 
-```groovy
+```text
 gremlin> g.v(1).out
 ==>v[2]
 ==>v[4]
@@ -412,7 +412,7 @@ gremlin> g.v(1).out.gather{it[1..2]}.scatter
 
 Select the named steps to emit after select with post-processing closures.
 
-```groovy
+```text
 gremlin> g.v(1).as('x').out('knows').as('y').select
 ==>[x:v[1], y:v[2]]
 ==>[x:v[1], y:v[4]]
@@ -431,7 +431,7 @@ gremlin>  g.v(1).as('x').out('knows').as('y').select{it.id}{it.name}
 
 Transform emits the result of a closure.
 
-```groovy
+```text
 gremlin> g.E.has('weight', T.gt, 0.5f).outV.map
 ==>32
 ==>29
@@ -444,7 +444,7 @@ gremlin> g.E.has('weight', T.gt, 0.5f).outV.age.transform{it+2}
 
 The vertex iterator for the graph.  Utilize this to iterate through all the vertices in the graph.  Use with care on large graphs.
 
-```groovy
+```text
 gremlin> g.V
 ==>v[3]
 ==>v[2]
@@ -474,7 +474,7 @@ Side Effect steps pass the object, but yield some kind of side effect while doin
 
 Emits input, but adds input in collection, where provided closure processes input prior to insertion (greedy). In being "greedy", 'aggregate' will exhaust all the items that come to it from previous steps before emitting the next element.
 
-```groovy
+```text
 gremlin> x = []
 gremlin> g.v(1).out.aggregate(x).next()
 ==>v[2]
@@ -493,7 +493,7 @@ gremlin> x
 
 Emits input, but adds input to collection, where provided closure processes input prior to insertion (lazy).  In being "lazy", 'store' will keep element as they are being requested.
 
-```groovy
+```text
 gremlin> x = []
 gremlin> g.v(1).out.store(x).next()
 ==>v[2]
@@ -518,7 +518,7 @@ Methods represent functions that make it faster and easier to work with [Bluepri
 
 Takes all the results in the pipeline and puts them into the provided collection.
 
-```groovy
+```text
 gremlin> m = []
 gremlin> g.v(1).out.fill(m)
 ==>v[2]
