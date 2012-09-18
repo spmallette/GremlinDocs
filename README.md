@@ -93,6 +93,20 @@ gremlin> e.bothV
 ==>v[3]
 ```
 
+### cap
+
+Gets the side-effect of the pipe prior.  In other words, it emits the value of the previous step and not the values that flow through it.
+
+```groovy
+gremlin> g.V('lang', 'java').in('created').name.groupCount
+==>marko
+==>josh
+==>peter
+==>josh
+gremlin> g.V('lang', 'java').in('created').name.groupCount.cap
+==>{marko=1, peter=1, josh=2}
+```
+
 ### E
 
 The edge iterator for the graph.  Utilize this to iterate through all the edges in the graph.  Use with care on large graphs.
