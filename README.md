@@ -285,6 +285,30 @@ gremlin> g.V.out.out.memoize(1,m).name
 ==>lop
 ```
 
+### order
+
+Order the items in the stream according to the closure if provided.  If no closure is provided, then a default sort order is used.
+
+```groovy
+gremlin> g.V.name.order
+==>josh
+==>lop
+==>marko
+==>peter
+==>ripple
+==>vadas
+gremlin>  g.V.name.order{it.b <=> it.a}
+==>vadas
+==>ripple
+==>peter
+==>marko
+==>lop
+==>josh
+gremlin> g.V.order{it.b.name <=> it.a.name}.out('knows')
+==>v[2]
+==>v[4]
+```
+
 ### out
 
 Gets the out adjacent vertices to the vertex.
