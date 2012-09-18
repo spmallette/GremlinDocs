@@ -483,6 +483,13 @@ A index filter that emits the particular indexed object.
 ```text
 gremlin> g.V[0].name
 ==>lop
+```
+
+### [i..j]
+
+A range filter that emits the objects within a range.
+
+```text
 gremlin> g.V[0..2].name
 ==>lop
 ==>vadas
@@ -491,10 +498,6 @@ gremlin> g.V[0..<2].name
 ==>lop
 ==>vadas
 ```
-
-### [i..j]
-
-A range filter that emits the objects within a range.
 
 ## Side Effect
 
