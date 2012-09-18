@@ -466,6 +466,36 @@ gremlin> g.V("name", "marko").name
 
 Filter steps decide whether to allow an object to pass to the next step or not.
 
+### filter
+
+Decide whether to allow an object to pass.  Return true from the closure to allow an object to pass.
+
+```text
+gremlin> g.V.filter{it.age > 29}.name
+==>peter
+==>josh
+```
+
+### [i]
+
+A index filter that emits the particular indexed object.
+
+```text
+gremlin> g.V[0].name
+==>lop
+gremlin> g.V[0..2].name
+==>lop
+==>vadas
+==>marko
+gremlin> g.V[0..<2].name
+==>lop
+==>vadas
+```
+
+### [i..j]
+
+A range filter that emits the objects within a range.
+
 ## Side Effect
 
 Side Effect steps pass the object, but yield some kind of side effect while doing so.
