@@ -489,6 +489,17 @@ gremlin> g.V[0..<2].name
 ==>vadas
 ```
 
+### back
+
+Go back to the results from n-steps ago or go back to the results of a named step.
+
+```text
+gremlin> g.V.out('knows').has('age', T.gt, 30).back(2).age
+==>29
+gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).back('x').age
+==>29
+```
+
 ### filter
 
 Decide whether to allow an object to pass.  Return true from the closure to allow an object to pass.
