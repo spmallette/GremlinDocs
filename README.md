@@ -466,16 +466,6 @@ gremlin> g.V("name", "marko").name
 
 Filter steps decide whether to allow an object to pass to the next step or not.
 
-### filter
-
-Decide whether to allow an object to pass.  Return true from the closure to allow an object to pass.
-
-```text
-gremlin> g.V.filter{it.age > 29}.name
-==>peter
-==>josh
-```
-
 ### [i]
 
 A index filter that emits the particular indexed object.
@@ -498,6 +488,68 @@ gremlin> g.V[0..<2].name
 ==>lop
 ==>vadas
 ```
+
+### filter
+
+Decide whether to allow an object to pass.  Return true from the closure to allow an object to pass.
+
+```text
+gremlin> g.V.filter{it.age > 29}.name
+==>peter
+==>josh
+```
+
+### has
+
+Allows an element if it has a particular property.  Utilizes several options for comparisons on through @T@:
+
+* T.gt - greater than 
+* T.gte - greater than or equal to
+* T.eq - equal to
+* T.neq - not equal to
+* T.lte - less than or equal to
+* T.lt - less than
+
+```text
+gremlin> g.V.has("name", "marko").name
+==>marko
+gremlin> g.v(1).outE.has("weight", T.gte, 0.5f).weight
+==>0.5
+==>1.0
+gremlin> g.V.has("age", null).name
+==>lop
+==>ripple
+```
+
+#### See Also
+
+* [hasNot](#filter/hasNot)
+
+### hasNot
+
+Allows an element if it does not have a particular property.  Utilizes several options for comparisons on through @T@:
+
+* T.gt - greater than 
+* T.gte - greater than or equal to
+* T.eq - equal to
+* T.neq - not equal to
+* T.lte - less than or equal to
+* T.lt - less than
+
+```text
+gremlin> g.v(1).outE.hasNot("weight", T.eq, 0.5f).weight
+==>1.0
+==>0.4
+gremlin> g.V.hasNot("age", null).name
+==>vadas
+==>marko
+==>peter
+==>josh
+```
+
+#### See Also
+
+* [has](#filter/has)
 
 ## Side Effect
 
