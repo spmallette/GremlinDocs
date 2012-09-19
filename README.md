@@ -501,7 +501,7 @@ gremlin> g.V.filter{it.age > 29}.name
 
 ### has
 
-Allows an element if it has a particular property.  Utilizes several options for comparisons on through @T@:
+Allows an element if it has a particular property.  Utilizes several options for comparisons on through `T`:
 
 * T.gt - greater than 
 * T.gte - greater than or equal to
@@ -527,7 +527,7 @@ gremlin> g.V.has("age", null).name
 
 ### hasNot
 
-Allows an element if it does not have a particular property.  Utilizes several options for comparisons on through @T@:
+Allows an element if it does not have a particular property.  Utilizes several options for comparisons on through `T`:
 
 * T.gt - greater than 
 * T.gte - greater than or equal to
