@@ -509,6 +509,45 @@ gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).back('x').age
 ==>29
 ```
 
+### dedup
+
+Emit only incoming objects that have not been seen before with an optional closure being the object to check on.
+
+```text
+gremlin> g.v(1).out.in
+==>v[1]
+==>v[1]
+==>v[1]
+==>v[4]
+==>v[6]
+gremlin> g.v(1).out.in.dedup()
+==>v[1]
+==>v[4]
+==>v[6]
+```
+
+### except
+
+Emit everything to pass except what is in the supplied collection.
+
+```text
+gremlin> x = [g.v(1), g.v(2), g.v(3)]
+==>v[1]
+==>v[2]
+==>v[3]
+gremlin> g.V.except(x)
+==>v[6]
+==>v[5]
+==>v[4]
+gremlin> x = []
+gremlin> g.v(1).out.aggregate(x).out.except(x)
+==>v[5]
+```
+
+### See Also
+
+* [retain](#filter/retain)
+
 ### filter
 
 Decide whether to allow an object to pass.  Return true from the closure to allow an object to pass.
@@ -567,6 +606,17 @@ gremlin> g.V.hasNot("age", null).name
 ==>josh
 ```
 
+### interval
+
+Allow elements to pass that have their property in the provided start and end interval.
+
+```text
+gremlin> g.E.interval("weight", 0.3f, 0.9f).weight
+==>0.5
+==>0.4
+==>0.4
+```
+
 #### See Also
 
 * [has](#filter/has)
@@ -579,6 +629,59 @@ Takes a collection of pipes and emits incoming objects that are true for any of 
 gremlin> g.v(1).outE.or(_().has('id', T.eq, "9"), _().has('weight', T.lt, 0.6f))
 ==>e[7][1-knows->2]
 ==>e[9][1-created->3]
+```
+
+### random
+
+Emits the incoming object if biased coin toss is heads.
+
+```text
+gremlin> g.V.random(0.5)
+==>v[3]
+==>v[1]
+==>v[6]
+gremlin> g.V.random(0.5)
+==>v[2]
+==>v[5]
+==>v[4]
+```
+
+### retain
+
+Allow everything to pass except what is not in the supplied collection.
+
+```text
+gremlin> x = [g.v(1), g.v(2), g.v(3)]
+==>v[1]
+==>v[2]
+==>v[3]
+gremlin> g.V.retain(x)
+==>v[3]
+==>v[2]
+==>v[1]
+gremlin> x = []
+gremlin> g.v(1).out.aggregate(x).out.retain(x)
+==>v[3]
+```
+
+#### See Also
+
+* [except](#filter/except)
+
+### simplePath
+
+Emit the object only if the current path has no repeated elements.
+
+```text
+gremlin> g.v(1).out.in
+==>v[1]
+==>v[1]
+==>v[1]
+==>v[4]
+==>v[6]
+gremlin> g.v(1).out.in.simplePath
+==>v[4]
+==>v[6]
 ```
 
 ## Side Effect
