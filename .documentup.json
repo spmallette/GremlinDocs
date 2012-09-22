@@ -1,0 +1,8 @@
+{
+  "name": "GremlinDocs",
+  "repo":"spmallette/GremlinDocs",
+  "twitter": [ "spmallette" ],
+  "travis": false,
+  "issues":false,
+  "google_analytics":"UA-34936244-1"
+}
