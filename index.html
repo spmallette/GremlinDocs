@@ -176,6 +176,18 @@
                 </li>
               
                 <li>
+                  <a href="#filter/dedup">dedup</a>
+                </li>
+              
+                <li>
+                  <a href="#filter/except">except</a>
+                </li>
+              
+                <li>
+                  <a href="#filter/see-also">See Also</a>
+                </li>
+              
+                <li>
                   <a href="#filter/filter">filter</a>
                 </li>
               
@@ -188,7 +200,23 @@
                 </li>
               
                 <li>
+                  <a href="#filter/interval">interval</a>
+                </li>
+              
+                <li>
                   <a href="#filter/or">or</a>
+                </li>
+              
+                <li>
+                  <a href="#filter/random">random</a>
+                </li>
+              
+                <li>
+                  <a href="#filter/retain">retain</a>
+                </li>
+              
+                <li>
+                  <a href="#filter/simplepath">simplePath</a>
                 </li>
               
             </ul>
@@ -671,6 +699,39 @@ gremlin&gt; g.V[0..&lt;2].name
 ==&gt;29
 gremlin&gt; g.V.as(&#39;x&#39;).outE(&#39;knows&#39;).inV.has(&#39;age&#39;, T.gt, 30).back(&#39;x&#39;).age
 ==&gt;29</code></pre>
+<h3 id='filter/dedup'>dedup</h3 id='filter/dedup'>
+<p>Emit only incoming objects that have not been seen before with an optional closure being the object to check on.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).out.in
+==&gt;v[1]
+==&gt;v[1]
+==&gt;v[1]
+==&gt;v[4]
+==&gt;v[6]
+gremlin&gt; g.v(1).out.in.dedup()
+==&gt;v[1]
+==&gt;v[4]
+==&gt;v[6]</code></pre>
+<h3 id='filter/except'>except</h3 id='filter/except'>
+<p>Emit everything to pass except what is in the supplied collection.
+
+</p>
+<pre><code class="text">gremlin&gt; x = [g.v(1), g.v(2), g.v(3)]
+==&gt;v[1]
+==&gt;v[2]
+==&gt;v[3]
+gremlin&gt; g.V.except(x)
+==&gt;v[6]
+==&gt;v[5]
+==&gt;v[4]
+gremlin&gt; x = []
+gremlin&gt; g.v(1).out.aggregate(x).out.except(x)
+==&gt;v[5]</code></pre>
+<h3 id='filter/see-also'>See Also</h3 id='filter/see-also'>
+<ul>
+<li><a href="#filter/retain">retain</a></li>
+</ul>
 <h3 id='filter/filter'>filter</h3 id='filter/filter'>
 <p>Decide whether to allow an object to pass.  Return true from the closure to allow an object to pass.
 
@@ -722,6 +783,14 @@ gremlin&gt; g.V.hasNot(&quot;age&quot;, null).name
 ==&gt;marko
 ==&gt;peter
 ==&gt;josh</code></pre>
+<h3 id='filter/interval'>interval</h3 id='filter/interval'>
+<p>Allow elements to pass that have their property in the provided start and end interval.
+
+</p>
+<pre><code class="text">gremlin&gt; g.E.interval(&quot;weight&quot;, 0.3f, 0.9f).weight
+==&gt;0.5
+==&gt;0.4
+==&gt;0.4</code></pre>
 <h4>See Also</h4>
 <ul>
 <li><a href="#filter/has">has</a></li>
@@ -733,6 +802,50 @@ gremlin&gt; g.V.hasNot(&quot;age&quot;, null).name
 <pre><code class="text">gremlin&gt; g.v(1).outE.or(_().has(&#39;id&#39;, T.eq, &quot;9&quot;), _().has(&#39;weight&#39;, T.lt, 0.6f))
 ==&gt;e[7][1-knows-&gt;2]
 ==&gt;e[9][1-created-&gt;3]</code></pre>
+<h3 id='filter/random'>random</h3 id='filter/random'>
+<p>Emits the incoming object if biased coin toss is heads.
+
+</p>
+<pre><code class="text">gremlin&gt; g.V.random(0.5)
+==&gt;v[3]
+==&gt;v[1]
+==&gt;v[6]
+gremlin&gt; g.V.random(0.5)
+==&gt;v[2]
+==&gt;v[5]
+==&gt;v[4]</code></pre>
+<h3 id='filter/retain'>retain</h3 id='filter/retain'>
+<p>Allow everything to pass except what is not in the supplied collection.
+
+</p>
+<pre><code class="text">gremlin&gt; x = [g.v(1), g.v(2), g.v(3)]
+==&gt;v[1]
+==&gt;v[2]
+==&gt;v[3]
+gremlin&gt; g.V.retain(x)
+==&gt;v[3]
+==&gt;v[2]
+==&gt;v[1]
+gremlin&gt; x = []
+gremlin&gt; g.v(1).out.aggregate(x).out.retain(x)
+==&gt;v[3]</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#filter/except">except</a></li>
+</ul>
+<h3 id='filter/simplepath'>simplePath</h3 id='filter/simplepath'>
+<p>Emit the object only if the current path has no repeated elements.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).out.in
+==&gt;v[1]
+==&gt;v[1]
+==&gt;v[1]
+==&gt;v[4]
+==&gt;v[6]
+gremlin&gt; g.v(1).out.in.simplePath
+==&gt;v[4]
+==&gt;v[6]</code></pre>
 <h2 id='side-effect'>Side Effect</h2 id='side-effect'>
 <p>Side Effect steps pass the object, but yield some kind of side effect while doing so.
 
