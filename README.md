@@ -442,7 +442,7 @@ gremlin> g.E.has('weight', T.gt, 0.5f).outV.age.transform{it+2}
 
 ### V
 
-The vertex iterator for the graph.  Utilize this to iterate through all the vertices in the graph.  Use with care on large graphs.
+The vertex iterator for the graph.  Utilize this to iterate through all the vertices in the graph.  Use with care on large graphs unless used in combination with a key index lookup.
 
 ```text
 gremlin> g.V
@@ -487,6 +487,15 @@ gremlin> g.V[0..2].name
 gremlin> g.V[0..<2].name
 ==>lop
 ==>vadas
+```
+
+### and
+
+Takes a collection of pipes and emits incoming objects that are true for all of the pipes.
+
+```text
+gremlin> g.v(1).outE.and(_().has('weight', T.gt, 0.4f), _().has('weight', T.lt, 0.8f))
+==>e[7][1-knows->2]
 ```
 
 ### back
@@ -561,6 +570,16 @@ gremlin> g.V.hasNot("age", null).name
 #### See Also
 
 * [has](#filter/has)
+
+### or
+
+Takes a collection of pipes and emits incoming objects that are true for any of the pipes.
+
+```text
+gremlin> g.v(1).outE.or(_().has('id', T.eq, "9"), _().has('weight', T.lt, 0.6f))
+==>e[7][1-knows->2]
+==>e[9][1-created->3]
+```
 
 ## Side Effect
 
