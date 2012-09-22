@@ -544,7 +544,7 @@ gremlin> g.v(1).out.aggregate(x).out.except(x)
 ==>v[5]
 ```
 
-### See Also
+#### See Also
 
 * [retain](#filter/retain)
 
