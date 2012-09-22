@@ -168,6 +168,10 @@
                 </li>
               
                 <li>
+                  <a href="#filter/and">and</a>
+                </li>
+              
+                <li>
                   <a href="#filter/back">back</a>
                 </li>
               
@@ -181,6 +185,10 @@
               
                 <li>
                   <a href="#filter/hasnot">hasNot</a>
+                </li>
+              
+                <li>
+                  <a href="#filter/or">or</a>
                 </li>
               
             </ul>
@@ -610,7 +618,7 @@ gremlin&gt; g.E.has(&#39;weight&#39;, T.gt, 0.5f).outV.age.transform{it+2}
 ==&gt;34
 ==&gt;31</code></pre>
 <h3 id='transform/v'>V</h3 id='transform/v'>
-<p>The vertex iterator for the graph.  Utilize this to iterate through all the vertices in the graph.  Use with care on large graphs.
+<p>The vertex iterator for the graph.  Utilize this to iterate through all the vertices in the graph.  Use with care on large graphs unless used in combination with a key index lookup.
 
 </p>
 <pre><code class="text">gremlin&gt; g.V
@@ -649,6 +657,12 @@ gremlin&gt; g.V(&quot;name&quot;, &quot;marko&quot;).name
 gremlin&gt; g.V[0..&lt;2].name
 ==&gt;lop
 ==&gt;vadas</code></pre>
+<h3 id='filter/and'>and</h3 id='filter/and'>
+<p>Takes a collection of pipes and emits incoming objects that are true for all of the pipes.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).outE.and(_().has(&#39;weight&#39;, T.gt, 0.4f), _().has(&#39;weight&#39;, T.lt, 0.8f))
+==&gt;e[7][1-knows-&gt;2]</code></pre>
 <h3 id='filter/back'>back</h3 id='filter/back'>
 <p>Go back to the results from n-steps ago or go back to the results of a named step.
 
@@ -712,6 +726,13 @@ gremlin&gt; g.V.hasNot(&quot;age&quot;, null).name
 <ul>
 <li><a href="#filter/has">has</a></li>
 </ul>
+<h3 id='filter/or'>or</h3 id='filter/or'>
+<p>Takes a collection of pipes and emits incoming objects that are true for any of the pipes.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).outE.or(_().has(&#39;id&#39;, T.eq, &quot;9&quot;), _().has(&#39;weight&#39;, T.lt, 0.6f))
+==&gt;e[7][1-knows-&gt;2]
+==&gt;e[9][1-created-&gt;3]</code></pre>
 <h2 id='side-effect'>Side Effect</h2 id='side-effect'>
 <p>Side Effect steps pass the object, but yield some kind of side effect while doing so.
 
