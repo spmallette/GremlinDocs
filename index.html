@@ -229,7 +229,31 @@
                 </li>
               
                 <li>
+                  <a href="#side-effect/as">as</a>
+                </li>
+              
+                <li>
+                  <a href="#side-effect/groupby">groupBy</a>
+                </li>
+              
+                <li>
+                  <a href="#side-effect/groupcount">groupCount</a>
+                </li>
+              
+                <li>
+                  <a href="#side-effect/sideeffect">sideEffect</a>
+                </li>
+              
+                <li>
                   <a href="#side-effect/store">store</a>
+                </li>
+              
+                <li>
+                  <a href="#side-effect/table">table</a>
+                </li>
+              
+                <li>
+                  <a href="#side-effect/tree">tree</a>
                 </li>
               
             </ul>
@@ -862,6 +886,77 @@ gremlin&gt; x
 <li><a href="#side-effect/store">store</a></li>
 <li><a href="#methods/fill">fill</a></li>
 </ul>
+<h3 id='side-effect/as'>as</h3 id='side-effect/as'>
+<p>Emits input, but names the previous step.
+
+</p>
+<pre><code class="text">gremlin&gt; g.V.out(&#39;knows&#39;).has(&#39;age&#39;, T.gt, 30).back(2).age     
+==&gt;29
+gremlin&gt; g.V.as(&#39;x&#39;).outE(&#39;knows&#39;).inV.has(&#39;age&#39;, T.gt, 30).back(&#39;x&#39;).age
+==&gt;29</code></pre>
+<h3 id='side-effect/groupby'>groupBy</h3 id='side-effect/groupby'>
+<p>Emits input, but groups input after processing it by provided key-closure and value-closure.  It is also possible to supply an optional reduce-closure.  
+
+</p>
+<pre><code class="text">gremlin&gt; g.V.groupBy{it}{it.out}.cap
+==&gt;{v[3]=[], v[2]=[], v[1]=[v[2], v[4], v[3]], v[6]=[v[3]], v[5]=[], v[4]=[v[5], v[3]]}
+gremlin&gt; g.V.groupBy{it}{it.out}{it.size()}.cap
+==&gt;{v[3]=0, v[2]=0, v[1]=3, v[6]=1, v[5]=0, v[4]=2}
+gremlin&gt; m = [:]
+gremlin&gt; g.V.groupBy(m){it}{it.out}.iterate();null;
+==&gt;null
+gremlin&gt; m
+==&gt;v[3]=[]
+==&gt;v[2]=[]
+==&gt;v[1]=[v[2], v[4], v[3]]
+==&gt;v[6]=[v[3]]
+==&gt;v[5]=[]
+==&gt;v[4]=[v[5], v[3]]</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#side-effect/groupCount">groupCount</a></li>
+</ul>
+<h3 id='side-effect/groupcount'>groupCount</h3 id='side-effect/groupcount'>
+<p>Emits input, but updates a map for each input, where closures provides generic map update.
+
+</p>
+<pre><code class="text">gremlin&gt; g.V.out.groupCount(m)
+==&gt;v[2]
+==&gt;v[4]
+==&gt;v[3]
+==&gt;v[3]
+==&gt;v[5]
+==&gt;v[3]
+gremlin&gt; m
+==&gt;v[2]=1
+==&gt;v[4]=1
+==&gt;v[3]=3
+==&gt;v[5]=1
+gremlin&gt; g.v(1).out.groupCount(m){it}{it.b+1.0}.out.groupCount(m){it}{it.b+0.5}
+==&gt;v[5]
+==&gt;v[3]
+gremlin&gt; m
+==&gt;v[2]=1.0
+==&gt;v[4]=1.0
+==&gt;v[5]=0.5
+==&gt;v[3]=1.5</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#side-effect/groupBy">groupBy</a></li>
+</ul>
+<h3 id='side-effect/sideeffect'>sideEffect</h3 id='side-effect/sideeffect'>
+<p>Emits input, but calls a side effect closure on each input.
+
+</p>
+<pre><code class="text">gremlin&gt; youngest = null
+==&gt;null
+gremlin&gt; g.V.hasNot(&#39;age&#39;, null).sideEffect{youngest = youngest == null || youngest.age &gt; it.age ? it : youngest}
+==&gt;v[2]
+==&gt;v[1]
+==&gt;v[6]
+==&gt;v[4]
+gremlin&gt; youngest
+==&gt;v[2]</code></pre>
 <h3 id='side-effect/store'>store</h3 id='side-effect/store'>
 <p>Emits input, but adds input to collection, where provided closure processes input prior to insertion (lazy).  In being &quot;lazy&quot;, &#39;store&#39; will keep element as they are being requested.
 
@@ -876,6 +971,54 @@ gremlin&gt; x
 <li><a href="#side-effect//aggregate">aggregate</a></li>
 <li><a href="#methods/fill">fill</a></li>
 </ul>
+<h3 id='side-effect/table'>table</h3 id='side-effect/table'>
+<p>Emits input, but stores row of as values (constrained by column names if provided) in a table.  Accepts an optional set of closures that are applied in round-robin fashion to each column of the table.
+
+</p>
+<pre><code class="text">gremlin&gt; t = new Table()  
+gremlin&gt; g.V.name.as(&#39;name&#39;).back(1).age.as(&#39;age&#39;).table(t)
+==&gt;null
+==&gt;27
+==&gt;29
+==&gt;35
+==&gt;null
+==&gt;32
+gremlin&gt; t
+==&gt;[name:lop, age:null]
+==&gt;[name:vadas, age:27]
+==&gt;[name:marko, age:29]
+==&gt;[name:peter, age:35]
+==&gt;[name:ripple, age:null]
+==&gt;[name:josh, age:32]
+gremlin&gt; t = new Table()
+gremlin&gt; g.V.hasNot(&#39;age&#39;, null).name.as(&#39;name&#39;).back(1).age.as(&#39;age&#39;).table(t){it}{it&gt;30 ? &#39;over thirty&#39; : &#39;under thirty&#39;}
+==&gt;27
+==&gt;29
+==&gt;35
+==&gt;32
+gremlin&gt; t
+==&gt;[name:vadas, age:under thirty]
+==&gt;[name:marko, age:under thirty]
+==&gt;[name:peter, age:over thirty]
+==&gt;[name:josh, age:over thirty]
+gremlin&gt; t.get(0,&#39;name&#39;)      
+==&gt;vadas</code></pre>
+<h3 id='side-effect/tree'>tree</h3 id='side-effect/tree'>
+<p>Emit input, but stores the tree formed by the traversal as a map.  Accepts an optional set of closures to be applied in round-robin fashion over each level of the tree.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).out.out.tree.cap
+==&gt;{v[1]={v[4]={v[3]={}, v[5]={}}}}
+gremlin&gt; g.v(1).out.out.tree{it.name}.cap
+==&gt;{marko={josh={lop={}, ripple={}}}}
+gremlin&gt; g.v(1).out.out.tree{it.name}{&quot;child1:&quot; + it.name}{&quot;child2:&quot; + it.name}.cap
+==&gt;{marko={child1:josh={child2:lop={}, child2:ripple={}}}}
+gremlin&gt; t = new Tree()                                                               
+gremlin&gt; g.v(1).out.out.tree(t){it.name}{&quot;child1:&quot; + it.name}{&quot;child2:&quot; + it.name}    
+==&gt;v[5]
+==&gt;v[3]
+gremlin&gt; t.get(&#39;marko&#39;)
+==&gt;child1:josh={child2:lop={}, child2:ripple={}}</code></pre>
 <h2 id='branch'>Branch</h2 id='branch'>
 <p>Branch steps decide which step to take.
 
