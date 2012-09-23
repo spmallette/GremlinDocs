@@ -707,6 +707,90 @@ gremlin> x
 * [store](#side-effect/store)
 * [fill](#methods/fill)
 
+
+### as
+
+Emits input, but names the previous step.
+
+```text
+gremlin> g.V.out('knows').has('age', T.gt, 30).back(2).age     
+==>29
+gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).back('x').age
+==>29
+```
+
+### groupBy
+
+Emits input, but groups input after processing it by provided key-closure and value-closure.  It is also possible to supply an optional reduce-closure.  
+
+```text
+gremlin> g.V.groupBy{it}{it.out}.cap
+==>{v[3]=[], v[2]=[], v[1]=[v[2], v[4], v[3]], v[6]=[v[3]], v[5]=[], v[4]=[v[5], v[3]]}
+gremlin> g.V.groupBy{it}{it.out}{it.size()}.cap
+==>{v[3]=0, v[2]=0, v[1]=3, v[6]=1, v[5]=0, v[4]=2}
+gremlin> m = [:]
+gremlin> g.V.groupBy(m){it}{it.out}.iterate();null;
+==>null
+gremlin> m
+==>v[3]=[]
+==>v[2]=[]
+==>v[1]=[v[2], v[4], v[3]]
+==>v[6]=[v[3]]
+==>v[5]=[]
+==>v[4]=[v[5], v[3]]
+```
+
+#### See Also
+
+* [groupCount](#side-effect/groupCount)
+
+### groupCount
+
+Emits input, but updates a map for each input, where closures provides generic map update.
+
+```text
+gremlin> g.V.out.groupCount(m)
+==>v[2]
+==>v[4]
+==>v[3]
+==>v[3]
+==>v[5]
+==>v[3]
+gremlin> m
+==>v[2]=1
+==>v[4]=1
+==>v[3]=3
+==>v[5]=1
+gremlin> g.v(1).out.groupCount(m){it}{it.b+1.0}.out.groupCount(m){it}{it.b+0.5}
+==>v[5]
+==>v[3]
+gremlin> m
+==>v[2]=1.0
+==>v[4]=1.0
+==>v[5]=0.5
+==>v[3]=1.5
+```
+
+#### See Also
+
+* [groupBy](#side-effect/groupBy)
+
+### sideEffect
+
+Emits input, but calls a side effect closure on each input.
+
+```text
+gremlin> youngest = null
+==>null
+gremlin> g.V.hasNot('age', null).sideEffect{youngest = youngest == null || youngest.age > it.age ? it : youngest}
+==>v[2]
+==>v[1]
+==>v[6]
+==>v[4]
+gremlin> youngest
+==>v[2]
+```
+
 ### store
 
 Emits input, but adds input to collection, where provided closure processes input prior to insertion (lazy).  In being "lazy", 'store' will keep element as they are being requested.
@@ -723,6 +807,60 @@ gremlin> x
 
 * [aggregate](#side-effect//aggregate)
 * [fill](#methods/fill)
+
+### table
+
+Emits input, but stores row of as values (constrained by column names if provided) in a table.  Accepts an optional set of closures that are applied in round-robin fashion to each column of the table.
+
+```text
+gremlin> t = new Table()  
+gremlin> g.V.name.as('name').back(1).age.as('age').table(t)
+==>null
+==>27
+==>29
+==>35
+==>null
+==>32
+gremlin> t
+==>[name:lop, age:null]
+==>[name:vadas, age:27]
+==>[name:marko, age:29]
+==>[name:peter, age:35]
+==>[name:ripple, age:null]
+==>[name:josh, age:32]
+gremlin> t = new Table()
+gremlin> g.V.hasNot('age', null).name.as('name').back(1).age.as('age').table(t){it}{it>30 ? 'over thirty' : 'under thirty'}
+==>27
+==>29
+==>35
+==>32
+gremlin> t
+==>[name:vadas, age:under thirty]
+==>[name:marko, age:under thirty]
+==>[name:peter, age:over thirty]
+==>[name:josh, age:over thirty]
+gremlin> t.get(0,'name')      
+==>vadas
+```
+
+### tree
+
+Emit input, but stores the tree formed by the traversal as a map.  Accepts an optional set of closures to be applied in round-robin fashion over each level of the tree.
+
+```text
+gremlin> g.v(1).out.out.tree.cap
+==>{v[1]={v[4]={v[3]={}, v[5]={}}}}
+gremlin> g.v(1).out.out.tree{it.name}.cap
+==>{marko={josh={lop={}, ripple={}}}}
+gremlin> g.v(1).out.out.tree{it.name}{"child1:" + it.name}{"child2:" + it.name}.cap
+==>{marko={child1:josh={child2:lop={}, child2:ripple={}}}}
+gremlin> t = new Tree()                                                               
+gremlin> g.v(1).out.out.tree(t){it.name}{"child1:" + it.name}{"child2:" + it.name}    
+==>v[5]
+==>v[3]
+gremlin> t.get('marko')
+==>child1:josh={child2:lop={}, child2:ripple={}}
+```
 
 ## Branch
 
