@@ -809,7 +809,7 @@ gremlin&gt; g.V.has(&quot;age&quot;, null).name
 ==&gt;ripple</code></pre>
 <h4>See Also</h4>
 <ul>
-<li><a href="#filter/hasNot">hasNot</a></li>
+<li><a href="#filter/hasnot">hasNot</a></li>
 </ul>
 <h3 id='filter/hasnot'>hasNot</h3 id='filter/hasnot'>
 <p>Allows an element if it does not have a particular property.  Utilizes several options for comparisons on through <code>T</code>:
@@ -942,7 +942,7 @@ gremlin&gt; m
 ==&gt;v[4]=[v[5], v[3]]</code></pre>
 <h4>See Also</h4>
 <ul>
-<li><a href="#side-effect/groupCount">groupCount</a></li>
+<li><a href="#side-effect/groupcount">groupCount</a></li>
 </ul>
 <h3 id='side-effect/groupcount'>groupCount</h3 id='side-effect/groupcount'>
 <p>Emits input, but updates a map for each input, where closures provides generic map update.
@@ -970,7 +970,7 @@ gremlin&gt; m
 ==&gt;v[3]=1.5</code></pre>
 <h4>See Also</h4>
 <ul>
-<li><a href="#side-effect/groupBy">groupBy</a></li>
+<li><a href="#side-effect/groupby">groupBy</a></li>
 </ul>
 <h3 id='side-effect/optional'>optional</h3 id='side-effect/optional'>
 <p>Behaves similar to <code>back</code> except that it does not filter. It will go down a particular path and back up to where it left off. As such, its useful for yielding a sideeffect down a particular branch.
@@ -1022,7 +1022,7 @@ gremlin&gt; x
 ==&gt;v[2]</code></pre>
 <h4>See Also</h4>
 <ul>
-<li><a href="#side-effect//aggregate">aggregate</a></li>
+<li><a href="#side-effect/aggregate">aggregate</a></li>
 <li><a href="#methods/fill">fill</a></li>
 </ul>
 <h3 id='side-effect/table'>table</h3 id='side-effect/table'>
@@ -1093,8 +1093,8 @@ gremlin&gt; g.v(1).out(&#39;knows&#39;).copySplit(_().out(&#39;created&#39;).nam
 ==&gt;32</code></pre>
 <h4>See Also</h4>
 <ul>
-<li><a href="#branch/exhaustMerge">exhaustMerge</a></li>
-<li><a href="#branch/fairMerge">fairMerge</a></li>
+<li><a href="#branch/exhaustmerge">exhaustMerge</a></li>
+<li><a href="#branch/fairmerge">fairMerge</a></li>
 </ul>
 <h3 id='branch/exhaustmerge'>exhaustMerge</h3 id='branch/exhaustmerge'>
 <p>Used in combination with a <code>copySplit</code>, merging the parallel traversals by exhaustively getting the objects of the first, then the second, etc.
@@ -1107,8 +1107,8 @@ gremlin&gt; g.v(1).out(&#39;knows&#39;).copySplit(_().out(&#39;created&#39;).nam
 ==&gt;32</code></pre>
 <h4>See Also</h4>
 <ul>
-<li><a href="#branch/copySplit">exhaustMerge</a></li>
-<li><a href="#branch/fairMerge">fairMerge</a></li>
+<li><a href="#branch/copysplit">exhaustMerge</a></li>
+<li><a href="#branch/fairmerge">fairMerge</a></li>
 </ul>
 <h3 id='branch/fairmerge'>fairMerge</h3 id='branch/fairmerge'>
 <p>Used in combination with a <code>copySplit</code>, merging the parallel traversals in a round-robin fashion.
@@ -1121,8 +1121,8 @@ gremlin&gt; g.v(1).out(&#39;knows&#39;).copySplit(_().out(&#39;created&#39;).nam
 ==&gt;32</code></pre>
 <h4>See Also</h4>
 <ul>
-<li><a href="#branch/copySplit">copySplit</a></li>
-<li><a href="#branch/exhaustMerge">fairMerge</a></li>
+<li><a href="#branch/copysplit">copySplit</a></li>
+<li><a href="#branch/exhaustmerge">fairMerge</a></li>
 </ul>
 <h3 id='branch/ifthenelse'>ifThenElse</h3 id='branch/ifthenelse'>
 <p>Allows for if-then-else conditional logic.
