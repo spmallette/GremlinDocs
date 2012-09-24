@@ -48,6 +48,8 @@ gremlin> x._().inV
 Get both adjacent vertices of the vertex, the in and the out.
 
 ```text
+gremlin> v = g.v(4)
+==>v[4]
 gremlin> v.both
 ==>v[1]
 ==>v[5]
@@ -65,6 +67,8 @@ gremlin> v.both('knows', 'created')
 Get both incoming and outgoing edges of the vertex.
 
 ```text
+gremlin> v = g.v(4)
+==>v[4]
 gremlin> v.bothE
 ==>e[8][1-knows->4]
 ==>e[10][4-created->5]
@@ -337,6 +341,8 @@ gremlin> v.out('knows')
 Gets the outgoing edges to the vertex.
 
 ```text
+gremlin> v = g.v(1)
+==>v[1]
 gremlin> v.outE.inV
 ==>v[2]
 ==>v[4]
