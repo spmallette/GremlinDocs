@@ -582,7 +582,7 @@ gremlin> g.V.has("age", null).name
 
 #### See Also
 
-* [hasNot](#filter/hasNot)
+* [hasNot](#filter/hasnot)
 
 ### hasNot
 
@@ -742,7 +742,7 @@ gremlin> m
 
 #### See Also
 
-* [groupCount](#side-effect/groupCount)
+* [groupCount](#side-effect/groupcount)
 
 ### groupCount
 
@@ -773,7 +773,7 @@ gremlin> m
 
 #### See Also
 
-* [groupBy](#side-effect/groupBy)
+* [groupBy](#side-effect/groupby)
 
 ### optional
 
@@ -834,7 +834,7 @@ gremlin> x
 
 #### See Also
 
-* [aggregate](#side-effect//aggregate)
+* [aggregate](#side-effect/aggregate)
 * [fill](#methods/fill)
 
 ### table
@@ -914,8 +914,8 @@ gremlin> g.v(1).out('knows').copySplit(_().out('created').name, _().age).exhaust
 
 #### See Also
 
-* [exhaustMerge](#branch/exhaustMerge)
-* [fairMerge](#branch/fairMerge)
+* [exhaustMerge](#branch/exhaustmerge)
+* [fairMerge](#branch/fairmerge)
 
 ### exhaustMerge
 
@@ -931,8 +931,8 @@ gremlin> g.v(1).out('knows').copySplit(_().out('created').name, _().age).exhaust
 
 #### See Also
 
-* [exhaustMerge](#branch/copySplit)
-* [fairMerge](#branch/fairMerge)
+* [exhaustMerge](#branch/copysplit)
+* [fairMerge](#branch/fairmerge)
 
 ### fairMerge
 
@@ -948,8 +948,8 @@ gremlin> g.v(1).out('knows').copySplit(_().out('created').name, _().age).fairMer
 
 #### See Also
 
-* [copySplit](#branch/copySplit)
-* [fairMerge](#branch/exhaustMerge)
+* [copySplit](#branch/copysplit)
+* [fairMerge](#branch/exhaustmerge)
 
 ### ifThenElse
 
