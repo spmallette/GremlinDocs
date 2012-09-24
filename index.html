@@ -241,6 +241,10 @@
                 </li>
               
                 <li>
+                  <a href="#side-effect/optional">optional</a>
+                </li>
+              
+                <li>
                   <a href="#side-effect/sideeffect">sideEffect</a>
                 </li>
               
@@ -262,6 +266,30 @@
       
         <li>
           <a href="#branch">Branch</a>
+          
+            <ul>
+              
+                <li>
+                  <a href="#branch/copysplit">copySplit</a>
+                </li>
+              
+                <li>
+                  <a href="#branch/exhaustmerge">exhaustMerge</a>
+                </li>
+              
+                <li>
+                  <a href="#branch/fairmerge">fairMerge</a>
+                </li>
+              
+                <li>
+                  <a href="#branch/ifthenelse">ifThenElse</a>
+                </li>
+              
+                <li>
+                  <a href="#branch/loop">loop</a>
+                </li>
+              
+            </ul>
           
         </li>
       
@@ -944,6 +972,32 @@ gremlin&gt; m
 <ul>
 <li><a href="#side-effect/groupBy">groupBy</a></li>
 </ul>
+<h3 id='side-effect/optional'>optional</h3 id='side-effect/optional'>
+<p>Behaves similar to <code>back</code> except that it does not filter. It will go down a particular path and back up to where it left off. As such, its useful for yielding a sideeffect down a particular branch.
+
+</p>
+<pre><code class="text">gremlin&gt; g.V.out(&#39;knows&#39;).has(&#39;age&#39;, T.gt, 30).back(2).age
+==&gt;29
+gremlin&gt; g.V.out(&#39;knows&#39;).has(&#39;age&#39;, T.gt, 30).optional(2).age
+==&gt;null
+==&gt;27
+==&gt;29
+==&gt;35
+==&gt;null
+==&gt;32
+gremlin&gt; g.V.as(&#39;x&#39;).outE(&#39;knows&#39;).inV.has(&#39;age&#39;, T.gt, 30).back(&#39;x&#39;).age
+==&gt;29
+gremlin&gt; g.V.as(&#39;x&#39;).outE(&#39;knows&#39;).inV.has(&#39;age&#39;, T.gt, 30).optional(&#39;x&#39;).age
+==&gt;null
+==&gt;27
+==&gt;29
+==&gt;35
+==&gt;null
+==&gt;32</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#filter/back">back</a></li>
+</ul>
 <h3 id='side-effect/sideeffect'>sideEffect</h3 id='side-effect/sideeffect'>
 <p>Emits input, but calls a side effect closure on each input.
 
@@ -1023,6 +1077,81 @@ gremlin&gt; t.get(&#39;marko&#39;)
 <p>Branch steps decide which step to take.
 
 </p>
+<h3 id='branch/copysplit'>copySplit</h3 id='branch/copysplit'>
+<p>Copies incoming object to internal pipes.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).out(&#39;knows&#39;).copySplit(_().out(&#39;created&#39;).name, _().age).fairMerge
+==&gt;ripple
+==&gt;27
+==&gt;lop
+==&gt;32
+gremlin&gt; g.v(1).out(&#39;knows&#39;).copySplit(_().out(&#39;created&#39;).name, _().age).exhaustMerge
+==&gt;ripple
+==&gt;lop
+==&gt;27
+==&gt;32</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#branch/exhaustMerge">exhaustMerge</a></li>
+<li><a href="#branch/fairMerge">fairMerge</a></li>
+</ul>
+<h3 id='branch/exhaustmerge'>exhaustMerge</h3 id='branch/exhaustmerge'>
+<p>Used in combination with a <code>copySplit</code>, merging the parallel traversals by exhaustively getting the objects of the first, then the second, etc.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).out(&#39;knows&#39;).copySplit(_().out(&#39;created&#39;).name, _().age).exhaustMerge
+==&gt;ripple
+==&gt;lop
+==&gt;27
+==&gt;32</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#branch/copySplit">exhaustMerge</a></li>
+<li><a href="#branch/fairMerge">fairMerge</a></li>
+</ul>
+<h3 id='branch/fairmerge'>fairMerge</h3 id='branch/fairmerge'>
+<p>Used in combination with a <code>copySplit</code>, merging the parallel traversals in a round-robin fashion.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).out(&#39;knows&#39;).copySplit(_().out(&#39;created&#39;).name, _().age).fairMerge
+==&gt;ripple
+==&gt;27
+==&gt;lop
+==&gt;32</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#branch/copySplit">copySplit</a></li>
+<li><a href="#branch/exhaustMerge">fairMerge</a></li>
+</ul>
+<h3 id='branch/ifthenelse'>ifThenElse</h3 id='branch/ifthenelse'>
+<p>Allows for if-then-else conditional logic.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).out.ifThenElse{it.name==&#39;josh&#39;}{it.age}{it.name}
+==&gt;vadas
+==&gt;32
+==&gt;lop</code></pre>
+<h3 id='branch/loop'>loop</h3 id='branch/loop'>
+<p>Loop over a particular set of steps in the pipeline.  The first argument is either the number of steps back in the pipeline to go or a named step.  The second argument is a while closure evaluating the current object.  The <code>it</code> component of the loop step closure has three properties that are accessible. These properties can be used to reason about when to break out of the loop.
+
+</p>
+<ul>
+<li><code>it.object</code>: the current object of the traverser.</li>
+<li><code>it.path</code>: the current path of the traverser.</li>
+<li><code>it.loops</code>: the number of times the traverser has looped through the loop section.</li>
+</ul>
+<p>The final argument is known as the &quot;emit&quot; closure. This boolean-based closure will determine wether the current object in the loop structure is emitted or not. As such, it is possible to emit intermediate objects, not simply those at the end of the loop.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).out.out                         
+==&gt;v[5]
+==&gt;v[3]
+gremlin&gt; g.v(1).out.loop(1){it.loops&lt;3}
+==&gt;v[5]
+==&gt;v[3]
+gremlin&gt; g.v(1).out.loop(1){it.loops&lt;3}{it.object.name==&#39;josh&#39;} 
+==&gt;v[4]</code></pre>
 <h2 id='methods'>Methods</h2 id='methods'>
 <p>Methods represent functions that make it faster and easier to work with <a href="http://blueprints.tinkerpop.com">Blueprints</a> and <a href="http://pipes.tinkerpop.com">Pipes</a> APIs.  It is important to keep in mind that the full <a href="http://download.oracle.com/javase/6/docs/api/">Java API</a> and <a href="http://groovy.codehaus.org/groovy-jdk">Groovy API</a> are accessible from Gremlin.
 
