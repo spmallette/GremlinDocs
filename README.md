@@ -775,6 +775,35 @@ gremlin> m
 
 * [groupBy](#side-effect/groupBy)
 
+### optional
+
+Behaves similar to `back` except that it does not filter. It will go down a particular path and back up to where it left off. As such, its useful for yielding a sideeffect down a particular branch.
+
+```text
+gremlin> g.V.out('knows').has('age', T.gt, 30).back(2).age
+==>29
+gremlin> g.V.out('knows').has('age', T.gt, 30).optional(2).age
+==>null
+==>27
+==>29
+==>35
+==>null
+==>32
+gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).back('x').age
+==>29
+gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).optional('x').age
+==>null
+==>27
+==>29
+==>35
+==>null
+==>32
+```
+
+#### See Also
+
+* [back](#filter/back)
+
 ### sideEffect
 
 Emits input, but calls a side effect closure on each input.
@@ -865,6 +894,94 @@ gremlin> t.get('marko')
 ## Branch
 
 Branch steps decide which step to take.
+
+### copySplit
+
+Copies incoming object to internal pipes.
+
+```text
+gremlin> g.v(1).out('knows').copySplit(_().out('created').name, _().age).fairMerge
+==>ripple
+==>27
+==>lop
+==>32
+gremlin> g.v(1).out('knows').copySplit(_().out('created').name, _().age).exhaustMerge
+==>ripple
+==>lop
+==>27
+==>32
+```
+
+#### See Also
+
+* [exhaustMerge](#branch/exhaustMerge)
+* [fairMerge](#branch/fairMerge)
+
+### exhaustMerge
+
+Used in combination with a `copySplit`, merging the parallel traversals by exhaustively getting the objects of the first, then the second, etc.
+
+```text
+gremlin> g.v(1).out('knows').copySplit(_().out('created').name, _().age).exhaustMerge
+==>ripple
+==>lop
+==>27
+==>32
+```
+
+#### See Also
+
+* [exhaustMerge](#branch/copySplit)
+* [fairMerge](#branch/fairMerge)
+
+### fairMerge
+
+Used in combination with a `copySplit`, merging the parallel traversals in a round-robin fashion.
+
+```text
+gremlin> g.v(1).out('knows').copySplit(_().out('created').name, _().age).fairMerge
+==>ripple
+==>27
+==>lop
+==>32
+```
+
+#### See Also
+
+* [copySplit](#branch/copySplit)
+* [fairMerge](#branch/exhaustMerge)
+
+### ifThenElse
+
+Allows for if-then-else conditional logic.
+
+```text
+gremlin> g.v(1).out.ifThenElse{it.name=='josh'}{it.age}{it.name}
+==>vadas
+==>32
+==>lop
+```
+
+### loop 
+
+Loop over a particular set of steps in the pipeline.  The first argument is either the number of steps back in the pipeline to go or a named step.  The second argument is a while closure evaluating the current object.  The `it` component of the loop step closure has three properties that are accessible. These properties can be used to reason about when to break out of the loop.
+
+* `it.object`: the current object of the traverser.
+* `it.path`: the current path of the traverser.
+* `it.loops`: the number of times the traverser has looped through the loop section.
+
+The final argument is known as the "emit" closure. This boolean-based closure will determine wether the current object in the loop structure is emitted or not. As such, it is possible to emit intermediate objects, not simply those at the end of the loop.
+
+```text
+gremlin> g.v(1).out.out                         
+==>v[5]
+==>v[3]
+gremlin> g.v(1).out.loop(1){it.loops<3}
+==>v[5]
+==>v[3]
+gremlin> g.v(1).out.loop(1){it.loops<3}{it.object.name=='josh'} 
+==>v[4]
+```
 
 ## Methods
 
