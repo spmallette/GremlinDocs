@@ -931,7 +931,7 @@ gremlin> g.v(1).out('knows').copySplit(_().out('created').name, _().age).exhaust
 
 #### See Also
 
-* [exhaustMerge](#branch/copysplit)
+* [copySplit](#branch/copysplit)
 * [fairMerge](#branch/fairmerge)
 
 ### fairMerge
@@ -949,7 +949,7 @@ gremlin> g.v(1).out('knows').copySplit(_().out('created').name, _().age).fairMer
 #### See Also
 
 * [copySplit](#branch/copysplit)
-* [fairMerge](#branch/exhaustmerge)
+* [exaustMerge](#branch/exhaustmerge)
 
 ### ifThenElse
 
