@@ -982,24 +982,24 @@ gremlin&gt; m
 <p>Behaves similar to <code>back</code> except that it does not filter. It will go down a particular path and back up to where it left off. As such, its useful for yielding a sideeffect down a particular branch.
 
 </p>
-<pre><code class="text">gremlin&gt; g.V.out(&#39;knows&#39;).has(&#39;age&#39;, T.gt, 30).back(2).age
-==&gt;29
-gremlin&gt; g.V.out(&#39;knows&#39;).has(&#39;age&#39;, T.gt, 30).optional(2).age
-==&gt;null
-==&gt;27
-==&gt;29
-==&gt;35
-==&gt;null
-==&gt;32
-gremlin&gt; g.V.as(&#39;x&#39;).outE(&#39;knows&#39;).inV.has(&#39;age&#39;, T.gt, 30).back(&#39;x&#39;).age
-==&gt;29
-gremlin&gt; g.V.as(&#39;x&#39;).outE(&#39;knows&#39;).inV.has(&#39;age&#39;, T.gt, 30).optional(&#39;x&#39;).age
-==&gt;null
-==&gt;27
-==&gt;29
-==&gt;35
-==&gt;null
-==&gt;32</code></pre>
+<pre><code class="text">gremlin&gt; g.V.out(&#39;knows&#39;).has(&#39;age&#39;, T.gt, 30).back(2)        
+==&gt;v[1]
+gremlin&gt; g.V.out(&#39;knows&#39;).has(&#39;age&#39;, T.gt, 30).optional(2)    
+==&gt;v[3]
+==&gt;v[2]
+==&gt;v[1]
+==&gt;v[6]
+==&gt;v[5]
+==&gt;v[4]
+gremlin&gt; g.V.as(&#39;x&#39;).outE(&#39;knows&#39;).inV.has(&#39;age&#39;, T.gt, 30).back(&#39;x&#39;)
+==&gt;v[1]
+gremlin&gt; g.V.as(&#39;x&#39;).outE(&#39;knows&#39;).inV.has(&#39;age&#39;, T.gt, 30).optional(&#39;x&#39;)
+==&gt;v[3]
+==&gt;v[2]
+==&gt;v[1]
+==&gt;v[6]
+==&gt;v[5]
+==&gt;v[4]</code></pre>
 <h4>See Also</h4>
 <ul>
 <li><a href="#filter/back">back</a></li>
@@ -1008,15 +1008,15 @@ gremlin&gt; g.V.as(&#39;x&#39;).outE(&#39;knows&#39;).inV.has(&#39;age&#39;, T.g
 <p>Emits input, but calls a side effect closure on each input.
 
 </p>
-<pre><code class="text">gremlin&gt; youngest = null
-==&gt;null
-gremlin&gt; g.V.hasNot(&#39;age&#39;, null).sideEffect{youngest = youngest == null || youngest.age &gt; it.age ? it : youngest}
+<pre><code class="text">gremlinyoungest = Integer.MAX_VALUE                                                    }
+==&gt;2147483647
+gremlin&gt; g.V.hasNot(&#39;age&#39;, null).sideEffect{youngest=youngest&gt;it.age?it.age:youngest}
 ==&gt;v[2]
 ==&gt;v[1]
 ==&gt;v[6]
 ==&gt;v[4]
 gremlin&gt; youngest
-==&gt;v[2]</code></pre>
+==&gt;27</code></pre>
 <h3 id='side-effect/store'>store</h3 id='side-effect/store'>
 <p>Emits input, but adds input to collection, where provided closure processes input prior to insertion (lazy).  In being &quot;lazy&quot;, &#39;store&#39; will keep element as they are being requested.
 
