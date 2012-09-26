@@ -786,24 +786,24 @@ gremlin> m
 Behaves similar to `back` except that it does not filter. It will go down a particular path and back up to where it left off. As such, its useful for yielding a sideeffect down a particular branch.
 
 ```text
-gremlin> g.V.out('knows').has('age', T.gt, 30).back(2).age
-==>29
-gremlin> g.V.out('knows').has('age', T.gt, 30).optional(2).age
-==>null
-==>27
-==>29
-==>35
-==>null
-==>32
-gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).back('x').age
-==>29
-gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).optional('x').age
-==>null
-==>27
-==>29
-==>35
-==>null
-==>32
+gremlin> g.V.out('knows').has('age', T.gt, 30).back(2)        
+==>v[1]
+gremlin> g.V.out('knows').has('age', T.gt, 30).optional(2)    
+==>v[3]
+==>v[2]
+==>v[1]
+==>v[6]
+==>v[5]
+==>v[4]
+gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).back('x')
+==>v[1]
+gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).optional('x')
+==>v[3]
+==>v[2]
+==>v[1]
+==>v[6]
+==>v[5]
+==>v[4]
 ```
 
 #### See Also
@@ -815,15 +815,15 @@ gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).optional('x').age
 Emits input, but calls a side effect closure on each input.
 
 ```text
-gremlin> youngest = null
-==>null
-gremlin> g.V.hasNot('age', null).sideEffect{youngest = youngest == null || youngest.age > it.age ? it : youngest}
+gremlinyoungest = Integer.MAX_VALUE                                                    }
+==>2147483647
+gremlin> g.V.hasNot('age', null).sideEffect{youngest=youngest>it.age?it.age:youngest}
 ==>v[2]
 ==>v[1]
 ==>v[6]
 ==>v[4]
 gremlin> youngest
-==>v[2]
+==>27
 ```
 
 ### store
