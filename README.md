@@ -14,7 +14,7 @@ This produces a hardcoded representation of the graph diagrammed [here](http://g
 
 The documentation and samples presented here attempt to stay current with the most current and stable release of Gremlin (currently 2.1.0).  Please note that this is not the *official* Gremlin documentation.  The official documentation resides in the Gremlin [wiki](https://github.com/tinkerpop/gremlin/wiki). 
 
-GremlinDocs is a "GitHub repository":https://github.com/spmallette/GremlinDocs.  Pull requests will be considered. 
+GremlinDocs is a [GitHub repository](https://github.com/spmallette/GremlinDocs).  Pull requests will be considered. 
 
 
 ## Transform
