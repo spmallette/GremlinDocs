@@ -43,6 +43,10 @@ gremlin> x._().inV
 ==>v[4]
 ```
 
+[top](#)
+
+***
+
 ### both
 
 Get both adjacent vertices of the vertex, the in and the out.
@@ -61,6 +65,10 @@ gremlin> v.both('knows', 'created')
 ==>v[5]
 ==>v[3]
 ```
+
+[top](#)
+
+***
 
 ### bothE
 
@@ -81,6 +89,10 @@ gremlin> v.bothE('knows', 'created')
 ==>e[11][4-created->3]
 ```
 
+[top](#)
+
+***
+
 ### bothV
 
 Get both incoming and outgoing vertices of the edge.
@@ -97,6 +109,10 @@ gremlin> e.bothV
 ==>v[3]
 ```
 
+[top](#)
+
+***
+
 ### cap
 
 Gets the side-effect of the pipe prior.  In other words, it emits the value of the previous step and not the values that flow through it.
@@ -110,6 +126,10 @@ gremlin> g.V('lang', 'java').in('created').name.groupCount
 gremlin> g.V('lang', 'java').in('created').name.groupCount.cap
 ==>{marko=1, peter=1, josh=2}
 ```
+
+[top](#)
+
+***
 
 ### E
 
@@ -132,6 +152,10 @@ gremlin> g.E.weight
 ==>0.2
 ```
 
+[top](#)
+
+***
+
 ### gather
 
 Collect all objects up to that step and process with the provided closure.
@@ -149,6 +173,10 @@ gremlin> g.v(1).out.gather
 
 * [scatter](#transform/scatter)
 
+[top](#)
+
+***
+
 ### id
 
 Gets the unique identifier of the element.  
@@ -161,6 +189,10 @@ gremlin> v.id
 gremlin> g.v(1).id
 ==>1
 ```
+
+[top](#)
+
+***
 
 ### in
 
@@ -185,6 +217,10 @@ gremlin> v.inE("created").outV
 ==>v[6]
 ```
 
+[top](#)
+
+***
+
 ### inE
 
 Gets the incoming edges of the vertex.
@@ -208,6 +244,10 @@ gremlin> v.inE("created").outV
 ==>v[6]
 ```
 
+[top](#)
+
+***
+
 ### inV
 
 Get both incoming head vertex of the edge.
@@ -223,6 +263,10 @@ gremlin> e.bothV
 ==>v[6]
 ==>v[3]
 ```
+
+[top](#)
+
+***
 
 ### key
 
@@ -243,6 +287,10 @@ gremlin> v.getProperty('name')
 ==>lop
 ```
 
+[top](#)
+
+***
+
 ### label
 
 Gets the label of an edge.
@@ -258,6 +306,10 @@ gremlin> g.v(1).outE.has('label','created')
 ==>e[9][1-created->3]
 ```
 
+[top](#)
+
+***
+
 ### map
 
 Gets the property map of the graph element.
@@ -269,6 +321,10 @@ gremlin> g.v(1).map()
 ==>name=marko
 ==>age=29
 ```
+
+[top](#)
+
+***
 
 ### memoize
 
@@ -288,6 +344,10 @@ gremlin> g.V.out.out.memoize(1,m).name
 ==>ripple
 ==>lop
 ```
+
+[top](#)
+
+***
 
 ### order
 
@@ -313,6 +373,10 @@ gremlin> g.V.order{it.b.name <=> it.a.name}.out('knows')
 ==>v[4]
 ```
 
+[top](#)
+
+***
+
 ### out
 
 Gets the out adjacent vertices to the vertex.
@@ -336,6 +400,10 @@ gremlin> v.out('knows')
 ==>v[4]
 ```
 
+[top](#)
+
+***
+
 ### outE
 
 Gets the outgoing edges to the vertex.
@@ -358,6 +426,10 @@ gremlin> v.out('knows')
 ==>v[2]
 ==>v[4]
 ```
+
+[top](#)
+
+***
 
 ### outV
 
@@ -488,6 +560,10 @@ gremlin> g.V("name", "marko").name
 ==>marko
 ```
 
+[top](#)
+
+***
+
 ## Filter
 
 Filter steps decide whether to allow an object to pass to the next step or not.
@@ -500,6 +576,10 @@ A index filter that emits the particular indexed object.
 gremlin> g.V[0].name
 ==>lop
 ```
+
+[top](#)
+
+***
 
 ### [i..j]
 
@@ -515,6 +595,10 @@ gremlin> g.V[0..<2].name
 ==>vadas
 ```
 
+[top](#)
+
+***
+
 ### and
 
 Takes a collection of pipes and emits incoming objects that are true for all of the pipes.
@@ -523,6 +607,10 @@ Takes a collection of pipes and emits incoming objects that are true for all of 
 gremlin> g.v(1).outE.and(_().has('weight', T.gt, 0.4f), _().has('weight', T.lt, 0.8f))
 ==>e[7][1-knows->2]
 ```
+
+[top](#)
+
+***
 
 ### back
 
@@ -534,6 +622,10 @@ gremlin> g.V.out('knows').has('age', T.gt, 30).back(2).age
 gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).back('x').age
 ==>29
 ```
+
+[top](#)
+
+***
 
 ### dedup
 
@@ -551,6 +643,10 @@ gremlin> g.v(1).out.in.dedup()
 ==>v[4]
 ==>v[6]
 ```
+
+[top](#)
+
+***
 
 ### except
 
@@ -574,6 +670,10 @@ gremlin> g.v(1).out.aggregate(x).out.except(x)
 
 * [retain](#filter/retain)
 
+[top](#)
+
+***
+
 ### filter
 
 Decide whether to allow an object to pass.  Return true from the closure to allow an object to pass.
@@ -583,6 +683,10 @@ gremlin> g.V.filter{it.age > 29}.name
 ==>peter
 ==>josh
 ```
+
+[top](#)
+
+***
 
 ### has
 
@@ -610,6 +714,10 @@ gremlin> g.V.has("age", null).name
 
 * [hasNot](#filter/hasnot)
 
+[top](#)
+
+***
+
 ### hasNot
 
 Allows an element if it does not have a particular property.  Utilizes several options for comparisons on through `T`:
@@ -632,6 +740,10 @@ gremlin> g.V.hasNot("age", null).name
 ==>josh
 ```
 
+[top](#)
+
+***
+
 ### interval
 
 Allow elements to pass that have their property in the provided start and end interval.
@@ -647,6 +759,10 @@ gremlin> g.E.interval("weight", 0.3f, 0.9f).weight
 
 * [has](#filter/has)
 
+[top](#)
+
+***
+
 ### or
 
 Takes a collection of pipes and emits incoming objects that are true for any of the pipes.
@@ -656,6 +772,10 @@ gremlin> g.v(1).outE.or(_().has('id', T.eq, "9"), _().has('weight', T.lt, 0.6f))
 ==>e[7][1-knows->2]
 ==>e[9][1-created->3]
 ```
+
+[top](#)
+
+***
 
 ### random
 
@@ -671,6 +791,10 @@ gremlin> g.V.random(0.5)
 ==>v[5]
 ==>v[4]
 ```
+
+[top](#)
+
+***
 
 ### retain
 
@@ -694,6 +818,10 @@ gremlin> g.v(1).out.aggregate(x).out.retain(x)
 
 * [except](#filter/except)
 
+[top](#)
+
+***
+
 ### simplePath
 
 Emit the object only if the current path has no repeated elements.
@@ -709,6 +837,10 @@ gremlin> g.v(1).out.in.simplePath
 ==>v[4]
 ==>v[6]
 ```
+
+[top](#)
+
+***
 
 ## Side Effect
 
@@ -733,6 +865,9 @@ gremlin> x
 * [store](#side-effect/store)
 * [fill](#methods/fill)
 
+[top](#)
+
+***
 
 ### as
 
@@ -744,6 +879,10 @@ gremlin> g.V.out('knows').has('age', T.gt, 30).back(2).age
 gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).back('x').age
 ==>29
 ```
+
+[top](#)
+
+***
 
 ### groupBy
 
@@ -769,6 +908,10 @@ gremlin> m
 #### See Also
 
 * [groupCount](#side-effect/groupcount)
+
+[top](#)
+
+***
 
 ### groupCount
 
@@ -801,6 +944,10 @@ gremlin> m
 
 * [groupBy](#side-effect/groupby)
 
+[top](#)
+
+***
+
 ### optional
 
 Behaves similar to `back` except that it does not filter. It will go down a particular path and back up to where it left off. As such, its useful for yielding a sideeffect down a particular branch.
@@ -830,6 +977,10 @@ gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).optional('x')
 
 * [back](#filter/back)
 
+[top](#)
+
+***
+
 ### sideEffect
 
 Emits input, but calls a side effect closure on each input.
@@ -845,6 +996,10 @@ gremlin> g.V.hasNot('age', null).sideEffect{youngest=youngest>it.age?it.age:youn
 gremlin> youngest
 ==>27
 ```
+
+[top](#)
+
+***
 
 ### store
 
@@ -862,6 +1017,10 @@ gremlin> x
 
 * [aggregate](#side-effect/aggregate)
 * [fill](#methods/fill)
+
+[top](#)
+
+***
 
 ### table
 
@@ -899,6 +1058,10 @@ gremlin> t.get(0,'name')
 ```
 
 ### tree
+
+[top](#)
+
+***
 
 Emit input, but stores the tree formed by the traversal as a map.  Accepts an optional set of closures to be applied in round-robin fashion over each level of the tree.
 
@@ -943,6 +1106,10 @@ gremlin> g.v(1).out('knows').copySplit(_().out('created').name, _().age).exhaust
 * [exhaustMerge](#branch/exhaustmerge)
 * [fairMerge](#branch/fairmerge)
 
+[top](#)
+
+***
+
 ### exhaustMerge
 
 Used in combination with a `copySplit`, merging the parallel traversals by exhaustively getting the objects of the first, then the second, etc.
@@ -959,6 +1126,10 @@ gremlin> g.v(1).out('knows').copySplit(_().out('created').name, _().age).exhaust
 
 * [copySplit](#branch/copysplit)
 * [fairMerge](#branch/fairmerge)
+
+[top](#)
+
+***
 
 ### fairMerge
 
@@ -977,6 +1148,10 @@ gremlin> g.v(1).out('knows').copySplit(_().out('created').name, _().age).fairMer
 * [copySplit](#branch/copysplit)
 * [exaustMerge](#branch/exhaustmerge)
 
+[top](#)
+
+***
+
 ### ifThenElse
 
 Allows for if-then-else conditional logic.
@@ -987,6 +1162,10 @@ gremlin> g.v(1).out.ifThenElse{it.name=='josh'}{it.age}{it.name}
 ==>32
 ==>lop
 ```
+
+[top](#)
+
+***
 
 ### loop 
 
@@ -1008,6 +1187,10 @@ gremlin> g.v(1).out.loop(1){it.loops<3}
 gremlin> g.v(1).out.loop(1){it.loops<3}{it.object.name=='josh'} 
 ==>v[4]
 ```
+
+[top](#)
+
+***
 
 ## Methods
 
@@ -1033,3 +1216,7 @@ gremlin> m
 
 * [aggregate](#side-effect/aggregate)
 * [store](#side-effect/store)
+
+[top](#)
+
+***
