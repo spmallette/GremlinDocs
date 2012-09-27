@@ -673,11 +673,14 @@ gremlin&gt; g.v(1).out.gather{it[1..2]}
 gremlin&gt; g.v(1).out.gather{it[1..2]}.scatter
 ==&gt;v[4]
 ==&gt;v[3]</code></pre>
+<p><a href="#">top</a>
+
+</p>
 <h4>See Also</h4>
 <ul>
 <li><a href="#transform/gather">gather</a></li>
 </ul>
-<p><a href="#transform">top</a>
+<p><a href="#">top</a>
 
 </p>
 <h3 id='transform/select'>select</h3 id='transform/select'>
@@ -696,6 +699,9 @@ gremlin&gt; g.v(1).as(&#39;x&#39;).out(&#39;knows&#39;).as(&#39;y&#39;).select([
 gremlin&gt;  g.v(1).as(&#39;x&#39;).out(&#39;knows&#39;).as(&#39;y&#39;).select{it.id}{it.name}
 ==&gt;[x:1, y:vadas]
 ==&gt;[x:1, y:josh]</code></pre>
+<p><a href="#">top</a>
+
+</p>
 <h3 id='transform/transform'>transform</h3 id='transform/transform'>
 <p>Transform emits the result of a closure.
 
@@ -706,6 +712,9 @@ gremlin&gt;  g.v(1).as(&#39;x&#39;).out(&#39;knows&#39;).as(&#39;y&#39;).select{
 gremlin&gt; g.E.has(&#39;weight&#39;, T.gt, 0.5f).outV.age.transform{it+2}
 ==&gt;34
 ==&gt;31</code></pre>
+<p><a href="#">top</a>
+
+</p>
 <h3 id='transform/v'>V</h3 id='transform/v'>
 <p>The vertex iterator for the graph.  Utilize this to iterate through all the vertices in the graph.  Use with care on large graphs unless used in combination with a key index lookup.
 
