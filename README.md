@@ -375,6 +375,10 @@ gremlin> e.bothV
 ==>v[3]
 ```
 
+[top](#)
+
+***
+
 ### path
 
 Gets the path through the pipeline up to this point, where closures are post-processing for each object in the path.  If the path step is provided closures then, in a round robin fashion, the closures are evaluated over each object of the path and that post-processed path is returned.
@@ -398,6 +402,10 @@ gremlin> g.v(1).outE.inV.name.path
 ==>[v[1], e[9][1-created->3], v[3], lop]
 ```
 
+[top](#)
+
+***
+
 ### scatter
 
 Unroll all objects in the iterable at that step. Gather/Scatter is good for breadth-first traversals where the gather closure filters out unwanted elements at the current radius.
@@ -414,14 +422,13 @@ gremlin> g.v(1).out.gather{it[1..2]}.scatter
 ==>v[3]
 ```
 
-[top](#)
-
 #### See Also
 
 * [gather](#transform/gather)
 
-
 [top](#)
+
+***
 
 ### select
 
@@ -444,6 +451,8 @@ gremlin>  g.v(1).as('x').out('knows').as('y').select{it.id}{it.name}
 
 [top](#)
 
+***
+
 ### transform
 
 Transform emits the result of a closure.
@@ -458,6 +467,8 @@ gremlin> g.E.has('weight', T.gt, 0.5f).outV.age.transform{it+2}
 ```
 
 [top](#)
+
+***
 
 ### V
 
