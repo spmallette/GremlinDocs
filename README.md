@@ -414,12 +414,14 @@ gremlin> g.v(1).out.gather{it[1..2]}.scatter
 ==>v[3]
 ```
 
+[top](#)
+
 #### See Also
 
 * [gather](#transform/gather)
 
 
-[top](#transform)
+[top](#)
 
 ### select
 
@@ -440,6 +442,8 @@ gremlin>  g.v(1).as('x').out('knows').as('y').select{it.id}{it.name}
 ==>[x:1, y:josh]
 ```
 
+[top](#)
+
 ### transform
 
 Transform emits the result of a closure.
@@ -452,6 +456,8 @@ gremlin> g.E.has('weight', T.gt, 0.5f).outV.age.transform{it+2}
 ==>34
 ==>31
 ```
+
+[top](#)
 
 ### V
 
