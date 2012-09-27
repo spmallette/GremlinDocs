@@ -673,6 +673,13 @@ gremlin&gt; g.v(1).out.gather{it[1..2]}
 gremlin&gt; g.v(1).out.gather{it[1..2]}.scatter
 ==&gt;v[4]
 ==&gt;v[3]</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#transform/gather">gather</a></li>
+</ul>
+<p><a href="#transform">top</a>
+
+</p>
 <h3 id='transform/select'>select</h3 id='transform/select'>
 <p>Select the named steps to emit after select with post-processing closures.
 
@@ -714,10 +721,6 @@ gremlin&gt; g.V(&quot;name&quot;, &quot;marko&quot;)
 ==&gt;v[1]
 gremlin&gt; g.V(&quot;name&quot;, &quot;marko&quot;).name
 ==&gt;marko</code></pre>
-<h4>See Also</h4>
-<ul>
-<li><a href="#transform/gather">gather</a></li>
-</ul>
 <h2 id='filter'>Filter</h2 id='filter'>
 <p>Filter steps decide whether to allow an object to pass to the next step or not.
 
