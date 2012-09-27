@@ -414,6 +414,13 @@ gremlin> g.v(1).out.gather{it[1..2]}.scatter
 ==>v[3]
 ```
 
+#### See Also
+
+* [gather](#transform/gather)
+
+
+[top](#transform)
+
 ### select
 
 Select the named steps to emit after select with post-processing closures.
@@ -463,10 +470,6 @@ gremlin> g.V("name", "marko")
 gremlin> g.V("name", "marko").name
 ==>marko
 ```
-
-#### See Also
-
-* [gather](#transform/gather)
 
 ## Filter
 
