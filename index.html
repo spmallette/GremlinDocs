@@ -640,6 +640,10 @@ gremlin&gt; e.inV
 gremlin&gt; e.bothV
 ==&gt;v[6]
 ==&gt;v[3]</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
 <h3 id='transform/path'>path</h3 id='transform/path'>
 <p>Gets the path through the pipeline up to this point, where closures are post-processing for each object in the path.  If the path step is provided closures then, in a round robin fashion, the closures are evaluated over each object of the path and that post-processed path is returned.
 
@@ -660,6 +664,10 @@ gremlin&gt; g.v(1).outE.inV.name.path
 ==&gt;[v[1], e[7][1-knows-&gt;2], v[2], vadas]
 ==&gt;[v[1], e[8][1-knows-&gt;4], v[4], josh]
 ==&gt;[v[1], e[9][1-created-&gt;3], v[3], lop]</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
 <h3 id='transform/scatter'>scatter</h3 id='transform/scatter'>
 <p>Unroll all objects in the iterable at that step. Gather/Scatter is good for breadth-first traversals where the gather closure filters out unwanted elements at the current radius.
 
@@ -673,9 +681,6 @@ gremlin&gt; g.v(1).out.gather{it[1..2]}
 gremlin&gt; g.v(1).out.gather{it[1..2]}.scatter
 ==&gt;v[4]
 ==&gt;v[3]</code></pre>
-<p><a href="#">top</a>
-
-</p>
 <h4>See Also</h4>
 <ul>
 <li><a href="#transform/gather">gather</a></li>
@@ -683,6 +688,7 @@ gremlin&gt; g.v(1).out.gather{it[1..2]}.scatter
 <p><a href="#">top</a>
 
 </p>
+<hr>
 <h3 id='transform/select'>select</h3 id='transform/select'>
 <p>Select the named steps to emit after select with post-processing closures.
 
@@ -702,6 +708,7 @@ gremlin&gt;  g.v(1).as(&#39;x&#39;).out(&#39;knows&#39;).as(&#39;y&#39;).select{
 <p><a href="#">top</a>
 
 </p>
+<hr>
 <h3 id='transform/transform'>transform</h3 id='transform/transform'>
 <p>Transform emits the result of a closure.
 
@@ -715,6 +722,7 @@ gremlin&gt; g.E.has(&#39;weight&#39;, T.gt, 0.5f).outV.age.transform{it+2}
 <p><a href="#">top</a>
 
 </p>
+<hr>
 <h3 id='transform/v'>V</h3 id='transform/v'>
 <p>The vertex iterator for the graph.  Utilize this to iterate through all the vertices in the graph.  Use with care on large graphs unless used in combination with a key index lookup.
 
