@@ -299,7 +299,15 @@
             <ul>
               
                 <li>
-                  <a href="#methods/fill">fill</a>
+                  <a href="#methods/graph-idx-string">Graph.idx(String)</a>
+                </li>
+              
+                <li>
+                  <a href="#methods/index-map-entry">Index[Map.Entry]</a>
+                </li>
+              
+                <li>
+                  <a href="#methods/pipe-fill">Pipe.fill</a>
                 </li>
               
             </ul>
@@ -1369,7 +1377,43 @@ gremlin&gt; g.v(1).out.loop(1){it.loops&lt;3}{it.object.name==&#39;josh&#39;}
 <p>Methods represent functions that make it faster and easier to work with <a href="http://blueprints.tinkerpop.com">Blueprints</a> and <a href="http://pipes.tinkerpop.com">Pipes</a> APIs.  It is important to keep in mind that the full <a href="http://download.oracle.com/javase/6/docs/api/">Java API</a> and <a href="http://groovy.codehaus.org/groovy-jdk">Groovy API</a> are accessible from Gremlin.
 
 </p>
-<h3 id='methods/fill'>fill</h3 id='methods/fill'>
+<h3 id='methods/graph-idx-string'>Graph.idx(String)</h3 id='methods/graph-idx-string'>
+<p>Get an manual index by its name.
+
+</p>
+<pre><code class="text">gremlin&gt; g.createIndex(&quot;my-index&quot;, Vertex.class)
+==&gt;index[my-index:Vertex]
+gremlin&gt; myIdx = g.idx(&quot;my-index&quot;).put(&quot;name&quot;, &quot;marko&quot;, g.v(1))
+==&gt;null
+gremlin&gt; myIdx.getIndexName()
+==&gt;my-index</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#methods/indexmapentry">Index[Map.Entry]</a></li>
+</ul>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='methods/index-map-entry'>Index[Map.Entry]</h3 id='methods/index-map-entry'>
+<p>Look up a value in an index.
+
+</p>
+<pre><code class="text">gremlin&gt; g.createIndex(&quot;my-index&quot;, Vertex.class)
+==&gt;index[my-index:Vertex]
+gremlin&gt; g.idx(&quot;my-index&quot;).put(&quot;name&quot;, &quot;marko&quot;, g.v(1))
+==&gt;null
+gremlin&gt; g.idx(&quot;my-index&quot;)[[name:&quot;marko&quot;]]  
+==&gt;v[1]</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#methods/graphidxstring">Graph.idx(String)</a></li>
+</ul>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='methods/pipe-fill'>Pipe.fill</h3 id='methods/pipe-fill'>
 <p>Takes all the results in the pipeline and puts them into the provided collection.
 
 </p>
