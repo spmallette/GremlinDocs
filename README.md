@@ -1198,7 +1198,49 @@ gremlin> g.v(1).out.loop(1){it.loops<3}{it.object.name=='josh'}
 
 Methods represent functions that make it faster and easier to work with [Blueprints](http://blueprints.tinkerpop.com) and [Pipes](http://pipes.tinkerpop.com) APIs.  It is important to keep in mind that the full [Java API](http://download.oracle.com/javase/6/docs/api/) and [Groovy API](http://groovy.codehaus.org/groovy-jdk) are accessible from Gremlin.
 
-### fill
+### Graph.idx(String)
+
+Get an manual index by its name.
+
+```text
+gremlin> g.createIndex("my-index", Vertex.class)
+==>index[my-index:Vertex]
+gremlin> myIdx = g.idx("my-index").put("name", "marko", g.v(1))
+==>null
+gremlin> myIdx.getIndexName()
+==>my-index
+```
+
+#### See Also
+
+* [Index[Map.Entry]](#methods/indexmapentry)
+
+[top](#)
+
+***
+
+### Index[Map.Entry]
+
+Look up a value in an index.
+
+```text
+gremlin> g.createIndex("my-index", Vertex.class)
+==>index[my-index:Vertex]
+gremlin> g.idx("my-index").put("name", "marko", g.v(1))
+==>null
+gremlin> g.idx("my-index")[[name:"marko"]]  
+==>v[1]
+```
+
+#### See Also
+
+* [Graph.idx](#methods/graph.idxstring)
+
+[top](#)
+
+***
+
+### Pipe.fill
 
 Takes all the results in the pipeline and puts them into the provided collection.
 
@@ -1222,3 +1264,4 @@ gremlin> m
 [top](#)
 
 ***
+
