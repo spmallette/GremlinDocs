@@ -1213,7 +1213,7 @@ gremlin> myIdx.getIndexName()
 
 #### See Also
 
-* [Index[Map.Entry]](#methods/indexmapentry)
+* [Index[Map.Entry]](#methods/index-map-entry)
 
 [top](#)
 
@@ -1234,7 +1234,7 @@ gremlin> g.idx("my-index")[[name:"marko"]]
 
 #### See Also
 
-* [Graph.idx(String)](#methods/graphidxstring)
+* [Graph.idx(String)](#methods/graph-idx-string)
 
 [top](#)
 
