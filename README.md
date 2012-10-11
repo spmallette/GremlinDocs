@@ -1234,7 +1234,7 @@ gremlin> g.idx("my-index")[[name:"marko"]]
 
 #### See Also
 
-* [Graph.idx](#methods/graph.idxstring)
+* [Graph.idx(String)](#methods/graphidxstring)
 
 [top](#)
 
