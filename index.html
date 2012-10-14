@@ -314,6 +314,23 @@
           
         </li>
       
+        <li>
+          <a href="#recipes">Recipes</a>
+          
+            <ul>
+              
+                <li>
+                  <a href="#recipes/duplicate-edges">Duplicate Edges</a>
+                </li>
+              
+                <li>
+                  <a href="#recipes/paths-between-two-vertices">Paths Between Two Vertices</a>
+                </li>
+              
+            </ul>
+          
+        </li>
+      
     </ul>
     
     
@@ -1431,6 +1448,54 @@ gremlin&gt; m
 <li><a href="#side-effect/aggregate">aggregate</a></li>
 <li><a href="#side-effect/store">store</a></li>
 </ul>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h2 id='recipes'>Recipes</h2 id='recipes'>
+<p>Recipes are common patterns that are seen in using Gremlin.
+
+</p>
+<h3 id='recipes/duplicate-edges'>Duplicate Edges</h3 id='recipes/duplicate-edges'>
+<p>Strictly speaking, you cannot have duplicated egdes with the same id.  This example finds edges with same <code>outV/inV/label</code> properties.
+
+</p>
+<pre><code class="text">gremlin&gt; g = TinkerGraphFactory.createTinkerGraph()
+==&gt;tinkergraph[vertices:6 edges:6]
+gremlin&gt; g.v(1).outE(&#39;created&#39;)
+==&gt;e[9][1-created-&gt;3]
+gremlin&gt; g.addEdge(null, g.v(1), g.v(3), &quot;created&quot;, g.e(9).map()) // see note
+==&gt;e[0][1-created-&gt;3]
+gremlin&gt; g.v(1).outE(&#39;created&#39;)
+==&gt;e[0][1-created-&gt;3]
+==&gt;e[9][1-created-&gt;3]
+gremlin&gt; ElementHelper.haveEqualProperties(g.e(9), g.e(0))
+==&gt;true
+gremlin&gt; e = g.e(9)
+==&gt;e[9][1-created-&gt;3]
+gremlin&gt; e.outV.outE(e.label).filter{ElementHelper.haveEqualProperties(e,it)}.as(&#39;e&#39;).inV.filter{it==e.inV.next()}.back(&#39;e&#39;).except([e])
+==&gt;e[0][1-created-&gt;3]</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='recipes/paths-between-two-vertices'>Paths Between Two Vertices</h3 id='recipes/paths-between-two-vertices'>
+<p>First, paths for a directed graph:
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).out.loop(1){it.loops&lt;=3 &amp;&amp; !(it.object.id in [&#39;1&#39;,&#39;5&#39;])}.has(&#39;id&#39;,&#39;5&#39;).path
+==&gt;[v[1], v[4], v[5]]</code></pre>
+<p>Then, undirected:
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).both.loop(1){it.loops&lt;=3 &amp;&amp; !(it.object.id in [&#39;1&#39;,&#39;5&#39;])}.has(&#39;id&#39;,&#39;5&#39;).path
+==&gt;[v[1], v[4], v[5]]
+==&gt;[v[1], v[3], v[4], v[5]]</code></pre>
+<p>Use the value of <code>it.loops&lt;=3</code>to control the depth of the traversal:
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).both.loop(1){it.loops&lt;=2 &amp;&amp; !(it.object.id in [&#39;1&#39;,&#39;5&#39;])}.has(&#39;id&#39;,&#39;5&#39;).path
+==&gt;[v[1], v[4], v[5]]</code></pre>
 <p><a href="#">top</a>
 
 </p>
