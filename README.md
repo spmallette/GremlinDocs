@@ -1265,3 +1265,52 @@ gremlin> m
 
 ***
 
+## Recipes
+
+Recipes are common patterns that are seen in using Gremlin.
+
+### Duplicate Edges
+
+Strictly speaking, you cannot have duplicated egdes with the same id.  This example finds edges with same `outV/inV/label` properties.
+
+```text
+gremlin> g = TinkerGraphFactory.createTinkerGraph()
+==>tinkergraph[vertices:6 edges:6]
+gremlin> g.v(1).outE('created')
+==>e[9][1-created->3]
+gremlin> g.addEdge(null, g.v(1), g.v(3), "created", g.e(9).map()) // see note
+==>e[0][1-created->3]
+gremlin> g.v(1).outE('created')
+==>e[0][1-created->3]
+==>e[9][1-created->3]
+gremlin> ElementHelper.haveEqualProperties(g.e(9), g.e(0))
+==>true
+gremlin> e = g.e(9)
+==>e[9][1-created->3]
+gremlin> e.outV.outE(e.label).filter{ElementHelper.haveEqualProperties(e,it)}.as('e').inV.filter{it==e.inV.next()}.back('e').except([e])
+==>e[0][1-created->3]
+```
+
+### Paths Between Two Vertices
+
+First, paths for a directed graph:
+
+```text
+gremlin> g.v(1).out.loop(1){it.loops<=3 && !(it.object.id in ['1','5'])}.has('id','5').path
+==>[v[1], v[4], v[5]]
+```
+
+Then, undirected:
+
+```text
+gremlin> g.v(1).both.loop(1){it.loops<=3 && !(it.object.id in ['1','5'])}.has('id','5').path
+==>[v[1], v[4], v[5]]
+==>[v[1], v[3], v[4], v[5]]
+```
+
+Use the value of `it.loops<=3`to control the depth of the traversal:
+
+```text
+gremlin> g.v(1).both.loop(1){it.loops<=2 && !(it.object.id in ['1','5'])}.has('id','5').path
+==>[v[1], v[4], v[5]]
+```
