@@ -1291,6 +1291,10 @@ gremlin> e.outV.outE(e.label).filter{ElementHelper.haveEqualProperties(e,it)}.as
 ==>e[0][1-created->3]
 ```
 
+[top](#)
+
+***
+
 ### Paths Between Two Vertices
 
 First, paths for a directed graph:
@@ -1314,3 +1318,7 @@ Use the value of `it.loops<=3`to control the depth of the traversal:
 gremlin> g.v(1).both.loop(1){it.loops<=2 && !(it.object.id in ['1','5'])}.has('id','5').path
 ==>[v[1], v[4], v[5]]
 ```
+
+[top](#)
+
+***
