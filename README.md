@@ -1295,6 +1295,29 @@ gremlin> e.outV.outE(e.label).filter{ElementHelper.haveEqualProperties(e,it)}.as
 
 ***
 
+### Paging Results
+
+It is sometimes desireable to not return an entire results set.  Results can be paged or limited as follows:
+
+```text
+gremlin> g.V.has("age", T.gte, 25)
+==>v[2]
+==>v[1]
+==>v[6]
+==>v[4]
+gremlin> g.V.has("age", T.gte, 29)
+==>v[1]
+==>v[6]
+==>v[4]
+gremlin> g.V.has("age", T.gte, 29)[0..1]
+==>v[1]
+==>v[6]
+```
+
+[top](#)
+
+***
+
 ### Paths Between Two Vertices
 
 First, paths for a directed graph:
