@@ -1312,6 +1312,8 @@ gremlin> g.V.has("age", T.gte, 29)
 gremlin> g.V.has("age", T.gte, 29)[0..1]
 ==>v[1]
 ==>v[6]
+gremlin> g.V.has("age", T.gte, 29)[0..<1]
+==>v[1]
 ```
 
 [top](#)
