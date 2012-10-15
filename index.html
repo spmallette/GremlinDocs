@@ -1500,7 +1500,10 @@ gremlin&gt; g.V.has(&quot;age&quot;, T.gte, 29)[0..1]
 ==&gt;v[1]
 ==&gt;v[6]
 gremlin&gt; g.V.has(&quot;age&quot;, T.gte, 29)[0..&lt;1]
-==&gt;v[1]</code></pre>
+==&gt;v[1]
+gremlin&gt; g.V.has(&quot;age&quot;, T.gte, 29)[1..2]
+==&gt;v[6]
+==&gt;v[4]</code></pre>
 <p><a href="#">top</a>
 
 </p>
