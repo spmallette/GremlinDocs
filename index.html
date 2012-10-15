@@ -324,6 +324,10 @@
                 </li>
               
                 <li>
+                  <a href="#recipes/paging-results">Paging Results</a>
+                </li>
+              
+                <li>
                   <a href="#recipes/paths-between-two-vertices">Paths Between Two Vertices</a>
                 </li>
               
@@ -1475,6 +1479,26 @@ gremlin&gt; e = g.e(9)
 ==&gt;e[9][1-created-&gt;3]
 gremlin&gt; e.outV.outE(e.label).filter{ElementHelper.haveEqualProperties(e,it)}.as(&#39;e&#39;).inV.filter{it==e.inV.next()}.back(&#39;e&#39;).except([e])
 ==&gt;e[0][1-created-&gt;3]</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='recipes/paging-results'>Paging Results</h3 id='recipes/paging-results'>
+<p>It is sometimes desireable to not return an entire results set.  Results can be paged or limited as follows:
+
+</p>
+<pre><code class="text">gremlin&gt; g.V.has(&quot;age&quot;, T.gte, 25)
+==&gt;v[2]
+==&gt;v[1]
+==&gt;v[6]
+==&gt;v[4]
+gremlin&gt; g.V.has(&quot;age&quot;, T.gte, 29)
+==&gt;v[1]
+==&gt;v[6]
+==&gt;v[4]
+gremlin&gt; g.V.has(&quot;age&quot;, T.gte, 29)[0..1]
+==&gt;v[1]
+==&gt;v[6]</code></pre>
 <p><a href="#">top</a>
 
 </p>
