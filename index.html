@@ -822,7 +822,13 @@ gremlin&gt;  g.v(1).as(&#39;x&#39;).out(&#39;knows&#39;).as(&#39;y&#39;).select{
 ==&gt;29
 gremlin&gt; g.E.has(&#39;weight&#39;, T.gt, 0.5f).outV.age.transform{it+2}
 ==&gt;34
-==&gt;31</code></pre>
+==&gt;31
+gremlin&gt; g.E.has(&#39;weight&#39;, T.gt, 0.5f).outV.transform{[it.id,it.age]}
+==&gt;[4, 32]
+==&gt;[1, 29]
+gremlin&gt; g.E.has(&#39;weight&#39;, T.gt, 0.5f).outV.transform{[id:it.id,age:it.age]}
+==&gt;{id=4, age=32}
+==&gt;{id=1, age=29}</code></pre>
 <p><a href="#">top</a>
 
 </p>
