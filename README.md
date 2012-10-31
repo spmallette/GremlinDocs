@@ -538,6 +538,12 @@ gremlin> g.E.has('weight', T.gt, 0.5f).outV.map
 gremlin> g.E.has('weight', T.gt, 0.5f).outV.age.transform{it+2}
 ==>34
 ==>31
+gremlin> g.E.has('weight', T.gt, 0.5f).outV.transform{[it.id,it.age]}
+==>[4, 32]
+==>[1, 29]
+gremlin> g.E.has('weight', T.gt, 0.5f).outV.transform{[id:it.id,age:it.age]}
+==>{id=4, age=32}
+==>{id=1, age=29}
 ```
 
 [top](#)
