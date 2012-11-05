@@ -1204,6 +1204,35 @@ gremlin> g.v(1).out.loop(1){it.loops<3}{it.object.name=='josh'}
 
 Methods represent functions that make it faster and easier to work with [Blueprints](http://blueprints.tinkerpop.com) and [Pipes](http://pipes.tinkerpop.com) APIs.  It is important to keep in mind that the full [Java API](http://download.oracle.com/javase/6/docs/api/) and [Groovy API](http://groovy.codehaus.org/groovy-jdk) are accessible from Gremlin.
 
+### Graph.e
+
+Get an edge or set of edges by providing one or more edge identifiers.  The identifiers must be the identifiers assigned by the underlying graph implementation.
+
+```text
+gremlin> g.e(10)
+==>e[10][4-created->5]
+gremlin> g.e(10,11,12)
+==>e[10][4-created->5]
+==>e[11][4-created->3]
+==>e[12][6-created->3]
+gremlin> ids = [10,11,12]
+==>10
+==>11
+==>12
+gremlin> g.e(ids.toArray())
+==>e[10][4-created->5]
+==>e[11][4-created->3]
+==>e[12][6-created->3]
+```
+
+#### See Also
+
+* [Graph.v](#methods/graph-v)
+
+[top](#)
+
+***
+
 ### Graph.idx(String)
 
 Get an manual index by its name.
@@ -1220,6 +1249,35 @@ gremlin> myIdx.getIndexName()
 #### See Also
 
 * [Index[Map.Entry]](#methods/index-map-entry)
+
+[top](#)
+
+***
+
+### Graph.v
+
+Get a vertex or set of vertices by providing one or more vertex identifiers.  The identifiers must be the identifiers assigned by the underlying graph implementation.
+
+```text
+gremlin> g.v(1)  
+==>v[1]
+gremlin> g.v(1,2,3)
+==>v[1]
+==>v[2]
+==>v[3]
+gremlin> ids = [1,2,3]
+==>1
+==>2
+==>3
+gremlin> g.v(ids.toArray())
+==>v[1]
+==>v[2]
+==>v[3]
+```
+
+#### See Also
+
+* [Graph.e](#methods/graph-e)
 
 [top](#)
 
