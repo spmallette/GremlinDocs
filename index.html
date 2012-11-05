@@ -299,7 +299,15 @@
             <ul>
               
                 <li>
+                  <a href="#methods/graph-e">Graph.e</a>
+                </li>
+              
+                <li>
                   <a href="#methods/graph-idx-string">Graph.idx(String)</a>
+                </li>
+              
+                <li>
+                  <a href="#methods/graph-v">Graph.v</a>
                 </li>
               
                 <li>
@@ -1404,6 +1412,32 @@ gremlin&gt; g.v(1).out.loop(1){it.loops&lt;3}{it.object.name==&#39;josh&#39;}
 <p>Methods represent functions that make it faster and easier to work with <a href="http://blueprints.tinkerpop.com">Blueprints</a> and <a href="http://pipes.tinkerpop.com">Pipes</a> APIs.  It is important to keep in mind that the full <a href="http://download.oracle.com/javase/6/docs/api/">Java API</a> and <a href="http://groovy.codehaus.org/groovy-jdk">Groovy API</a> are accessible from Gremlin.
 
 </p>
+<h3 id='methods/graph-e'>Graph.e</h3 id='methods/graph-e'>
+<p>Get an edge or set of edges by providing one or more edge identifiers.  The identifiers must be the identifiers assigned by the underlying graph implementation.
+
+</p>
+<pre><code class="text">gremlin&gt; g.e(10)
+==&gt;e[10][4-created-&gt;5]
+gremlin&gt; g.e(10,11,12)
+==&gt;e[10][4-created-&gt;5]
+==&gt;e[11][4-created-&gt;3]
+==&gt;e[12][6-created-&gt;3]
+gremlin&gt; ids = [10,11,12]
+==&gt;10
+==&gt;11
+==&gt;12
+gremlin&gt; g.e(ids.toArray())
+==&gt;e[10][4-created-&gt;5]
+==&gt;e[11][4-created-&gt;3]
+==&gt;e[12][6-created-&gt;3]</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#methods/graph-v">Graph.v</a></li>
+</ul>
+<p><a href="#">top</a>
+
+</p>
+<hr>
 <h3 id='methods/graph-idx-string'>Graph.idx(String)</h3 id='methods/graph-idx-string'>
 <p>Get an manual index by its name.
 
@@ -1417,6 +1451,32 @@ gremlin&gt; myIdx.getIndexName()
 <h4>See Also</h4>
 <ul>
 <li><a href="#methods/index-map-entry">Index[Map.Entry]</a></li>
+</ul>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='methods/graph-v'>Graph.v</h3 id='methods/graph-v'>
+<p>Get a vertex or set of vertices by providing one or more vertex identifiers.  The identifiers must be the identifiers assigned by the underlying graph implementation.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1)  
+==&gt;v[1]
+gremlin&gt; g.v(1,2,3)
+==&gt;v[1]
+==&gt;v[2]
+==&gt;v[3]
+gremlin&gt; ids = [1,2,3]
+==&gt;1
+==&gt;2
+==&gt;3
+gremlin&gt; g.v(ids.toArray())
+==&gt;v[1]
+==&gt;v[2]
+==&gt;v[3]</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#methods/graph-e">Graph.e</a></li>
 </ul>
 <p><a href="#">top</a>
 
