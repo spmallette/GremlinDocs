@@ -359,6 +359,10 @@
                   <a href="#recipes/paths-between-two-vertices">Paths Between Two Vertices</a>
                 </li>
               
+                <li>
+                  <a href="#recipes/sampling">Sampling</a>
+                </li>
+              
             </ul>
           
         </li>
@@ -1739,6 +1743,20 @@ gremlin&gt; g.V.has(&quot;age&quot;, T.gte, 29)[1..2]
 </p>
 <pre><code class="text">gremlin&gt; g.v(1).both.loop(1){it.loops&lt;=2 &amp;&amp; !(it.object.id in [&#39;1&#39;,&#39;5&#39;])}.has(&#39;id&#39;,&#39;5&#39;).path
 ==&gt;[v[1], v[4], v[5]]</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='recipes/sampling'>Sampling</h3 id='recipes/sampling'>
+<p>It is sometimes useful to grab a random sample of the items in a collection.  That can be done to some degree with the <a href="#filter.random">random</a> step, but getting an explicit number of items is not supported using that step.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).out.gather{Collections.shuffle(it);it}.scatter[0..1]
+==&gt;v[4]
+==&gt;v[2]
+gremlin&gt; g.v(1).out.gather{Collections.shuffle(it);it}.scatter[0..1]
+==&gt;v[4]
+==&gt;v[3]</code></pre>
 <p><a href="#">top</a>
 
 </p>
