@@ -160,7 +160,7 @@ gremlin> g.E.weight
 
 ### gather
 
-Collect all objects up to that step and process with the provided closure.
+Collect all objects up to that step and process the gathered list with the provided closure.
 
 ```text
 gremlin> g.v(1).out
@@ -169,6 +169,8 @@ gremlin> g.v(1).out
 ==>v[3]
 gremlin> g.v(1).out.gather
 ==>[v[2], v[4], v[3]]
+gremlin> g.v(1).out.gather{it.size()}
+==>3
 ```
 
 #### See Also
