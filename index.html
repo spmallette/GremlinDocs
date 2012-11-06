@@ -348,6 +348,10 @@
                 </li>
               
                 <li>
+                  <a href="#recipes/hiding-console-output">Hiding Console Output</a>
+                </li>
+              
+                <li>
                   <a href="#recipes/paging-results">Paging Results</a>
                 </li>
               
@@ -1578,6 +1582,9 @@ gremlin&gt; m
 <p>Calls <a href="#methods/pipe-next">Pipe.next</a> for all objects in the pipe. This is an important notion to follow when considering the behavior of the Gremlin Console.  The Gremlin Console iterates through the pipeline automatically and outputs the results.  Outside of the Gremlin Console or if more than one statement is present on a single line of the Gremlin Console, iterating the pipe must be done manually.  Read more about this topic in the Gremlin Wiki <a href="https://github.com/tinkerpop/gremlin/wiki/Troubleshooting">Troubleshooting Page</a>.
 
 </p>
+<p>There are some important things to note in the example below.  Had the the first line of Gremlin been executed separately, as opposed to being placed on the same line separated by a semi-colon, the names of all the vertices would have changed because the Gremlin Console would have automatically iterated the pipe and processed the side-effects.
+
+</p>
 <pre><code class="text">gremlin&gt; g.V.sideEffect{it.name=&quot;same-again&quot;};g.V.name          
 ==&gt;lop
 ==&gt;vadas
@@ -1602,6 +1609,9 @@ gremlin&gt; g.V.sideEffect{it.name=&quot;same&quot;}.iterate();g.V.name
 <hr>
 <h3 id='methods/pipe-next'>Pipe.next</h3 id='methods/pipe-next'>
 <p>Gets the next object in the pipe or the next <em>n</em> objects.  This is an important notion to follow when considering the behavior of the Gremlin Console.  The Gremlin Console iterates through the pipeline automatically and outputs the results.  Outside of the Gremlin Console or if more than one statement is present on a single line of the Gremlin Console, iterating the pipe must be done manually.  Read more about this topic in the Gremlin Wiki <a href="https://github.com/tinkerpop/gremlin/wiki/Troubleshooting">Troubleshooting Page</a>.
+
+</p>
+<p>There are some important things to note in the example below.  Had the the first line of Gremlin been executed separately, as opposed to being placed on the same line separated by a semi-colon, the name of the vertex would have changed because the Gremlin Console would have automatically iterated the pipe and processed the side-effect.
 
 </p>
 <pre><code class="text">gremlin&gt; g.v(1).sideEffect{it.name=&quot;same&quot;};g.v(1).name
@@ -1646,6 +1656,35 @@ gremlin&gt; e = g.e(9)
 ==&gt;e[9][1-created-&gt;3]
 gremlin&gt; e.outV.outE(e.label).filter{ElementHelper.haveEqualProperties(e,it)}.as(&#39;e&#39;).inV.filter{it==e.inV.next()}.back(&#39;e&#39;).except([e])
 ==&gt;e[0][1-created-&gt;3]</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='recipes/hiding-console-output'>Hiding Console Output</h3 id='recipes/hiding-console-output'>
+<p>The Gremlin Console automatically iterates the pipe and outputs the results to the console.  In some cases, this can lead to lots of screen output that isn&#39;t terribly useful.  To suppress the output, manually iterate the pipe and return null as follows:
+
+</p>
+<pre><code class="text">gremlin&gt; g.V.sideEffect{it.name=&#39;changed&#39;}                          
+==&gt;v[3]
+==&gt;v[2]
+==&gt;v[1]
+==&gt;v[6]
+==&gt;v[5]
+==&gt;v[4]
+gremlin&gt; g.V.sideEffect{it.name=&#39;changed-again&#39;}.iterate();null     
+==&gt;null
+gremlin&gt; g.V.name
+==&gt;changed-again
+==&gt;changed-again
+==&gt;changed-again
+==&gt;changed-again
+==&gt;changed-again
+==&gt;changed-again</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#methods/pipe-iterate">Pipe.iterate</a></li>
+<li><a href="#methods/pipe-next">Pipe.next</a></li>
+</ul>
 <p><a href="#">top</a>
 
 </p>
