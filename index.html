@@ -326,6 +326,14 @@
                   <a href="#methods/pipe-fill">Pipe.fill</a>
                 </li>
               
+                <li>
+                  <a href="#methods/pipe-iterate">Pipe.iterate</a>
+                </li>
+              
+                <li>
+                  <a href="#methods/pipe-next">Pipe.next</a>
+                </li>
+              
             </ul>
           
         </li>
@@ -1561,6 +1569,55 @@ gremlin&gt; m
 <ul>
 <li><a href="#side-effect/aggregate">aggregate</a></li>
 <li><a href="#side-effect/store">store</a></li>
+</ul>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='methods/pipe-iterate'>Pipe.iterate</h3 id='methods/pipe-iterate'>
+<p>Calls <a href="#methods/pipe-next">Pipe.next</a> for all objects in the pipe. This is an important notion to follow when considering the behavior of the Gremlin Console.  The Gremlin Console iterates through the pipeline automatically and outputs the results.  Outside of the Gremlin Console or if more than one statement is present on a single line of the Gremlin Console, iterating the pipe must be done manually.  Read more about this topic in the Gremlin Wiki <a href="https://github.com/tinkerpop/gremlin/wiki/Troubleshooting">Troubleshooting Page</a>.
+
+</p>
+<pre><code class="text">gremlin&gt; g.V.sideEffect{it.name=&quot;same-again&quot;};g.V.name          
+==&gt;lop
+==&gt;vadas
+==&gt;marko
+==&gt;peter
+==&gt;ripple
+==&gt;josh
+gremlin&gt; g.V.sideEffect{it.name=&quot;same&quot;}.iterate();g.V.name      
+==&gt;same
+==&gt;same
+==&gt;same
+==&gt;same
+==&gt;same
+==&gt;same</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#methods/pipe-next">Pipe.next</a></li>
+</ul>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='methods/pipe-next'>Pipe.next</h3 id='methods/pipe-next'>
+<p>Gets the next object in the pipe or the next <em>n</em> objects.  This is an important notion to follow when considering the behavior of the Gremlin Console.  The Gremlin Console iterates through the pipeline automatically and outputs the results.  Outside of the Gremlin Console or if more than one statement is present on a single line of the Gremlin Console, iterating the pipe must be done manually.  Read more about this topic in the Gremlin Wiki <a href="https://github.com/tinkerpop/gremlin/wiki/Troubleshooting">Troubleshooting Page</a>.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).sideEffect{it.name=&quot;same&quot;};g.v(1).name
+==&gt;marko
+gremlin&gt; g.v(1).sideEffect{it.name=&quot;same&quot;}.next();g.v(1).name   
+==&gt;same
+gremlin&gt; g.V.sideEffect{it.name=&quot;same-again&quot;}.next(3);g.V.name
+==&gt;same-again
+==&gt;same-again
+==&gt;same-again
+==&gt;peter
+==&gt;ripple
+==&gt;josh</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#methods/pipe-iterate">Pipe.iterate</a></li>
 </ul>
 <p><a href="#">top</a>
 
