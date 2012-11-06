@@ -1375,6 +1375,8 @@ gremlin> m
 
 Calls [Pipe.next](#methods/pipe-next) for all objects in the pipe. This is an important notion to follow when considering the behavior of the Gremlin Console.  The Gremlin Console iterates through the pipeline automatically and outputs the results.  Outside of the Gremlin Console or if more than one statement is present on a single line of the Gremlin Console, iterating the pipe must be done manually.  Read more about this topic in the Gremlin Wiki [Troubleshooting Page](https://github.com/tinkerpop/gremlin/wiki/Troubleshooting).
 
+There are some important things to note in the example below.  Had the the first line of Gremlin been executed separately, as opposed to being placed on the same line separated by a semi-colon, the names of all the vertices would have changed because the Gremlin Console would have automatically iterated the pipe and processed the side-effects.
+
 ```text
 gremlin> g.V.sideEffect{it.name="same-again"};g.V.name          
 ==>lop
@@ -1403,6 +1405,8 @@ gremlin> g.V.sideEffect{it.name="same"}.iterate();g.V.name
 ### Pipe.next
 
 Gets the next object in the pipe or the next *n* objects.  This is an important notion to follow when considering the behavior of the Gremlin Console.  The Gremlin Console iterates through the pipeline automatically and outputs the results.  Outside of the Gremlin Console or if more than one statement is present on a single line of the Gremlin Console, iterating the pipe must be done manually.  Read more about this topic in the Gremlin Wiki [Troubleshooting Page](https://github.com/tinkerpop/gremlin/wiki/Troubleshooting).
+
+There are some important things to note in the example below.  Had the the first line of Gremlin been executed separately, as opposed to being placed on the same line separated by a semi-colon, the name of the vertex would have changed because the Gremlin Console would have automatically iterated the pipe and processed the side-effect.
 
 ```text
 gremlin> g.v(1).sideEffect{it.name="same"};g.v(1).name
@@ -1451,6 +1455,38 @@ gremlin> e = g.e(9)
 gremlin> e.outV.outE(e.label).filter{ElementHelper.haveEqualProperties(e,it)}.as('e').inV.filter{it==e.inV.next()}.back('e').except([e])
 ==>e[0][1-created->3]
 ```
+
+[top](#)
+
+***
+
+### Hiding Console Output
+
+The Gremlin Console automatically iterates the pipe and outputs the results to the console.  In some cases, this can lead to lots of screen output that isn't terribly useful.  To suppress the output, manually iterate the pipe and return null as follows:
+
+```text
+gremlin> g.V.sideEffect{it.name='changed'}                          
+==>v[3]
+==>v[2]
+==>v[1]
+==>v[6]
+==>v[5]
+==>v[4]
+gremlin> g.V.sideEffect{it.name='changed-again'}.iterate();null     
+==>null
+gremlin> g.V.name
+==>changed-again
+==>changed-again
+==>changed-again
+==>changed-again
+==>changed-again
+==>changed-again
+```
+
+#### See Also
+
+* [Pipe.iterate](#methods/pipe-iterate)
+* [Pipe.next](#methods/pipe-next)
 
 [top](#)
 
