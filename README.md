@@ -1462,7 +1462,7 @@ gremlin> e.outV.outE(e.label).filter{ElementHelper.haveEqualProperties(e,it)}.as
 
 ### Hiding Console Output
 
-The Gremlin Console automatically iterates the pipe and outputs the results to the console.  In some cases, this can lead to lots of screen output that isn't terribly useful.  To suppress the output, manually iterate the pipe and return null as follows:
+The Gremlin Console automatically iterates the pipe and outputs the results to the console.  In some cases, this can lead to lots of screen output that isn't terribly useful.  To suppress the output, consider the following:
 
 ```text
 gremlin> g.V.sideEffect{it.name='changed'}                          
@@ -1472,7 +1472,7 @@ gremlin> g.V.sideEffect{it.name='changed'}
 ==>v[6]
 ==>v[5]
 ==>v[4]
-gremlin> g.V.sideEffect{it.name='changed-again'}.iterate();null     
+gremlin> g.V.sideEffect{it.name='changed-again'}.iterate()    
 ==>null
 gremlin> g.V.name
 ==>changed-again
@@ -1481,6 +1481,14 @@ gremlin> g.V.name
 ==>changed-again
 ==>changed-again
 ==>changed-again
+gremlin> t = g.v(1).out.tree.cap.next()
+==>v[1]={v[3]={}, v[2]={}, v[4]={}}
+gremlin> t
+==>v[1]={v[3]={}, v[2]={}, v[4]={}}
+gremlin> s = g.v(1).out.tree.cap.next();null
+==>null
+gremlin> s
+==>v[1]={v[3]={}, v[2]={}, v[4]={}}
 ```
 
 #### See Also
