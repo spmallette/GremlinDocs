@@ -524,7 +524,7 @@ gremlin&gt; g.E.weight
 </p>
 <hr>
 <h3 id='transform/gather'>gather</h3 id='transform/gather'>
-<p>Collect all objects up to that step and process with the provided closure.
+<p>Collect all objects up to that step and process the gathered list with the provided closure.
 
 </p>
 <pre><code class="text">gremlin&gt; g.v(1).out
@@ -532,7 +532,9 @@ gremlin&gt; g.E.weight
 ==&gt;v[4]
 ==&gt;v[3]
 gremlin&gt; g.v(1).out.gather
-==&gt;[v[2], v[4], v[3]]</code></pre>
+==&gt;[v[2], v[4], v[3]]
+gremlin&gt; g.v(1).out.gather{it.size()}
+==&gt;3</code></pre>
 <h4>See Also</h4>
 <ul>
 <li><a href="#transform/scatter">scatter</a></li>
