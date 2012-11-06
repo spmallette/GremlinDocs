@@ -1555,3 +1555,21 @@ gremlin> g.v(1).both.loop(1){it.loops<=2 && !(it.object.id in ['1','5'])}.has('i
 [top](#)
 
 ***
+
+
+### Sampling
+
+It is sometimes useful to grab a random sample of the items in a collection.  That can be done to some degree with the [random](#filter.random) step, but getting an explicit number of items is not supported using that step.
+
+```text
+gremlin> g.v(1).out.gather{Collections.shuffle(it);it}.scatter[0..1]
+==>v[4]
+==>v[2]
+gremlin> g.v(1).out.gather{Collections.shuffle(it);it}.scatter[0..1]
+==>v[4]
+==>v[3]
+```
+
+[top](#)
+
+***
