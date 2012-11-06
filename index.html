@@ -299,6 +299,14 @@
             <ul>
               
                 <li>
+                  <a href="#methods/graph-addedge">Graph.addEdge</a>
+                </li>
+              
+                <li>
+                  <a href="#methods/graph-addvertex">Graph.addVertex</a>
+                </li>
+              
+                <li>
                   <a href="#methods/graph-e">Graph.e</a>
                 </li>
               
@@ -1412,6 +1420,42 @@ gremlin&gt; g.v(1).out.loop(1){it.loops&lt;3}{it.object.name==&#39;josh&#39;}
 <p>Methods represent functions that make it faster and easier to work with <a href="http://blueprints.tinkerpop.com">Blueprints</a> and <a href="http://pipes.tinkerpop.com">Pipes</a> APIs.  It is important to keep in mind that the full <a href="http://download.oracle.com/javase/6/docs/api/">Java API</a> and <a href="http://groovy.codehaus.org/groovy-jdk">Groovy API</a> are accessible from Gremlin.
 
 </p>
+<h3 id='methods/graph-addedge'>Graph.addEdge</h3 id='methods/graph-addedge'>
+<p>Adds an edge to the graph.  Note that most graph implementations ignore the identifier supplied to <code>addEdge</code>.  
+
+</p>
+<pre><code class="text">gremlin&gt; g = new TinkerGraph()                     
+==&gt;tinkergraph[vertices:0 edges:0]
+gremlin&gt; v1 = g.addVertex(100)                     
+==&gt;v[100]
+gremlin&gt; v2 = g.addVertex(200)
+==&gt;v[200]
+gremlin&gt; g.addEdge(v1,v2,&#39;friend&#39;)                 
+==&gt;e[0][100-friend-&gt;200]
+gremlin&gt; g.addEdge(1000,v1,v2,&#39;buddy&#39;)             
+==&gt;e[1000][100-buddy-&gt;200]
+gremlin&gt; g.addEdge(null,v1,v2,&#39;pal&#39;,[weight:0.75f])
+==&gt;e[1][100-pal-&gt;200]</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='methods/graph-addvertex'>Graph.addVertex</h3 id='methods/graph-addvertex'>
+<p>Adds a vertex to the graph.  Note that most graph implementations ignore the identifier supplied to <code>addVertex</code>.  
+
+</p>
+<pre><code class="text">gremlin&gt; g = new TinkerGraph()                     
+==&gt;tinkergraph[vertices:0 edges:0]
+gremlin&gt; g.addVertex()
+==&gt;v[0]
+gremlin&gt; g.addVertex(100)
+==&gt;v[100]
+gremlin&gt; g.addVertex(null,[name:&quot;stephen&quot;])
+==&gt;v[1]</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
 <h3 id='methods/graph-e'>Graph.e</h3 id='methods/graph-e'>
 <p>Get an edge or set of edges by providing one or more edge identifiers.  The identifiers must be the identifiers assigned by the underlying graph implementation.
 
