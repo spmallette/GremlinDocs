@@ -1204,6 +1204,48 @@ gremlin> g.v(1).out.loop(1){it.loops<3}{it.object.name=='josh'}
 
 Methods represent functions that make it faster and easier to work with [Blueprints](http://blueprints.tinkerpop.com) and [Pipes](http://pipes.tinkerpop.com) APIs.  It is important to keep in mind that the full [Java API](http://download.oracle.com/javase/6/docs/api/) and [Groovy API](http://groovy.codehaus.org/groovy-jdk) are accessible from Gremlin.
 
+### Graph.addEdge
+
+Adds an edge to the graph.  Note that most graph implementations ignore the identifier supplied to `addEdge`.  
+
+```text
+gremlin> g = new TinkerGraph()                     
+==>tinkergraph[vertices:0 edges:0]
+gremlin> v1 = g.addVertex(100)                     
+==>v[100]
+gremlin> v2 = g.addVertex(200)
+==>v[200]
+gremlin> g.addEdge(v1,v2,'friend')                 
+==>e[0][100-friend->200]
+gremlin> g.addEdge(1000,v1,v2,'buddy')             
+==>e[1000][100-buddy->200]
+gremlin> g.addEdge(null,v1,v2,'pal',[weight:0.75f])
+==>e[1][100-pal->200]
+```
+
+[top](#)
+
+***
+
+### Graph.addVertex
+
+Adds a vertex to the graph.  Note that most graph implementations ignore the identifier supplied to `addVertex`.  
+
+```text
+gremlin> g = new TinkerGraph()                     
+==>tinkergraph[vertices:0 edges:0]
+gremlin> g.addVertex()
+==>v[0]
+gremlin> g.addVertex(100)
+==>v[100]
+gremlin> g.addVertex(null,[name:"stephen"])
+==>v[1]
+```
+
+[top](#)
+
+***
+
 ### Graph.e
 
 Get an edge or set of edges by providing one or more edge identifiers.  The identifiers must be the identifiers assigned by the underlying graph implementation.
