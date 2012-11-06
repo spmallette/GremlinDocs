@@ -1661,7 +1661,7 @@ gremlin&gt; e.outV.outE(e.label).filter{ElementHelper.haveEqualProperties(e,it)}
 </p>
 <hr>
 <h3 id='recipes/hiding-console-output'>Hiding Console Output</h3 id='recipes/hiding-console-output'>
-<p>The Gremlin Console automatically iterates the pipe and outputs the results to the console.  In some cases, this can lead to lots of screen output that isn&#39;t terribly useful.  To suppress the output, manually iterate the pipe and return null as follows:
+<p>The Gremlin Console automatically iterates the pipe and outputs the results to the console.  In some cases, this can lead to lots of screen output that isn&#39;t terribly useful.  To suppress the output, consider the following:
 
 </p>
 <pre><code class="text">gremlin&gt; g.V.sideEffect{it.name=&#39;changed&#39;}                          
@@ -1671,7 +1671,7 @@ gremlin&gt; e.outV.outE(e.label).filter{ElementHelper.haveEqualProperties(e,it)}
 ==&gt;v[6]
 ==&gt;v[5]
 ==&gt;v[4]
-gremlin&gt; g.V.sideEffect{it.name=&#39;changed-again&#39;}.iterate();null     
+gremlin&gt; g.V.sideEffect{it.name=&#39;changed-again&#39;}.iterate()    
 ==&gt;null
 gremlin&gt; g.V.name
 ==&gt;changed-again
@@ -1679,7 +1679,15 @@ gremlin&gt; g.V.name
 ==&gt;changed-again
 ==&gt;changed-again
 ==&gt;changed-again
-==&gt;changed-again</code></pre>
+==&gt;changed-again
+gremlin&gt; t = g.v(1).out.tree.cap.next()
+==&gt;v[1]={v[3]={}, v[2]={}, v[4]={}}
+gremlin&gt; t
+==&gt;v[1]={v[3]={}, v[2]={}, v[4]={}}
+gremlin&gt; s = g.v(1).out.tree.cap.next();null
+==&gt;null
+gremlin&gt; s
+==&gt;v[1]={v[3]={}, v[2]={}, v[4]={}}</code></pre>
 <h4>See Also</h4>
 <ul>
 <li><a href="#methods/pipe-iterate">Pipe.iterate</a></li>
