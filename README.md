@@ -1371,6 +1371,61 @@ gremlin> m
 
 ***
 
+### Pipe.iterate
+
+Calls [Pipe.next](#methods/pipe-next) for all objects in the pipe. This is an important notion to follow when considering the behavior of the Gremlin Console.  The Gremlin Console iterates through the pipeline automatically and outputs the results.  Outside of the Gremlin Console or if more than one statement is present on a single line of the Gremlin Console, iterating the pipe must be done manually.  Read more about this topic in the Gremlin Wiki [Troubleshooting Page](https://github.com/tinkerpop/gremlin/wiki/Troubleshooting).
+
+```text
+gremlin> g.V.sideEffect{it.name="same-again"};g.V.name          
+==>lop
+==>vadas
+==>marko
+==>peter
+==>ripple
+==>josh
+gremlin> g.V.sideEffect{it.name="same"}.iterate();g.V.name      
+==>same
+==>same
+==>same
+==>same
+==>same
+==>same
+```
+
+#### See Also
+
+* [Pipe.next](#methods/pipe-next)
+
+[top](#)
+
+***
+
+### Pipe.next
+
+Gets the next object in the pipe or the next *n* objects.  This is an important notion to follow when considering the behavior of the Gremlin Console.  The Gremlin Console iterates through the pipeline automatically and outputs the results.  Outside of the Gremlin Console or if more than one statement is present on a single line of the Gremlin Console, iterating the pipe must be done manually.  Read more about this topic in the Gremlin Wiki [Troubleshooting Page](https://github.com/tinkerpop/gremlin/wiki/Troubleshooting).
+
+```text
+gremlin> g.v(1).sideEffect{it.name="same"};g.v(1).name
+==>marko
+gremlin> g.v(1).sideEffect{it.name="same"}.next();g.v(1).name   
+==>same
+gremlin> g.V.sideEffect{it.name="same-again"}.next(3);g.V.name
+==>same-again
+==>same-again
+==>same-again
+==>peter
+==>ripple
+==>josh
+```
+
+#### See Also
+
+* [Pipe.iterate](#methods/pipe-iterate)
+
+[top](#)
+
+***
+
 ## Recipes
 
 Recipes are common patterns that are seen in using Gremlin.
