@@ -1177,7 +1177,9 @@ gremlin&gt; m
 ==&gt;v[1]=[v[2], v[4], v[3]]
 ==&gt;v[6]=[v[3]]
 ==&gt;v[5]=[]
-==&gt;v[4]=[v[5], v[3]]</code></pre>
+==&gt;v[4]=[v[5], v[3]]
+gremlin&gt; g.V.out.groupBy{it.name}{it.in}{it.unique().findAll{i -&gt; i.age &gt; 30}.name}.cap
+==&gt;{lop=[josh, peter], ripple=[josh], josh=[], vadas=[]}</code></pre>
 <h4>See Also</h4>
 <ul>
 <li><a href="#side-effect/groupcount">groupCount</a></li>
