@@ -913,6 +913,8 @@ gremlin> m
 ==>v[6]=[v[3]]
 ==>v[5]=[]
 ==>v[4]=[v[5], v[3]]
+gremlin> g.V.out.groupBy{it.name}{it.in}{it.unique().findAll{i -> i.age > 30}.name}.cap
+==>{lop=[josh, peter], ripple=[josh], josh=[], vadas=[]}
 ```
 
 #### See Also
