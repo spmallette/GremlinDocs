@@ -363,6 +363,10 @@
                   <a href="#recipes/sampling">Sampling</a>
                 </li>
               
+                <li>
+                  <a href="#recipes/writing-to-file">Writing To File</a>
+                </li>
+              
             </ul>
           
         </li>
@@ -1761,6 +1765,16 @@ gremlin&gt; g.V.has(&quot;age&quot;, T.gte, 29)[1..2]
 gremlin&gt; g.v(1).out.gather{Collections.shuffle(it);it}.scatter[0..1]
 ==&gt;v[4]
 ==&gt;v[3]</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='recipes/writing-to-file'>Writing To File</h3 id='recipes/writing-to-file'>
+<p>TinkerPop supports a number of different graph file formats, like <a href="https://github.com/tinkerpop/blueprints/wiki/GraphML-Reader-and-Writer-Library">GraphML</a>, <a href="https://github.com/tinkerpop/blueprints/wiki/GML-Reader-and-Writer-Library">GML</a>, and <a href="https://github.com/tinkerpop/blueprints/wiki/GraphSON-Reader-and-Writer-Library">GraphSON</a>, but sometimes a custom format or just a simple edge list is desireable.  The following code shows how to open a file and side-effect out a comma-separated file of in and out vertices for each edge in the graph.
+
+</p>
+<pre><code class="text">gremlin&gt; new File(&quot;/tmp/edge-set.txt&quot;).withWriter{f -&gt; g.E.sideEffect{f &lt;&lt; &quot;${it.outV.id.next()},${it.inV.id.next()}\r\n&quot;}.iterate()}
+==&gt;null</code></pre>
 <p><a href="#">top</a>
 
 </p>
