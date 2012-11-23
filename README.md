@@ -1577,3 +1577,16 @@ gremlin> g.v(1).out.gather{Collections.shuffle(it);it}.scatter[0..1]
 [top](#)
 
 ***
+
+### Writing To File
+
+TinkerPop supports a number of different graph file formats, like [GraphML](https://github.com/tinkerpop/blueprints/wiki/GraphML-Reader-and-Writer-Library), [GML](https://github.com/tinkerpop/blueprints/wiki/GML-Reader-and-Writer-Library), and [GraphSON](https://github.com/tinkerpop/blueprints/wiki/GraphSON-Reader-and-Writer-Library), but sometimes a custom format or just a simple edge list is desireable.  The following code shows how to open a file and side-effect out a comma-separated file of in and out vertices for each edge in the graph.
+
+```text
+gremlin> new File("/tmp/edge-set.txt").withWriter{f -> g.E.sideEffect{f << "${it.outV.id.next()},${it.inV.id.next()}\r\n"}.iterate()}
+==>null
+```
+
+[top](#)
+
+***
