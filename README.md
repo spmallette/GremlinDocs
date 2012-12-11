@@ -616,6 +616,9 @@ Takes a collection of pipes and emits incoming objects that are true for all of 
 ```text
 gremlin> g.v(1).outE.and(_().has('weight', T.gt, 0.4f), _().has('weight', T.lt, 0.8f))
 ==>e[7][1-knows->2]
+gremlin> g.V.and(_().both("knows"), _().both("created"))
+==>v[1]
+==>v[4]
 ```
 
 [top](#)
