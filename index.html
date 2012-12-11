@@ -924,7 +924,10 @@ gremlin&gt; g.V[0..&lt;2].name
 
 </p>
 <pre><code class="text">gremlin&gt; g.v(1).outE.and(_().has(&#39;weight&#39;, T.gt, 0.4f), _().has(&#39;weight&#39;, T.lt, 0.8f))
-==&gt;e[7][1-knows-&gt;2]</code></pre>
+==&gt;e[7][1-knows-&gt;2]
+gremlin&gt; g.V.and(_().both(&quot;knows&quot;), _().both(&quot;created&quot;))
+==&gt;v[1]
+==&gt;v[4]</code></pre>
 <p><a href="#">top</a>
 
 </p>
