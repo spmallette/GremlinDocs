@@ -1261,7 +1261,7 @@ gremlin&gt; g.V.as(&#39;x&#39;).outE(&#39;knows&#39;).inV.has(&#39;age&#39;, T.g
 <p>Emits input, but calls a side effect closure on each input.
 
 </p>
-<pre><code class="text">gremlinyoungest = Integer.MAX_VALUE                                                    }
+<pre><code class="text">gremlin&gt; youngest = Integer.MAX_VALUE
 ==&gt;2147483647
 gremlin&gt; g.V.hasNot(&#39;age&#39;, null).sideEffect{youngest=youngest&gt;it.age?it.age:youngest}
 ==&gt;v[2]
