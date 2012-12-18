@@ -997,7 +997,7 @@ gremlin&gt; g.v(1).out.aggregate(x).out.except(x)
 </p>
 <hr>
 <h3 id='filter/has'>has</h3 id='filter/has'>
-<p>Allows an element if it has a particular property.  Utilizes several options for comparisons on through <code>T</code>:
+<p>Allows an element if it has a particular property.  Utilizes several options for comparisons through <code>T</code>:
 
 </p>
 <ul>
@@ -1008,6 +1008,9 @@ gremlin&gt; g.v(1).out.aggregate(x).out.except(x)
 <li>T.lte - less than or equal to</li>
 <li>T.lt - less than</li>
 </ul>
+<p>It is worth noting that the syntax of <code>has</code> is similar to <code>g.V(&quot;name&quot;, &quot;marko&quot;)</code>, which has the difference of being a [[key index|<a href="https://github.com/tinkerpop/blueprints/wiki/Graph-Indices">https://github.com/tinkerpop/blueprints/wiki/Graph-Indices</a>]] lookup and as such will perform faster. In contrast, this line, <code>g.V.has(&quot;name&quot;, &quot;marko&quot;)</code>, will iterate over all vertices checking the <code>name</code> property of each vertex for a match and will be significantly slower than the key index approach.
+
+</p>
 <pre><code class="text">gremlin&gt; g.V.has(&quot;name&quot;, &quot;marko&quot;).name
 ==&gt;marko
 gremlin&gt; g.v(1).outE.has(&quot;weight&quot;, T.gte, 0.5f).weight
