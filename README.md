@@ -703,7 +703,7 @@ gremlin> g.V.filter{it.age > 29}.name
 
 ### has
 
-Allows an element if it has a particular property.  Utilizes several options for comparisons on through `T`:
+Allows an element if it has a particular property.  Utilizes several options for comparisons through `T`:
 
 * T.gt - greater than 
 * T.gte - greater than or equal to
@@ -711,6 +711,8 @@ Allows an element if it has a particular property.  Utilizes several options for
 * T.neq - not equal to
 * T.lte - less than or equal to
 * T.lt - less than
+
+It is worth noting that the syntax of `has` is similar to `g.V("name", "marko")`, which has the difference of being a [[key index|https://github.com/tinkerpop/blueprints/wiki/Graph-Indices]] lookup and as such will perform faster. In contrast, this line, `g.V.has("name", "marko")`, will iterate over all vertices checking the `name` property of each vertex for a match and will be significantly slower than the key index approach.
 
 ```text
 gremlin> g.V.has("name", "marko").name
