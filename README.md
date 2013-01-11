@@ -176,6 +176,7 @@ gremlin> g.v(1).out.gather{it.size()}
 #### See Also
 
 * [scatter](#transform/scatter)
+* [shuffle](#transform/shuffle)
 
 [top](#)
 
@@ -501,6 +502,7 @@ gremlin> g.v(1).out.gather{it[1..2]}.scatter
 #### See Also
 
 * [gather](#transform/gather)
+* [shuffle](#transform/shuffle)
 
 [top](#)
 
@@ -524,6 +526,26 @@ gremlin>  g.v(1).as('x').out('knows').as('y').select{it.id}{it.name}
 ==>[x:1, y:vadas]
 ==>[x:1, y:josh]
 ```
+
+[top](#)
+
+***
+
+### shuffle
+
+Collect all objects up to that step into a list and randomize their order.
+
+```text
+gremlin> g.v(1).out.shuffle              
+==>[v[2], v[4], v[3]]
+gremlin> g.v(1).out.shuffle
+==>[v[3], v[4], v[2]]
+```
+
+#### See Also
+
+* [gather](#transform/gather)
+* [scatter](#transform/scatter)
 
 [top](#)
 
