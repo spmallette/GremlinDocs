@@ -143,6 +143,10 @@
                 </li>
               
                 <li>
+                  <a href="#transform/shuffle">shuffle</a>
+                </li>
+              
+                <li>
                   <a href="#transform/transform">transform</a>
                 </li>
               
@@ -542,6 +546,7 @@ gremlin&gt; g.v(1).out.gather{it.size()}
 <h4>See Also</h4>
 <ul>
 <li><a href="#transform/scatter">scatter</a></li>
+<li><a href="#transform/shuffle">shuffle</a></li>
 </ul>
 <p><a href="#">top</a>
 
@@ -826,6 +831,7 @@ gremlin&gt; g.v(1).out.gather{it[1..2]}.scatter
 <h4>See Also</h4>
 <ul>
 <li><a href="#transform/gather">gather</a></li>
+<li><a href="#transform/shuffle">shuffle</a></li>
 </ul>
 <p><a href="#">top</a>
 
@@ -847,6 +853,23 @@ gremlin&gt; g.v(1).as(&#39;x&#39;).out(&#39;knows&#39;).as(&#39;y&#39;).select([
 gremlin&gt;  g.v(1).as(&#39;x&#39;).out(&#39;knows&#39;).as(&#39;y&#39;).select{it.id}{it.name}
 ==&gt;[x:1, y:vadas]
 ==&gt;[x:1, y:josh]</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='transform/shuffle'>shuffle</h3 id='transform/shuffle'>
+<p>Collect all objects up to that step into a list and randomize their order.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).out.shuffle              
+==&gt;[v[2], v[4], v[3]]
+gremlin&gt; g.v(1).out.shuffle
+==&gt;[v[3], v[4], v[2]]</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#transform/gather">gather</a></li>
+<li><a href="#transform/scatter">scatter</a></li>
+</ul>
 <p><a href="#">top</a>
 
 </p>
