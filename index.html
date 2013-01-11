@@ -1765,12 +1765,12 @@ gremlin&gt; g.V.has(&quot;age&quot;, T.gte, 29)[1..2]
 <p>It is sometimes useful to grab a random sample of the items in a collection.  That can be done to some degree with the <a href="#filter.random">random</a> step, but getting an explicit number of items is not supported using that step.
 
 </p>
-<pre><code class="text">gremlin&gt; g.v(1).out.gather{Collections.shuffle(it);it}.scatter[0..1]
-==&gt;v[4]
+<pre><code class="text">gremlin&gt; g.v(1).out.shuffle.scatter[0..1]
 ==&gt;v[2]
-gremlin&gt; g.v(1).out.gather{Collections.shuffle(it);it}.scatter[0..1]
 ==&gt;v[4]
-==&gt;v[3]</code></pre>
+gremlin&gt; g.v(1).out.shuffle.scatter[0..1]
+==&gt;v[3]
+==&gt;v[4]</code></pre>
 <p><a href="#">top</a>
 
 </p>
