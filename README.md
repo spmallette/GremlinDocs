@@ -176,7 +176,6 @@ gremlin> g.v(1).out.gather{it.size()}
 #### See Also
 
 * [scatter](#transform/scatter)
-* [shuffle](#transform/shuffle)
 
 [top](#)
 
@@ -502,7 +501,6 @@ gremlin> g.v(1).out.gather{it[1..2]}.scatter
 #### See Also
 
 * [gather](#transform/gather)
-* [shuffle](#transform/shuffle)
 
 [top](#)
 
@@ -548,8 +546,7 @@ gremlin> g.v(1).out.shuffle
 
 #### See Also
 
-* [gather](#transform/gather)
-* [scatter](#transform/scatter)
+* [random](#filter/random)
 
 [top](#)
 
@@ -1597,12 +1594,19 @@ gremlin> g.v(1).both.loop(1){it.loops<=2 && !(it.object.id in ['1','5'])}.has('i
 It is sometimes useful to grab a random sample of the items in a collection.  That can be done to some degree with the [random](#filter.random) step, but getting an explicit number of items is not supported using that step.
 
 ```text
-gremlin> g.v(1).out.shuffle.scatter[0..1]
+gremlin> g.v(1).out.shuffle
 ==>v[2]
-==>v[4]
-gremlin> g.v(1).out.shuffle.scatter[0..1]
 ==>v[3]
 ==>v[4]
+gremlin> g.v(1).out.shuffle
+==>v[3]
+==>v[2]
+==>v[4]
+gremlin> g.v(1).out.random(0.5)
+==>v[2]
+gremlin> g.v(1).out.random(0.5)
+==>v[4]
+==>v[3]
 ```
 
 [top](#)
