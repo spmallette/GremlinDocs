@@ -536,10 +536,14 @@ gremlin>  g.v(1).as('x').out('knows').as('y').select{it.id}{it.name}
 Collect all objects up to that step into a list and randomize their order.
 
 ```text
-gremlin> g.v(1).out.shuffle              
-==>[v[2], v[4], v[3]]
 gremlin> g.v(1).out.shuffle
-==>[v[3], v[4], v[2]]
+==>v[2]
+==>v[3]
+==>v[4]
+gremlin> g.v(1).out.shuffle
+==>v[3]
+==>v[2]
+==>v[4]
 ```
 
 #### See Also
