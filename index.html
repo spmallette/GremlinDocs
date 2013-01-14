@@ -861,10 +861,14 @@ gremlin&gt;  g.v(1).as(&#39;x&#39;).out(&#39;knows&#39;).as(&#39;y&#39;).select{
 <p>Collect all objects up to that step into a list and randomize their order.
 
 </p>
-<pre><code class="text">gremlin&gt; g.v(1).out.shuffle              
-==&gt;[v[2], v[4], v[3]]
+<pre><code class="text">gremlin&gt; g.v(1).out.shuffle
+==&gt;v[2]
+==&gt;v[3]
+==&gt;v[4]
 gremlin&gt; g.v(1).out.shuffle
-==&gt;[v[3], v[4], v[2]]</code></pre>
+==&gt;v[3]
+==&gt;v[2]
+==&gt;v[4]</code></pre>
 <h4>See Also</h4>
 <ul>
 <li><a href="#transform/gather">gather</a></li>
