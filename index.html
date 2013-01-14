@@ -546,7 +546,6 @@ gremlin&gt; g.v(1).out.gather{it.size()}
 <h4>See Also</h4>
 <ul>
 <li><a href="#transform/scatter">scatter</a></li>
-<li><a href="#transform/shuffle">shuffle</a></li>
 </ul>
 <p><a href="#">top</a>
 
@@ -831,7 +830,6 @@ gremlin&gt; g.v(1).out.gather{it[1..2]}.scatter
 <h4>See Also</h4>
 <ul>
 <li><a href="#transform/gather">gather</a></li>
-<li><a href="#transform/shuffle">shuffle</a></li>
 </ul>
 <p><a href="#">top</a>
 
@@ -871,8 +869,7 @@ gremlin&gt; g.v(1).out.shuffle
 ==&gt;v[4]</code></pre>
 <h4>See Also</h4>
 <ul>
-<li><a href="#transform/gather">gather</a></li>
-<li><a href="#transform/scatter">scatter</a></li>
+<li><a href="#filter/random">random</a></li>
 </ul>
 <p><a href="#">top</a>
 
@@ -1792,12 +1789,19 @@ gremlin&gt; g.V.has(&quot;age&quot;, T.gte, 29)[1..2]
 <p>It is sometimes useful to grab a random sample of the items in a collection.  That can be done to some degree with the <a href="#filter.random">random</a> step, but getting an explicit number of items is not supported using that step.
 
 </p>
-<pre><code class="text">gremlin&gt; g.v(1).out.shuffle.scatter[0..1]
+<pre><code class="text">gremlin&gt; g.v(1).out.shuffle
+==&gt;v[2]
+==&gt;v[3]
+==&gt;v[4]
+gremlin&gt; g.v(1).out.shuffle
+==&gt;v[3]
 ==&gt;v[2]
 ==&gt;v[4]
-gremlin&gt; g.v(1).out.shuffle.scatter[0..1]
-==&gt;v[3]
-==&gt;v[4]</code></pre>
+gremlin&gt; g.v(1).out.random(0.5)
+==&gt;v[2]
+gremlin&gt; g.v(1).out.random(0.5)
+==&gt;v[4]
+==&gt;v[3]</code></pre>
 <p><a href="#">top</a>
 
 </p>
