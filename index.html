@@ -368,6 +368,10 @@
                 </li>
               
                 <li>
+                  <a href="#recipes/shortest-path">Shortest Path</a>
+                </li>
+              
+                <li>
                   <a href="#recipes/writing-to-file">Writing To File</a>
                 </li>
               
@@ -1802,6 +1806,16 @@ gremlin&gt; g.v(1).out.random(0.5)
 gremlin&gt; g.v(1).out.random(0.5)
 ==&gt;v[4]
 ==&gt;v[3]</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='recipes/shortest-path'>Shortest Path</h3 id='recipes/shortest-path'>
+<p>Find the shortest path between two vertices:
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).out.loop(1){it.object.id != &quot;5&quot; &amp; it.loops &lt; 6}.path
+==&gt;[v[1], v[4], v[5]]</code></pre>
 <p><a href="#">top</a>
 
 </p>
