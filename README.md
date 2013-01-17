@@ -1613,6 +1613,19 @@ gremlin> g.v(1).out.random(0.5)
 
 ***
 
+### Shortest Path
+
+Find the shortest path between two vertices:
+
+```text
+gremlin> g.v(1).out.loop(1){it.object.id != "5" & it.loops < 6}.path
+==>[v[1], v[4], v[5]]
+```
+
+[top](#)
+
+***
+
 ### Writing To File
 
 TinkerPop supports a number of different graph file formats, like [GraphML](https://github.com/tinkerpop/blueprints/wiki/GraphML-Reader-and-Writer-Library), [GML](https://github.com/tinkerpop/blueprints/wiki/GML-Reader-and-Writer-Library), and [GraphSON](https://github.com/tinkerpop/blueprints/wiki/GraphSON-Reader-and-Writer-Library), but sometimes a custom format or just a simple edge list is desireable.  The following code shows how to open a file and side-effect out a comma-separated file of in and out vertices for each edge in the graph.
