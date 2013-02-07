@@ -381,6 +381,37 @@ gremlin> g.V.order{it.b.name <=> it.a.name}.out('knows')
 
 ***
 
+### orderMap
+
+For every incoming map, sort with supplied closure or `T.decr` or `T.incr` and emit keys.
+
+```text
+gremlin> g.V.both.groupCount.cap.next()
+==>v[3]=3
+==>v[2]=1
+==>v[1]=3
+==>v[6]=1
+==>v[5]=1
+==>v[4]=3
+gremlin> g.V.both.groupCount.cap.orderMap(T.decr)
+==>v[3]
+==>v[1]
+==>v[4]
+==>v[2]
+==>v[6]
+==>v[5]
+gremlin> g.V.both.groupCount.cap.orderMap(T.decr)[0..1]
+==>v[3]
+==>v[1]
+gremlin> g.V.both.groupCount.cap.orderMap(T.decr)[0..1].name
+==>lop
+==>marko
+```
+
+[top](#)
+
+***
+
 ### out
 
 Gets the out adjacent vertices to the vertex.
