@@ -368,6 +368,10 @@
                 </li>
               
                 <li>
+                  <a href="#recipes/reading-from-a-file">Reading From a File</a>
+                </li>
+              
+                <li>
                   <a href="#recipes/sampling">Sampling</a>
                 </li>
               
@@ -1817,6 +1821,33 @@ gremlin&gt; g.V.has(&quot;age&quot;, T.gte, 29)[1..2]
 </p>
 <pre><code class="text">gremlin&gt; g.v(1).both.loop(1){it.loops&lt;=2 &amp;&amp; !(it.object.id in [&#39;1&#39;,&#39;5&#39;])}.has(&#39;id&#39;,&#39;5&#39;).path
 ==&gt;[v[1], v[4], v[5]]</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='recipes/reading-from-a-file'>Reading From a File</h3 id='recipes/reading-from-a-file'>
+<p>Reading data from an edge file formatted as CSV is easy to do with Gremlin.
+
+</p>
+<pre><code class="text">gremlin&gt; g = new TinkerGraph()
+==&gt;tinkergraph[vertices:0 edges:0]
+gremlin&gt; vs=[] as Set;new
+File(&quot;edges.txt&quot;).eachLine{l-&gt;p=l.split(&quot;,&quot;);vs&lt;&lt;p[0];vs&lt;&lt;p[1];}
+==&gt;1
+==&gt;2
+==&gt;3
+==&gt;4
+gremlin&gt; vs.each{v-&gt;g.addVertex(v)}
+==&gt;1
+==&gt;2
+==&gt;3
+==&gt;4
+gremlin&gt; new File(&quot;edges.txt&quot;).eachLine{l-&gt;p=l.split(&quot;,&quot;);g.addEdge(g.getVertex(p[0]),g.getVertex(p[1]),&#39;friend&#39;)}
+gremlin&gt; g.E
+==&gt;e[3][1-friend-&gt;4]
+==&gt;e[2][3-friend-&gt;4]
+==&gt;e[1][2-friend-&gt;3]
+==&gt;e[0][1-friend-&gt;2]</code></pre>
 <p><a href="#">top</a>
 
 </p>
