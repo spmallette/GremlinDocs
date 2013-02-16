@@ -1619,6 +1619,35 @@ gremlin> g.v(1).both.loop(1){it.loops<=2 && !(it.object.id in ['1','5'])}.has('i
 
 ***
 
+### Reading From a File
+
+Reading data from an edge file formatted as CSV is easy to do with Gremlin.
+
+```text
+gremlin> g = new TinkerGraph()
+==>tinkergraph[vertices:0 edges:0]
+gremlin> vs=[] as Set;new
+File("edges.txt").eachLine{l->p=l.split(",");vs<<p[0];vs<<p[1];}
+==>1
+==>2
+==>3
+==>4
+gremlin> vs.each{v->g.addVertex(v)}
+==>1
+==>2
+==>3
+==>4
+gremlin> new File("edges.txt").eachLine{l->p=l.split(",");g.addEdge(g.getVertex(p[0]),g.getVertex(p[1]),'friend')}
+gremlin> g.E
+==>e[3][1-friend->4]
+==>e[2][3-friend->4]
+==>e[1][2-friend->3]
+==>e[0][1-friend->2]
+```
+
+[top](#)
+
+***
 
 ### Sampling
 
