@@ -1359,6 +1359,41 @@ gremlin> myIdx.getIndexName()
 
 ***
 
+### Graph.removeEdge
+
+Remove an edge. 
+
+```text
+gremlin> g = new TinkerGraph()                     
+==>tinkergraph[vertices:0 edges:0]
+gremlin> v1 = g.addVertex()                     
+==>v[100]
+gremlin> v2 = g.addVertex()
+==>v[200]
+gremlin> g.addEdge(v1,v2,'friend')                 
+==>e[0][100-friend->200]
+gremlin> g.removeEdge(g.e(0))
+==>null
+```
+
+[top](#)
+
+***
+
+### Graph.removeVertex
+
+Remove a vertex. 
+
+```text
+gremlin> g.addVertex()
+==>v[128]
+gremlin> g.removeVertex(g.v(128))
+==>null
+```
+[top](#)
+
+***
+
 ### Graph.v
 
 Get a vertex or set of vertices by providing one or more vertex identifiers.  The identifiers must be the identifiers assigned by the underlying graph implementation.
