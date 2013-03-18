@@ -1361,14 +1361,14 @@ gremlin> myIdx.getIndexName()
 
 ### Graph.removeEdge
 
-Remove an edge.
+Remove an edge. 
 
 ```text
 gremlin> g = new TinkerGraph()                     
 ==>tinkergraph[vertices:0 edges:0]
-gremlin> v1 = g.addVertex(100)                     
+gremlin> v1 = g.addVertex()                     
 ==>v[100]
-gremlin> v2 = g.addVertex(200)
+gremlin> v2 = g.addVertex()
 ==>v[200]
 gremlin> g.addEdge(v1,v2,'friend')                 
 ==>e[0][100-friend->200]
@@ -1382,7 +1382,7 @@ gremlin> g.removeEdge(g.e(0))
 
 ### Graph.removeVertex
 
-Remove a vertex.
+Remove a vertex. 
 
 ```text
 gremlin> g.addVertex()
