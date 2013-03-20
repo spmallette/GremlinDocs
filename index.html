@@ -323,6 +323,14 @@
                 </li>
               
                 <li>
+                  <a href="#methods/graph-removeedge">Graph.removeEdge</a>
+                </li>
+              
+                <li>
+                  <a href="#methods/graph-removevertex">Graph.removeVertex</a>
+                </li>
+              
+                <li>
                   <a href="#methods/graph-v">Graph.v</a>
                 </li>
               
@@ -1590,6 +1598,36 @@ gremlin&gt; myIdx.getIndexName()
 <ul>
 <li><a href="#methods/index-map-entry">Index[Map.Entry]</a></li>
 </ul>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='methods/graph-removeedge'>Graph.removeEdge</h3 id='methods/graph-removeedge'>
+<p>Remove an edge. 
+
+</p>
+<pre><code class="text">gremlin&gt; g = new TinkerGraph()                     
+==&gt;tinkergraph[vertices:0 edges:0]
+gremlin&gt; v1 = g.addVertex()                     
+==&gt;v[100]
+gremlin&gt; v2 = g.addVertex()
+==&gt;v[200]
+gremlin&gt; g.addEdge(v1,v2,&#39;friend&#39;)                 
+==&gt;e[0][100-friend-&gt;200]
+gremlin&gt; g.removeEdge(g.e(0))
+==&gt;null</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='methods/graph-removevertex'>Graph.removeVertex</h3 id='methods/graph-removevertex'>
+<p>Remove a vertex. 
+
+</p>
+<pre><code class="text">gremlin&gt; g.addVertex()
+==&gt;v[128]
+gremlin&gt; g.removeVertex(g.v(128))
+==&gt;null</code></pre>
 <p><a href="#">top</a>
 
 </p>
