@@ -311,6 +311,18 @@
             <ul>
               
                 <li>
+                  <a href="#methods/element-keys">Element.keys</a>
+                </li>
+              
+                <li>
+                  <a href="#methods/element-remove">Element.remove</a>
+                </li>
+              
+                <li>
+                  <a href="#methods/element-values">Element.values</a>
+                </li>
+              
+                <li>
                   <a href="#methods/graph-addedge">Graph.addEdge</a>
                 </li>
               
@@ -1562,6 +1574,49 @@ gremlin&gt; g.v(1).out.loop(1){it.loops&lt;3}{it.object.name==&#39;josh&#39;}
 <p>Methods represent functions that make it faster and easier to work with <a href="http://blueprints.tinkerpop.com">Blueprints</a> and <a href="http://pipes.tinkerpop.com">Pipes</a> APIs.  It is important to keep in mind that the full <a href="http://download.oracle.com/javase/6/docs/api/">Java API</a> and <a href="http://groovy.codehaus.org/groovy-jdk">Groovy API</a> are accessible from Gremlin.
 
 </p>
+<h3 id='methods/element-keys'>Element.keys</h3 id='methods/element-keys'>
+<p>Get the property keys of an element.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).keys()
+==&gt;name
+==&gt;age</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='methods/element-remove'>Element.remove</h3 id='methods/element-remove'>
+<p>Remove an element from the graph.
+
+</p>
+<pre><code class="text">gremlin&gt; g.E.weight
+==&gt;1.0
+==&gt;0.5
+==&gt;0.4
+==&gt;1.0
+==&gt;0.4
+==&gt;0.2
+gremlin&gt; g.E.has(&quot;weight&quot;,T.lt,0.5f).remove()
+==&gt;null
+gremlin&gt; g.E.weight
+==&gt;1.0
+==&gt;0.5
+==&gt;1.0</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='methods/element-values'>Element.values</h3 id='methods/element-values'>
+<p>Gets the property values of an element.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).values()
+==&gt;marko
+==&gt;29</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
 <h3 id='methods/graph-addedge'>Graph.addEdge</h3 id='methods/graph-addedge'>
 <p>Adds an edge to the graph.  Note that most graph implementations ignore the identifier supplied to <code>addEdge</code>.  
 
