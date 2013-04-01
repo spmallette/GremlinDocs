@@ -107,6 +107,10 @@
                 </li>
               
                 <li>
+                  <a href="#transform/linkboth-in-out">linkBoth[In/Out]</a>
+                </li>
+              
+                <li>
                   <a href="#transform/map">map</a>
                 </li>
               
@@ -682,6 +686,42 @@ gremlin&gt; g.v(1).outE.filter{it.label==&#39;created&#39;}
 // a more efficient approach to use of label
 gremlin&gt; g.v(1).outE.has(&#39;label&#39;,&#39;created&#39;)
 ==&gt;e[9][1-created-&gt;3]</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='transform/linkboth-in-out'>linkBoth[In/Out]</h3 id='transform/linkboth-in-out'>
+<p>An element-centric mutation that takes every incoming vertex and creates an edge to the provided vertex. It can be used with both a Vertex object or a named step.
+
+</p>
+<pre><code class="text">gremlin&gt; marko = g.v(1)
+==&gt;v[1]
+gremlin&gt; g.V.except([marko]).linkBoth(&#39;connected&#39;,marko)
+==&gt;v[3]
+==&gt;v[2]
+==&gt;v[6]
+==&gt;v[5]
+==&gt;v[4]
+gremlin&gt; marko.outE(&#39;connected&#39;)
+==&gt;e[2][1-connected-&gt;2]
+==&gt;e[0][1-connected-&gt;3]
+==&gt;e[6][1-connected-&gt;5]
+==&gt;e[4][1-connected-&gt;6]
+==&gt;e[14][1-connected-&gt;4]
+gremlin&gt; g.V.except([marko]).outE(&#39;connected&#39;)
+==&gt;e[1][3-connected-&gt;1]
+==&gt;e[3][2-connected-&gt;1]
+==&gt;e[5][6-connected-&gt;1]
+==&gt;e[13][5-connected-&gt;1]
+==&gt;e[15][4-connected-&gt;1]
+gremlin&gt; g.v(1).as(&#39;x&#39;).out(&#39;created&#39;).in(&#39;created&#39;).except([g.v(1)]).linkBoth(&#39;cocreator&#39;,&#39;x&#39;)
+==&gt;v[4]
+==&gt;v[6]
+gremlin&gt; g.E.has(&#39;label&#39;,&#39;cocreator&#39;)
+==&gt;e[3][6-cocreator-&gt;1]
+==&gt;e[2][1-cocreator-&gt;6]
+==&gt;e[1][4-cocreator-&gt;1]
+==&gt;e[0][1-cocreator-&gt;4]</code></pre>
 <p><a href="#">top</a>
 
 </p>
