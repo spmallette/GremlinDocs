@@ -1306,6 +1306,58 @@ gremlin> g.v(1).out.loop(1){it.loops<3}{it.object.name=='josh'}
 
 Methods represent functions that make it faster and easier to work with [Blueprints](http://blueprints.tinkerpop.com) and [Pipes](http://pipes.tinkerpop.com) APIs.  It is important to keep in mind that the full [Java API](http://download.oracle.com/javase/6/docs/api/) and [Groovy API](http://groovy.codehaus.org/groovy-jdk) are accessible from Gremlin.
 
+### Element.keys
+
+Get the property keys of an element.
+
+```text
+gremlin> g.v(1).keys()
+==>name
+==>age
+```
+
+[top](#)
+
+***
+
+### Element.remove
+
+Remove an element from the graph.
+
+```text
+gremlin> g.E.weight
+==>1.0
+==>0.5
+==>0.4
+==>1.0
+==>0.4
+==>0.2
+gremlin> g.E.has("weight",T.lt,0.5f).remove()
+==>null
+gremlin> g.E.weight
+==>1.0
+==>0.5
+==>1.0
+```
+
+[top](#)
+
+***
+
+### Element.values
+
+Gets the property values of an element.
+
+```text
+gremlin> g.v(1).values()
+==>marko
+==>29
+```
+
+[top](#)
+
+***
+
 ### Graph.addEdge
 
 Adds an edge to the graph.  Note that most graph implementations ignore the identifier supplied to `addEdge`.  
