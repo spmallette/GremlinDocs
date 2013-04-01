@@ -314,6 +314,45 @@ gremlin> g.v(1).outE.has('label','created')
 
 ***
 
+### linkBoth[In/Out]
+
+An element-centric mutation that takes every incoming vertex and creates an edge to the provided vertex. It can be used with both a Vertex object or a named step.
+
+```text
+gremlin> marko = g.v(1)
+==>v[1]
+gremlin> g.V.except([marko]).linkBoth('connected',marko)
+==>v[3]
+==>v[2]
+==>v[6]
+==>v[5]
+==>v[4]
+gremlin> marko.outE('connected')
+==>e[2][1-connected->2]
+==>e[0][1-connected->3]
+==>e[6][1-connected->5]
+==>e[4][1-connected->6]
+==>e[14][1-connected->4]
+gremlin> g.V.except([marko]).outE('connected')
+==>e[1][3-connected->1]
+==>e[3][2-connected->1]
+==>e[5][6-connected->1]
+==>e[13][5-connected->1]
+==>e[15][4-connected->1]
+gremlin> g.v(1).as('x').out('created').in('created').except([g.v(1)]).linkBoth('cocreator','x')
+==>v[4]
+==>v[6]
+gremlin> g.E.has('label','cocreator')
+==>e[3][6-cocreator->1]
+==>e[2][1-cocreator->6]
+==>e[1][4-cocreator->1]
+==>e[0][1-cocreator->4]
+```
+
+[top](#)
+
+***
+
 ### map
 
 Gets the property map of the graph element.
