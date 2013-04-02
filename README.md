@@ -1450,7 +1450,7 @@ gremlin> myIdx.getIndexName()
 
 ***
 
-### Graph.loadGraphML[GML/GraphSON]
+### Graph.load
 
 Load a file from one of several standard formats such as [GraphML](http://graphml.graphdrawing.org/), [GML](http://www.fim.uni-passau.de/en/fim/faculty/chairs/theoretische-informatik/projects.html), or [GraphSON](https://github.com/tinkerpop/blueprints/wiki/GraphSON-Reader-and-Writer-Library).
 
@@ -1470,7 +1470,7 @@ gremlin> g.V
 
 #### See Also
 
-* [Graph[GML/GraphSON]](#methods/savegraph-gml-graphson)
+* [Graph.save](#methods/graph-save)
 
 [top](#)
 
@@ -1511,7 +1511,7 @@ gremlin> g.removeVertex(g.v(128))
 
 ***
 
-### Graph.saveGraphML[GML/GraphSON]
+### Graph.save
 
 Save a graph to file given one of several standard formats such as [GraphML](http://graphml.graphdrawing.org/), [GML](http://www.fim.uni-passau.de/en/fim/faculty/chairs/theoretische-informatik/projects.html), or [GraphSON](https://github.com/tinkerpop/blueprints/wiki/GraphSON-Reader-and-Writer-Library).
 
@@ -1522,7 +1522,7 @@ gremlin> g.saveGraphML('data/graph.xml')
 
 #### See Also
 
-* [Graph[GML/GraphSON]](#methods/loadgraph-gml-graphson)
+* [Graph.load](#methods/graph-load)
 
 [top](#)
 
