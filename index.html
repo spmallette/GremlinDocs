@@ -339,11 +339,19 @@
                 </li>
               
                 <li>
+                  <a href="#methods/graph-loadgraphml-gml-graphson">Graph.loadGraphML[GML/GraphSON]</a>
+                </li>
+              
+                <li>
                   <a href="#methods/graph-removeedge">Graph.removeEdge</a>
                 </li>
               
                 <li>
                   <a href="#methods/graph-removevertex">Graph.removeVertex</a>
+                </li>
+              
+                <li>
+                  <a href="#methods/graph-savegraphml-gml-graphson">Graph.saveGraphML[GML/GraphSON]</a>
                 </li>
               
                 <li>
@@ -1697,6 +1705,29 @@ gremlin&gt; myIdx.getIndexName()
 
 </p>
 <hr>
+<h3 id='methods/graph-loadgraphml-gml-graphson'>Graph.loadGraphML[GML/GraphSON]</h3 id='methods/graph-loadgraphml-gml-graphson'>
+<p>Load a file from one of several standard formats such as <a href="http://graphml.graphdrawing.org/">GraphML</a>, <a href="http://www.fim.uni-passau.de/en/fim/faculty/chairs/theoretische-informatik/projects.html">GML</a>, or <a href="https://github.com/tinkerpop/blueprints/wiki/GraphSON-Reader-and-Writer-Library">GraphSON</a>.
+
+</p>
+<pre><code class="text">gremlin&gt; g = new TinkerGraph()
+==&gt;tinkergraph[vertices:0 edges:0]
+gremlin&gt; g.loadGraphML(&#39;data/graph-example-1.xml&#39;)
+==&gt;null
+gremlin&gt; g.V
+==&gt;v[3]
+==&gt;v[2]
+==&gt;v[1]
+==&gt;v[6]
+==&gt;v[5]
+==&gt;v[4]</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#methods/savegraph-gml-graphson">Graph[GML/GraphSON]</a></li>
+</ul>
+<p><a href="#">top</a>
+
+</p>
+<hr>
 <h3 id='methods/graph-removeedge'>Graph.removeEdge</h3 id='methods/graph-removeedge'>
 <p>Remove an edge. 
 
@@ -1723,6 +1754,20 @@ gremlin&gt; g.removeEdge(g.e(0))
 ==&gt;v[128]
 gremlin&gt; g.removeVertex(g.v(128))
 ==&gt;null</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='methods/graph-savegraphml-gml-graphson'>Graph.saveGraphML[GML/GraphSON]</h3 id='methods/graph-savegraphml-gml-graphson'>
+<p>Save a graph to file given one of several standard formats such as <a href="http://graphml.graphdrawing.org/">GraphML</a>, <a href="http://www.fim.uni-passau.de/en/fim/faculty/chairs/theoretische-informatik/projects.html">GML</a>, or <a href="https://github.com/tinkerpop/blueprints/wiki/GraphSON-Reader-and-Writer-Library">GraphSON</a>.
+
+</p>
+<pre><code class="text">gremlin&gt; g.saveGraphML(&#39;data/graph.xml&#39;)
+==&gt;null</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#methods/loadgraph-gml-graphson">Graph[GML/GraphSON]</a></li>
+</ul>
 <p><a href="#">top</a>
 
 </p>
