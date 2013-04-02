@@ -1450,6 +1450,32 @@ gremlin> myIdx.getIndexName()
 
 ***
 
+### Graph.loadGraphML[GML/GraphSON]
+
+Load a file from one of several standard formats such as [GraphML](http://graphml.graphdrawing.org/), [GML](http://www.fim.uni-passau.de/en/fim/faculty/chairs/theoretische-informatik/projects.html), or [GraphSON](https://github.com/tinkerpop/blueprints/wiki/GraphSON-Reader-and-Writer-Library).
+
+```text
+gremlin> g = new TinkerGraph()
+==>tinkergraph[vertices:0 edges:0]
+gremlin> g.loadGraphML('data/graph-example-1.xml')
+==>null
+gremlin> g.V
+==>v[3]
+==>v[2]
+==>v[1]
+==>v[6]
+==>v[5]
+==>v[4]
+```
+
+#### See Also
+
+* [Graph[GML/GraphSON]](#methods/savegraph-gml-graphson)
+
+[top](#)
+
+***
+
 ### Graph.removeEdge
 
 Remove an edge. 
@@ -1481,6 +1507,23 @@ gremlin> g.addVertex()
 gremlin> g.removeVertex(g.v(128))
 ==>null
 ```
+[top](#)
+
+***
+
+### Graph.saveGraphML[GML/GraphSON]
+
+Save a graph to file given one of several standard formats such as [GraphML](http://graphml.graphdrawing.org/), [GML](http://www.fim.uni-passau.de/en/fim/faculty/chairs/theoretische-informatik/projects.html), or [GraphSON](https://github.com/tinkerpop/blueprints/wiki/GraphSON-Reader-and-Writer-Library).
+
+```text
+gremlin> g.saveGraphML('data/graph.xml')
+==>null
+```
+
+#### See Also
+
+* [Graph[GML/GraphSON]](#methods/loadgraph-gml-graphson)
+
 [top](#)
 
 ***
