@@ -1864,12 +1864,15 @@ Extracting a portion of a graph out of another graph by side-effecting out graph
 gremlin> g.E.has('label','knows')
 ==>e[7][1-knows->2]
 ==>e[8][1-knows->4]
-// this is my target subgraph
+
+// this is the target subgraph
 gremlin> sg = new TinkerGraph() 
 ==>tinkergraph[vertices:0 edges:0]
+
 // define a "Get Or Create" function for vertices...use ElementHelper to copy properties
 gremlin> def goc(v,g){nv=g.getVertex(v.id);if(nv==null){nv=g.addVertex(v.id,ElementHelper.getProperties(v))};nv}
 ==>true
+
 // generate the subgraph by side-effecting graph elements into new graph
 gremlin> g.E.has('label','knows').sideEffect{sg.addEdge(it.id,goc(it.outV.next(),sg),goc(it.inV.next(),sg),it.label,ElementHelper.getProperties(it))}.iterate()
 ==>null
