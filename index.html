@@ -412,6 +412,10 @@
                 </li>
               
                 <li>
+                  <a href="#recipes/subgraphing">Subgraphing</a>
+                </li>
+              
+                <li>
                   <a href="#recipes/writing-to-file">Writing To File</a>
                 </li>
               
@@ -2057,6 +2061,30 @@ gremlin&gt; g.v(1).out.random(0.5)
 </p>
 <pre><code class="text">gremlin&gt; g.v(1).out.loop(1){it.object.id != &quot;5&quot; &amp; it.loops &lt; 6}.path
 ==&gt;[v[1], v[4], v[5]]</code></pre>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='recipes/subgraphing'>Subgraphing</h3 id='recipes/subgraphing'>
+<p>Extracting a portion of a graph out of another graph by side-effecting out graph elements to another graph.  Using a TinkerGraph as the host for the subgraph is best (as memory allows), since TinkerGraph will preserve element identifiers after the extractions.
+
+</p>
+<pre><code class="text">// the goal is to extract the &quot;knows&quot; subgraph
+gremlin&gt; g.E.has(&#39;label&#39;,&#39;knows&#39;)
+==&gt;e[7][1-knows-&gt;2]
+==&gt;e[8][1-knows-&gt;4]
+// this is my target subgraph
+gremlin&gt; sg = new TinkerGraph() 
+==&gt;tinkergraph[vertices:0 edges:0]
+// define a &quot;Get Or Create&quot; function for vertices...use ElementHelper to copy properties
+gremlin&gt; def goc(v,g){nv=g.getVertex(v.id);if(nv==null){nv=g.addVertex(v.id,ElementHelper.getProperties(v))};nv}
+==&gt;true
+// generate the subgraph by side-effecting graph elements into new graph
+gremlin&gt; g.E.has(&#39;label&#39;,&#39;knows&#39;).sideEffect{sg.addEdge(it.id,goc(it.outV.next(),sg),goc(it.inV.next(),sg),it.label,ElementHelper.getProperties(it))}.iterate()
+==&gt;null
+gremlin&gt; sg.E
+==&gt;e[7][1-knows-&gt;2]
+==&gt;e[8][1-knows-&gt;4]</code></pre>
 <p><a href="#">top</a>
 
 </p>

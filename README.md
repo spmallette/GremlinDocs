@@ -1855,6 +1855,33 @@ gremlin> g.v(1).out.loop(1){it.object.id != "5" & it.loops < 6}.path
 
 ***
 
+### Subgraphing
+
+Extracting a portion of a graph out of another graph by side-effecting out graph elements to another graph.  Using a TinkerGraph as the host for the subgraph is best (as memory allows), since TinkerGraph will preserve element identifiers after the extractions.
+
+```text
+// the goal is to extract the "knows" subgraph
+gremlin> g.E.has('label','knows')
+==>e[7][1-knows->2]
+==>e[8][1-knows->4]
+// this is my target subgraph
+gremlin> sg = new TinkerGraph() 
+==>tinkergraph[vertices:0 edges:0]
+// define a "Get Or Create" function for vertices...use ElementHelper to copy properties
+gremlin> def goc(v,g){nv=g.getVertex(v.id);if(nv==null){nv=g.addVertex(v.id,ElementHelper.getProperties(v))};nv}
+==>true
+// generate the subgraph by side-effecting graph elements into new graph
+gremlin> g.E.has('label','knows').sideEffect{sg.addEdge(it.id,goc(it.outV.next(),sg),goc(it.inV.next(),sg),it.label,ElementHelper.getProperties(it))}.iterate()
+==>null
+gremlin> sg.E
+==>e[7][1-knows->2]
+==>e[8][1-knows->4]
+```
+
+[top](#)
+
+***
+
 ### Writing To File
 
 TinkerPop supports a number of different graph file formats, like [GraphML](https://github.com/tinkerpop/blueprints/wiki/GraphML-Reader-and-Writer-Library), [GML](https://github.com/tinkerpop/blueprints/wiki/GML-Reader-and-Writer-Library), and [GraphSON](https://github.com/tinkerpop/blueprints/wiki/GraphSON-Reader-and-Writer-Library), but sometimes a custom format or just a simple edge list is desireable.  The following code shows how to open a file and side-effect out a comma-separated file of in and out vertices for each edge in the graph.
