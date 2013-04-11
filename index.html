@@ -2073,12 +2073,15 @@ gremlin&gt; g.v(1).out.random(0.5)
 gremlin&gt; g.E.has(&#39;label&#39;,&#39;knows&#39;)
 ==&gt;e[7][1-knows-&gt;2]
 ==&gt;e[8][1-knows-&gt;4]
-// this is my target subgraph
+
+// this is the target subgraph
 gremlin&gt; sg = new TinkerGraph() 
 ==&gt;tinkergraph[vertices:0 edges:0]
+
 // define a &quot;Get Or Create&quot; function for vertices...use ElementHelper to copy properties
 gremlin&gt; def goc(v,g){nv=g.getVertex(v.id);if(nv==null){nv=g.addVertex(v.id,ElementHelper.getProperties(v))};nv}
 ==&gt;true
+
 // generate the subgraph by side-effecting graph elements into new graph
 gremlin&gt; g.E.has(&#39;label&#39;,&#39;knows&#39;).sideEffect{sg.addEdge(it.id,goc(it.outV.next(),sg),goc(it.inV.next(),sg),it.label,ElementHelper.getProperties(it))}.iterate()
 ==&gt;null
