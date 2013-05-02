@@ -1099,7 +1099,7 @@ gremlin&gt; g.v(1).out.in.dedup()
 </p>
 <hr>
 <h3 id='filter/except'>except</h3 id='filter/except'>
-<p>Emit everything to pass except what is in the supplied collection.
+<p>Emit everything to pass except what is in the supplied collection or in the results of a named step.
 
 </p>
 <pre><code class="text">gremlin&gt; x = [g.v(1), g.v(2), g.v(3)]
@@ -1112,7 +1112,10 @@ gremlin&gt; g.V.except(x)
 ==&gt;v[4]
 gremlin&gt; x = []
 gremlin&gt; g.v(1).out.aggregate(x).out.except(x)
-==&gt;v[5]</code></pre>
+==&gt;v[5]
+gremlin&gt; g.V.has(&#39;age&#39;,T.lt,30).as(&#39;x&#39;).out(&#39;created&#39;).in(&#39;created&#39;).except(&#39;x&#39;)
+==&gt;v[4]
+==&gt;v[6]</code></pre>
 <h4>See Also</h4>
 <ul>
 <li><a href="#filter/retain">retain</a></li>
@@ -1231,7 +1234,7 @@ gremlin&gt; g.V.random(0.5)
 </p>
 <hr>
 <h3 id='filter/retain'>retain</h3 id='filter/retain'>
-<p>Allow everything to pass except what is not in the supplied collection.
+<p>Allow everything to pass except what is not in the supplied collection or in the results of a named step.
 
 </p>
 <pre><code class="text">gremlin&gt; x = [g.v(1), g.v(2), g.v(3)]
@@ -1244,7 +1247,14 @@ gremlin&gt; g.V.retain(x)
 ==&gt;v[1]
 gremlin&gt; x = []
 gremlin&gt; g.v(1).out.aggregate(x).out.retain(x)
-==&gt;v[3]</code></pre>
+==&gt;v[3]
+gremlin&gt; g.V.as(&#39;x&#39;).both.both.both.retain(&#39;x&#39;)
+==&gt;v[3]
+==&gt;v[3]
+==&gt;v[1]
+==&gt;v[1]
+==&gt;v[4]
+==&gt;v[4]</code></pre>
 <h4>See Also</h4>
 <ul>
 <li><a href="#filter/except">except</a></li>
