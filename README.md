@@ -756,7 +756,7 @@ gremlin> g.v(1).out.in.dedup()
 
 ### except
 
-Emit everything to pass except what is in the supplied collection.
+Emit everything to pass except what is in the supplied collection or in the results of a named step.
 
 ```text
 gremlin> x = [g.v(1), g.v(2), g.v(3)]
@@ -770,6 +770,9 @@ gremlin> g.V.except(x)
 gremlin> x = []
 gremlin> g.v(1).out.aggregate(x).out.except(x)
 ==>v[5]
+gremlin> g.V.has('age',T.lt,30).as('x').out('created').in('created').except('x')
+==>v[4]
+==>v[6]
 ```
 
 #### See Also
@@ -906,7 +909,7 @@ gremlin> g.V.random(0.5)
 
 ### retain
 
-Allow everything to pass except what is not in the supplied collection.
+Allow everything to pass except what is not in the supplied collection or in the results of a named step.
 
 ```text
 gremlin> x = [g.v(1), g.v(2), g.v(3)]
@@ -920,6 +923,13 @@ gremlin> g.V.retain(x)
 gremlin> x = []
 gremlin> g.v(1).out.aggregate(x).out.retain(x)
 ==>v[3]
+gremlin> g.V.as('x').both.both.both.retain('x')
+==>v[3]
+==>v[3]
+==>v[1]
+==>v[1]
+==>v[4]
+==>v[4]
 ```
 
 #### See Also
