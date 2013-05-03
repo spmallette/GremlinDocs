@@ -627,7 +627,7 @@ gremlin> g.v(1).out.shuffle
 Transform emits the result of a closure.
 
 ```text
-gremlin> g.E.has('weight', T.gt, 0.5f).outV.map
+gremlin> g.E.has('weight', T.gt, 0.5f).outV.age
 ==>32
 ==>29
 gremlin> g.E.has('weight', T.gt, 0.5f).outV.age.transform{it+2}
