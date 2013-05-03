@@ -991,7 +991,7 @@ gremlin&gt; g.v(1).out.shuffle
 <p>Transform emits the result of a closure.
 
 </p>
-<pre><code class="text">gremlin&gt; g.E.has(&#39;weight&#39;, T.gt, 0.5f).outV.map
+<pre><code class="text">gremlin&gt; g.E.has(&#39;weight&#39;, T.gt, 0.5f).outV.age
 ==&gt;32
 ==&gt;29
 gremlin&gt; g.E.has(&#39;weight&#39;, T.gt, 0.5f).outV.age.transform{it+2}
