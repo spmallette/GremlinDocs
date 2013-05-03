@@ -992,8 +992,8 @@ gremlin&gt; g.v(1).out.shuffle
 
 </p>
 <pre><code class="text">gremlin&gt; g.E.has(&#39;weight&#39;, T.gt, 0.5f).outV.map
-==&gt;32
-==&gt;29
+==&gt;{name=josh, age=32}
+==&gt;{name=marko, age=29}
 gremlin&gt; g.E.has(&#39;weight&#39;, T.gt, 0.5f).outV.age.transform{it+2}
 ==&gt;34
 ==&gt;31
