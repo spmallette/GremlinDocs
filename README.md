@@ -1854,11 +1854,29 @@ gremlin> g.v(1).out.random(0.5)
 
 ### Shortest Path
 
-Find the shortest path between two vertices:
+Finding the shortest path between two vertices can be accomplished with a loop.  The following example shows the shortest path between vertex `1` and vertex `5` and if such path cannot be found in five steps, break out of the computation.  
 
 ```text
 gremlin> g.v(1).out.loop(1){it.object.id != "5" & it.loops < 6}.path
 ==>[v[1], v[4], v[5]]
+```
+
+In the event there are multiple paths to `5`, all paths will be output and the shortest path will need to be selected.  The following example adds some edges to the toy graph to demonstrate a path length distribution:
+
+```text
+gremlin> g.addEdge(g.v(3), g.v(5), 'created')
+==>e[0][3-created->5]
+gremlin> g.addEdge(g.v(1), g.v(5), 'created')
+==>e[1][1-created->5]
+gremlin> g.v(1).out.loop(1){it.object.id!="5" && it.loops < 6}.path{it.name}
+==>[marko, ripple]
+==>[marko, josh, ripple]
+==>[marko, lop, ripple]
+==>[marko, josh, lop, ripple]
+gremlin> g.v(1).out.loop(1){it.object.id!="5" && it.loops < 6}.path{it.name}.groupBy{it.size()}{it}.cap.next()
+==>2=[[marko, ripple]]
+==>3=[[marko, josh, ripple], [marko, lop, ripple]]
+==>4=[[marko, josh, lop, ripple]]
 ```
 
 [top](#)
