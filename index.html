@@ -396,10 +396,6 @@
                 </li>
               
                 <li>
-                  <a href="#recipes/paths-between-two-vertices">Paths Between Two Vertices</a>
-                </li>
-              
-                <li>
                   <a href="#recipes/reading-from-a-file">Reading From a File</a>
                 </li>
               
@@ -1996,27 +1992,6 @@ gremlin&gt; g.V.has(&quot;age&quot;, T.gte, 29)[1..2]
 
 </p>
 <hr>
-<h3 id='recipes/paths-between-two-vertices'>Paths Between Two Vertices</h3 id='recipes/paths-between-two-vertices'>
-<p>First, paths for a directed graph:
-
-</p>
-<pre><code class="text">gremlin&gt; g.v(1).out.loop(1){it.loops&lt;=3 &amp;&amp; !(it.object.id in [&#39;1&#39;,&#39;5&#39;])}.has(&#39;id&#39;,&#39;5&#39;).path
-==&gt;[v[1], v[4], v[5]]</code></pre>
-<p>Then, undirected:
-
-</p>
-<pre><code class="text">gremlin&gt; g.v(1).both.loop(1){it.loops&lt;=3 &amp;&amp; !(it.object.id in [&#39;1&#39;,&#39;5&#39;])}.has(&#39;id&#39;,&#39;5&#39;).path
-==&gt;[v[1], v[4], v[5]]
-==&gt;[v[1], v[3], v[4], v[5]]</code></pre>
-<p>Use the value of <code>it.loops&lt;=3</code>to control the depth of the traversal:
-
-</p>
-<pre><code class="text">gremlin&gt; g.v(1).both.loop(1){it.loops&lt;=2 &amp;&amp; !(it.object.id in [&#39;1&#39;,&#39;5&#39;])}.has(&#39;id&#39;,&#39;5&#39;).path
-==&gt;[v[1], v[4], v[5]]</code></pre>
-<p><a href="#">top</a>
-
-</p>
-<hr>
 <h3 id='recipes/reading-from-a-file'>Reading From a File</h3 id='recipes/reading-from-a-file'>
 <p>Reading data from an edge file formatted as CSV is easy to do with Gremlin.
 
@@ -2066,11 +2041,27 @@ gremlin&gt; g.v(1).out.random(0.5)
 </p>
 <hr>
 <h3 id='recipes/shortest-path'>Shortest Path</h3 id='recipes/shortest-path'>
-<p>Find the shortest path between two vertices:
+<p>Finding the shortest path between two vertices can be accomplished with a loop.  The following example shows the shortest path between vertex <code>1</code> and vertex <code>5</code> and if such path cannot be found in five steps, break out of the computation.  
 
 </p>
-<pre><code class="text">gremlin&gt; g.v(1).out.loop(1){it.object.id != &quot;5&quot; &amp; it.loops &lt; 6}.path
+<pre><code class="text">gremlin&gt; g.v(1).out.loop(1){it.object.id != &quot;5&quot; &amp;&amp; it.loops &lt; 6}.path
 ==&gt;[v[1], v[4], v[5]]</code></pre>
+<p>In the event there are multiple paths to <code>5</code>, all paths will be output and the shortest path will need to be selected.  The following example adds some edges to the toy graph to demonstrate a path length distribution:
+
+</p>
+<pre><code class="text">gremlin&gt; g.addEdge(g.v(3), g.v(5), &#39;created&#39;)
+==&gt;e[0][3-created-&gt;5]
+gremlin&gt; g.addEdge(g.v(1), g.v(5), &#39;created&#39;)
+==&gt;e[1][1-created-&gt;5]
+gremlin&gt; g.v(1).out.loop(1){it.object.id!=&quot;5&quot; &amp;&amp; it.loops &lt; 6}.path{it.name}
+==&gt;[marko, ripple]
+==&gt;[marko, josh, ripple]
+==&gt;[marko, lop, ripple]
+==&gt;[marko, josh, lop, ripple]
+gremlin&gt; g.v(1).out.loop(1){it.object.id!=&quot;5&quot; &amp;&amp; it.loops &lt; 6}.path{it.name}.groupBy{it.size()}{it}.cap.next()
+==&gt;2=[[marko, ripple]]
+==&gt;3=[[marko, josh, ripple], [marko, lop, ripple]]
+==&gt;4=[[marko, josh, lop, ripple]]</code></pre>
 <p><a href="#">top</a>
 
 </p>
