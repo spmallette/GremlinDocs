@@ -1857,7 +1857,7 @@ gremlin> g.v(1).out.random(0.5)
 Finding the shortest path between two vertices can be accomplished with a loop.  The following example shows the shortest path between vertex `1` and vertex `5` and if such path cannot be found in five steps, break out of the computation.  
 
 ```text
-gremlin> g.v(1).out.loop(1){it.object.id != "5" & it.loops < 6}.path
+gremlin> g.v(1).out.loop(1){it.object.id != "5" && it.loops < 6}.path
 ==>[v[1], v[4], v[5]]
 ```
 
