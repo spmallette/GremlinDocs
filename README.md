@@ -1770,34 +1770,6 @@ gremlin> g.V.has("age", T.gte, 29)[1..2]
 
 ***
 
-### Paths Between Two Vertices
-
-First, paths for a directed graph:
-
-```text
-gremlin> g.v(1).out.loop(1){it.loops<=3 && !(it.object.id in ['1','5'])}.has('id','5').path
-==>[v[1], v[4], v[5]]
-```
-
-Then, undirected:
-
-```text
-gremlin> g.v(1).both.loop(1){it.loops<=3 && !(it.object.id in ['1','5'])}.has('id','5').path
-==>[v[1], v[4], v[5]]
-==>[v[1], v[3], v[4], v[5]]
-```
-
-Use the value of `it.loops<=3`to control the depth of the traversal:
-
-```text
-gremlin> g.v(1).both.loop(1){it.loops<=2 && !(it.object.id in ['1','5'])}.has('id','5').path
-==>[v[1], v[4], v[5]]
-```
-
-[top](#)
-
-***
-
 ### Reading From a File
 
 Reading data from an edge file formatted as CSV is easy to do with Gremlin.
