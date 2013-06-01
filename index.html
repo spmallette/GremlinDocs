@@ -2062,6 +2062,14 @@ gremlin&gt; g.v(1).out.loop(1){it.object.id!=&quot;5&quot; &amp;&amp; it.loops &
 ==&gt;2=[[marko, ripple]]
 ==&gt;3=[[marko, josh, ripple], [marko, lop, ripple]]
 ==&gt;4=[[marko, josh, lop, ripple]]</code></pre>
+<p>Starting with a new &quot;toy&quot; TinkerGraph, calculating the &quot;cost&quot; of the path (in this case utilizing the <code>weight</code> stored on the edges), can be accomplished with:
+
+</p>
+<pre><code class="text">gremlin&gt; g = TinkerGraphFactory.createTinkerGraph()
+==&gt;tinkergraph[vertices:6 edges:6]
+gremlin&gt; g.v(1).outE.inV.loop(2){it.object.id!=&quot;3&quot; &amp;&amp; it.loops &lt; 6}.path.transform{[it.findAll{it instanceof Edge}.sum{it.weight}, it]}
+==&gt;[0.4, [v[1], e[9][1-created-&gt;3], v[3]]]
+==&gt;[1.4000000059604645, [v[1], e[8][1-knows-&gt;4], v[4], e[11][4-created-&gt;3], v[3]]]</code></pre>
 <p><a href="#">top</a>
 
 </p>
