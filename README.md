@@ -1851,6 +1851,16 @@ gremlin> g.v(1).out.loop(1){it.object.id!="5" && it.loops < 6}.path{it.name}.gro
 ==>4=[[marko, josh, lop, ripple]]
 ```
 
+Starting with a new "toy" TinkerGraph, calculating the "cost" of the path (in this case utilizing the `weight` stored on the edges), can be accomplished with:
+
+```text
+gremlin> g = TinkerGraphFactory.createTinkerGraph()
+==>tinkergraph[vertices:6 edges:6]
+gremlin> g.v(1).outE.inV.loop(2){it.object.id!="3" && it.loops < 6}.path.transform{[it.findAll{it instanceof Edge}.sum{it.weight}, it]}
+==>[0.4, [v[1], e[9][1-created->3], v[3]]]
+==>[1.4000000059604645, [v[1], e[8][1-knows->4], v[4], e[11][4-created->3], v[3]]]
+```
+
 [top](#)
 
 ***
