@@ -2070,6 +2070,36 @@ gremlin&gt; g.v(1).out.loop(1){it.object.id!=&quot;5&quot; &amp;&amp; it.loops &
 gremlin&gt; g.v(1).outE.inV.loop(2){it.object.id!=&quot;3&quot; &amp;&amp; it.loops &lt; 6}.path.transform{[it.findAll{it instanceof Edge}.sum{it.weight}, it]}
 ==&gt;[0.4, [v[1], e[9][1-created-&gt;3], v[3]]]
 ==&gt;[1.4000000059604645, [v[1], e[8][1-knows-&gt;4], v[4], e[11][4-created-&gt;3], v[3]]]</code></pre>
+<p>Evaluating a shortest path between two vertices in both directions (in and out edges) can be expensive.  Consider this example:
+
+</p>
+<pre><code class="text">gremlin&gt; g = new TinkerGraph()
+==&gt;tinkergraph[vertices:0 edges:0]
+gremlin&gt; 
+gremlin&gt; root = g.addVertex()
+==&gt;v[0]
+gremlin&gt; 
+gremlin&gt; (1..10).each { outer -&gt;
+gremlin&gt;   parent = root
+gremlin&gt;   (1..10).each { inner -&gt;
+gremlin&gt;     child = g.addVertex()
+gremlin&gt;     g.addEdge(parent, child, &#39;to&#39;)
+gremlin&gt;     parent = child
+gremlin&gt;   }
+gremlin&gt; }; null
+==&gt;null</code></pre>
+<p>Given the sample graph generated above, the following uses the same pattern shown above for finding the shortest path, but evaulates both incoming and outgoing edges (prior examples only evaluated outgoing edges).
+
+</p>
+<pre><code class="text">gremlin&gt; target = &#39;99&#39;; c = 0; root.both().sideEffect{c++}.loop(2){it.object.id != target &amp;&amp; it.loops &lt;= 10}.has(&#39;id&#39;,target).path().iterate(); c
+==&gt;557670</code></pre>
+<p>The above example shows that 557,670 vertices were touched in the above traversal.  Adapting this traversal slightly to use the <a href="https://github.com/tinkerpop/gremlin/wiki/Except-Retain-Pattern">store/except pattern</a> makes it far more efficient, touching only 100 vertices) as shown below:
+
+</p>
+<pre><code class="text">gremlin&gt; s = [root] as Set
+==&gt;v[0]
+gremlin&gt; target = &#39;99&#39;; c = 0; root.both().except(s).store(s).sideEffect{c++}.loop(4){it.object.id != target &amp;&amp; it.loops &lt;= 10}.has(&#39;id&#39;,target).path().iterate(); c
+==&gt;100</code></pre>
 <p><a href="#">top</a>
 
 </p>
