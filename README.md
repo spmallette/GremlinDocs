@@ -1861,6 +1861,42 @@ gremlin> g.v(1).outE.inV.loop(2){it.object.id!="3" && it.loops < 6}.path.transfo
 ==>[1.4000000059604645, [v[1], e[8][1-knows->4], v[4], e[11][4-created->3], v[3]]]
 ```
 
+Evaluating a shortest path between two vertices in both directions (in and out edges) can be expensive.  Consider this example:
+
+```text
+gremlin> g = new TinkerGraph()
+==>tinkergraph[vertices:0 edges:0]
+gremlin> 
+gremlin> root = g.addVertex()
+==>v[0]
+gremlin> 
+gremlin> (1..10).each { outer ->
+gremlin>   parent = root
+gremlin>   (1..10).each { inner ->
+gremlin>     child = g.addVertex()
+gremlin>     g.addEdge(parent, child, 'to')
+gremlin>     parent = child
+gremlin>   }
+gremlin> }; null
+==>null
+```
+
+Given the sample graph generated above, the following uses the same pattern shown above for finding the shortest path, but evaulates both incoming and outgoing edges (prior examples only evaluated outgoing edges).
+
+```text
+gremlin> target = '99'; c = 0; root.both().sideEffect{c++}.loop(2){it.object.id != target && it.loops <= 10}.has('id',target).path().iterate(); c
+==>557670
+```
+
+The above example shows that 557,670 vertices were touched in the above traversal.  Adapting this traversal slightly to use the [store/except pattern](https://github.com/tinkerpop/gremlin/wiki/Except-Retain-Pattern) makes it far more efficient, touching only 100 vertices) as shown below:
+
+```text
+gremlin> s = [root] as Set
+==>v[0]
+gremlin> target = '99'; c = 0; root.both().except(s).store(s).sideEffect{c++}.loop(4){it.object.id != target && it.loops <= 10}.has('id',target).path().iterate(); c
+==>100
+```
+
 [top](#)
 
 ***
