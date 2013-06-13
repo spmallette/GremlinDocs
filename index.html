@@ -922,6 +922,10 @@ gremlin&gt; g.v(1).outE.inV.name.path
 ==&gt;[v[1], e[7][1-knows-&gt;2], v[2], vadas]
 ==&gt;[v[1], e[8][1-knows-&gt;4], v[4], josh]
 ==&gt;[v[1], e[9][1-created-&gt;3], v[3], lop]</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#methods/pipe-enablepath">Pipe.enablePath</a></li>
+</ul>
 <p><a href="#">top</a>
 
 </p>
@@ -1840,6 +1844,10 @@ Display stack trace? [yN]
 gremlin&gt; g.v(1).out.loop(1){it.loops &lt; 3}{it.path.contains(g.v(4))}.enablePath()
 ==&gt;v[5]
 ==&gt;v[3]</code></pre>
+<h4>See Also</h4>
+<ul>
+<li><a href="#transform/path">path</a></li>
+</ul>
 <p><a href="#">top</a>
 
 </p>
