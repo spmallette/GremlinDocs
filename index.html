@@ -363,6 +363,10 @@
                 </li>
               
                 <li>
+                  <a href="#methods/pipe-enablepath">Pipe.enablePath</a>
+                </li>
+              
+                <li>
                   <a href="#methods/pipe-fill">Pipe.fill</a>
                 </li>
               
@@ -1822,6 +1826,20 @@ gremlin&gt; g.idx(&quot;my-index&quot;)[[name:&quot;marko&quot;]]
 <ul>
 <li><a href="#methods/graph-idx-string">Graph.idx(String)</a></li>
 </ul>
+<p><a href="#">top</a>
+
+</p>
+<hr>
+<h3 id='methods/pipe-enablepath'>Pipe.enablePath</h3 id='methods/pipe-enablepath'>
+<p>If the path information is required internal to a closure, Gremlin doesn’t know that as it can not interpret what is in a closure. As such, be sure to use <code>GremlinPipeline.enablePath()</code> if path information will be required by the expression.
+
+</p>
+<pre><code class="text">gremlin&gt; g.v(1).out.loop(1){it.loops &lt; 3}{it.path.contains(g.v(4))}             
+Cannot invoke method contains() on null object
+Display stack trace? [yN] 
+gremlin&gt; g.v(1).out.loop(1){it.loops &lt; 3}{it.path.contains(g.v(4))}.enablePath()
+==&gt;v[5]
+==&gt;v[3]</code></pre>
 <p><a href="#">top</a>
 
 </p>
