@@ -548,6 +548,10 @@ gremlin> g.v(1).outE.inV.name.path
 ==>[v[1], e[9][1-created->3], v[3], lop]
 ```
 
+#### See Also
+
+* [Pipe.enablePath](#methods/pipe-enablepath)
+
 [top](#)
 
 ***
@@ -1600,6 +1604,10 @@ gremlin> g.v(1).out.loop(1){it.loops < 3}{it.path.contains(g.v(4))}.enablePath()
 ==>v[5]
 ==>v[3]
 ```
+
+#### See Also
+
+* [path](#transform/path)
 
 [top](#)
 
