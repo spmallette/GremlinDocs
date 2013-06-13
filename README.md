@@ -1588,6 +1588,23 @@ gremlin> g.idx("my-index")[[name:"marko"]]
 
 ***
 
+### Pipe.enablePath
+
+If the path information is required internal to a closure, Gremlin doesn’t know that as it can not interpret what is in a closure. As such, be sure to use `GremlinPipeline.enablePath()` if path information will be required by the expression.
+
+```text
+gremlin> g.v(1).out.loop(1){it.loops < 3}{it.path.contains(g.v(4))}             
+Cannot invoke method contains() on null object
+Display stack trace? [yN] 
+gremlin> g.v(1).out.loop(1){it.loops < 3}{it.path.contains(g.v(4))}.enablePath()
+==>v[5]
+==>v[3]
+```
+
+[top](#)
+
+***
+
 ### Pipe.fill
 
 Takes all the results in the pipeline and puts them into the provided collection.
