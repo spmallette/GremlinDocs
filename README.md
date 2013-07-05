@@ -1,4 +1,4 @@
-![Gremlin](https://github.com/tinkerpop/gremlin/raw/master/doc/images/gremlin-logo.png)
+![Gremlin](https://raw.github.com/tinkerpop/gremlin/master/doc/images/gremlindocs-logo.png)
 
 [Gremlin](http://gremlin.tinkerpop.com) is a domain specific language for traversing property graphs. This language has application in the areas of graph query, analysis, and manipulation. See the [Getting Started](https://github.com/tinkerpop/gremlin/wiki/Getting-Started) Gremlin wiki page for downloading and installing Gremlin.
 
