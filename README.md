@@ -16,6 +16,8 @@ The documentation and samples presented here attempt to stay current with the mo
 
 GremlinDocs is a [GitHub repository](https://github.com/spmallette/GremlinDocs).  Pull requests will be considered. 
 
+_Acknowledgements_: Gremlin artwork by [Ketrina Yim](http://ketrinadrawsalot.tumblr.com/) and font by Maelle Keita.
+
 
 ## Transform
 
