@@ -12,7 +12,7 @@ gremlin> g = TinkerGraphFactory.createTinkerGraph()
 
 This produces a hardcoded representation of the graph diagrammed [here](http://github.com/tinkerpop/blueprints/wiki/Property-Graph-Model).  
 
-The documentation and samples presented here attempt to stay current with the most current, stable release of Gremlin.  Please note that this is not the *official* Gremlin documentation.  The official documentation resides in the Gremlin [wiki](https://github.com/tinkerpop/gremlin/wiki). 
+The documentation and samples presented here attempt to stay current with the most current, stable release of Gremlin.  Please note that this is not the *official* Gremlin documentation.  The official documentation resides in the Gremlin [wiki](https://github.com/tinkerpop/gremlin/wiki).  Other Gremlin documentation can be found at [Sql2Gremlin](http://sql2gremlin.com/), which is focused on teaching those familiar with SQL how to think in Gremlin and graphs.
 
 GremlinDocs is a [GitHub repository](https://github.com/spmallette/GremlinDocs).  Pull requests will be considered. 
 
