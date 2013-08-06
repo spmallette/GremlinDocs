@@ -68,6 +68,8 @@ gremlin> v.both('knows', 'created')
 ==>v[1]
 ==>v[5]
 ==>v[3]
+gremlin> v.both(1, 'knows', 'created')
+==>v[1]
 ```
 
 [top](#)
@@ -91,6 +93,8 @@ gremlin> v.bothE('knows', 'created')
 ==>e[8][1-knows->4]
 ==>e[10][4-created->5]
 ==>e[11][4-created->3]
+gremlin> v.bothE(1,'knows','created')
+==>e[8][1-knows->4]
 ```
 
 [top](#)
