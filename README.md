@@ -822,9 +822,11 @@ gremlin> g.V.has("name", "marko").name
 gremlin> g.v(1).outE.has("weight", T.gte, 0.5f).weight
 ==>0.5
 ==>1.0
-gremlin> g.V.has("age", null).name
-==>lop
-==>ripple
+gremlin> g.V.has('age').name   
+==>vadas
+==>marko
+==>peter
+==>josh
 ```
 
 #### See Also
@@ -850,11 +852,9 @@ Allows an element if it does not have a particular property.  Utilizes several o
 gremlin> g.v(1).outE.hasNot("weight", T.eq, 0.5f).weight
 ==>1.0
 ==>0.4
-gremlin> g.V.hasNot("age", null).name
-==>vadas
-==>marko
-==>peter
-==>josh
+gremlin> g.V.hasNot('age').name
+==>lop
+==>ripple
 ```
 
 [top](#)
