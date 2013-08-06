@@ -726,11 +726,9 @@ gremlin> g.V.and(_().both("knows"), _().both("created"))
 
 ### back
 
-Go back to the results from n-steps ago or go back to the results of a named step.
+Go back to the results of a named step.
 
 ```text
-gremlin> g.V.out('knows').has('age', T.gt, 30).back(2).age
-==>29
 gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).back('x').age
 ==>29
 ```
@@ -1004,8 +1002,6 @@ gremlin> x
 Emits input, but names the previous step.
 
 ```text
-gremlin> g.V.out('knows').has('age', T.gt, 30).back(2).age     
-==>29
 gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).back('x').age
 ==>29
 ```
@@ -1082,18 +1078,9 @@ gremlin> m
 
 ### optional
 
-Behaves similar to `back` except that it does not filter. It will go down a particular path and back up to where it left off. As such, its useful for yielding a sideeffect down a particular branch.
+Behaves similar to `back` except that it does not filter. It will go down a particular path and back up to where it left off. As such, its useful for yielding a side-effect down a particular branch.
 
 ```text
-gremlin> g.V.out('knows').has('age', T.gt, 30).back(2)        
-==>v[1]
-gremlin> g.V.out('knows').has('age', T.gt, 30).optional(2)    
-==>v[3]
-==>v[2]
-==>v[1]
-==>v[6]
-==>v[5]
-==>v[4]
 gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).back('x')
 ==>v[1]
 gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).optional('x')
@@ -1120,7 +1107,7 @@ Emits input, but calls a side effect closure on each input.
 ```text
 gremlin> youngest = Integer.MAX_VALUE
 ==>2147483647
-gremlin> g.V.hasNot('age', null).sideEffect{youngest=youngest>it.age?it.age:youngest}
+gremlin> g.V.has('age').sideEffect{youngest=youngest>it.age?it.age:youngest}
 ==>v[2]
 ==>v[1]
 ==>v[6]
@@ -1160,7 +1147,7 @@ Emits input, but stores row of as values (constrained by column names if provide
 
 ```text
 gremlin> t = new Table()  
-gremlin> g.V.name.as('name').back(1).age.as('age').table(t)
+gremlin> g.V.as('x').name.as('name').back('x').age.as('age').table(t)
 ==>null
 ==>27
 ==>29
@@ -1175,16 +1162,16 @@ gremlin> t
 ==>[name:ripple, age:null]
 ==>[name:josh, age:32]
 gremlin> t = new Table()
-gremlin> g.V.hasNot('age', null).name.as('name').back(1).age.as('age').table(t){it}{it>30 ? 'over thirty' : 'under thirty'}
+gremlin> g.V.has('age').as('x').name.as('name').back('x').age.as('age').table(t){it}{it}{it>30 ? 'over thirty' : 'under thirty'}
 ==>27
 ==>29
 ==>35
 ==>32
 gremlin> t
-==>[name:vadas, age:under thirty]
-==>[name:marko, age:under thirty]
-==>[name:peter, age:over thirty]
-==>[name:josh, age:over thirty]
+==>[x:v[2], name:vadas, age:under thirty]
+==>[x:v[1], name:marko, age:under thirty]
+==>[x:v[6], name:peter, age:over thirty]
+==>[x:v[4], name:josh, age:over thirty]
 gremlin> t.get(0,'name')      
 ==>vadas
 ```
