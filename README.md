@@ -1966,7 +1966,7 @@ gremlin> sg.E
 
 ### Using External Classes
 
-Classes in external `jar` files can be referenced in the Gremlin REPL, making it possible to expand the capabilities of the REPL itself.  Either copy the `jar` file to the `GREMLIN_HOME/lib` directory before starting the REPL so that the `jar` is on the Gremlin classpath or use [Grape](http://groovy.codehaus.org/Grape) to help manage `jar` files and their related dependencies.  The following example demonstrates how to use [MongoDB](http://mongodb.org) from the Gremlin REPL:
+Classes in external `jar` files can be referenced in the Gremlin REPL, making it possible to expand the capabilities of the REPL itself.  Either copy the `jar` file to the `GREMLIN_HOME/lib` directory before starting the REPL so that the `jar` is on the Gremlin classpath or use [Grape](http://groovy.codehaus.org/Grape) to help manage `jar` files and their related dependencies.  The following example demonstrates how to use [MongoDB](http://www.mongodb.org) from the Gremlin REPL:
 
 ```text
 gremlin> Grape.grab(group:'com.gmongo',module:'gmongo',version:'1.2')
