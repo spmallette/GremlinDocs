@@ -827,6 +827,12 @@ gremlin> g.V.has('age').name
 ==>marko
 ==>peter
 ==>josh
+gremlin> g.V.has('age',Contains.IN, [27,35]).name
+==>vadas
+==>peter
+gremlin> g.V.has('age').has('age',Contains.NOT_IN, [27,35]).name
+==>marko
+==>josh
 ```
 
 #### See Also
