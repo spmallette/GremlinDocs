@@ -1964,6 +1964,27 @@ gremlin> sg.E
 
 ***
 
+### Using External Classes
+
+Classes in external `jar` files can be referenced in the Gremlin REPL, making it possible to expand the capabilities of the REPL itself.  Either copy the `jar` file to the `GREMLIN_HOME/lib` directory before starting the REPL so that the `jar` is on the Gremlin classpath or use [Grape](http://groovy.codehaus.org/Grape) to help manage `jar` files and their related dependencies.  The following example demonstrates how to use [MongoDB](http://mongodb.org) from the Gremlin REPL:
+
+```text
+gremlin> Grape.grab(group:'com.gmongo',module:'gmongo',version:'1.2')
+==>null
+gremlin> import com.gmongo.GMongo
+==>import com.tinkerpop.gremlin.*
+==>import com.tinkerpop.gremlin.java.*
+==>import com.tinkerpop.gremlin.pipes.filter.*
+...
+==>import com.gmongo.GMongo
+gremlin> mongo = new GMongo()
+==>com.gmongo.GMongo@3717ee94
+```
+
+[top](#)
+
+***
+
 ### Writing To File
 
 TinkerPop supports a number of different graph file formats, like [GraphML](https://github.com/tinkerpop/blueprints/wiki/GraphML-Reader-and-Writer-Library), [GML](https://github.com/tinkerpop/blueprints/wiki/GML-Reader-and-Writer-Library), and [GraphSON](https://github.com/tinkerpop/blueprints/wiki/GraphSON-Reader-and-Writer-Library), but sometimes a custom format or just a simple edge list is desireable.  The following code shows how to open a file and side-effect out a comma-separated file of in and out vertices for each edge in the graph.
