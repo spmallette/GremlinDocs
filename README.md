@@ -217,10 +217,15 @@ gremlin> v.in("created")
 ==>v[1]
 ==>v[4]
 ==>v[6]
+gremlin> v.in(2,'created')
+==>v[1]
+==>v[4]
 gremlin> v.inE("created").outV
 ==>v[1]
 ==>v[4]
 ==>v[6]
+gremlin> v.inE(2,'created').outV[0]
+==>v[1]
 ```
 
 [top](#)
@@ -244,10 +249,15 @@ gremlin> v.in("created")
 ==>v[1]
 ==>v[4]
 ==>v[6]
+gremlin> v.in(2,'created')
+==>v[1]
+==>v[4]
 gremlin> v.inE("created").outV
 ==>v[1]
 ==>v[4]
 ==>v[6]
+gremlin> v.inE(2,'created').outV[0]
+==>v[1]
 ```
 
 [top](#)
@@ -474,6 +484,9 @@ gremlin> v.outE('knows').inV
 gremlin> v.out('knows')
 ==>v[2]
 ==>v[4]
+gremlin> v.out(1,'knows')
+==>v[2]
+
 ```
 
 [top](#)
@@ -491,16 +504,18 @@ gremlin> v.outE.inV
 ==>v[2]
 ==>v[4]
 ==>v[3]
-gremlin> v.out
-==>v[2]
-==>v[4]
-==>v[3]
+gremlin> v.outE
+==>e[7][1-knows->2]
+==>e[8][1-knows->4]
+==>e[9][1-created->3]
 gremlin> v.outE('knows').inV
 ==>v[2]
 ==>v[4]
-gremlin> v.out('knows')
-==>v[2]
-==>v[4]
+gremlin> v.outE('knows')
+==>e[7][1-knows->2]
+==>e[8][1-knows->4]
+gremlin> v.outE(1,'knows')
+==>e[7][1-knows->2]
 ```
 
 [top](#)
