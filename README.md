@@ -830,6 +830,8 @@ Allows an element if it has a particular property.  Utilizes several options for
 * T.neq - not equal to
 * T.lte - less than or equal to
 * T.lt - less than
+* T.in - contained in a list
+* T.notin - not contained in a list
 
 It is worth noting that the syntax of `has` is similar to `g.V("name", "marko")`, which has the difference of being a [key index](https://github.com/tinkerpop/blueprints/wiki/Graph-Indices) lookup and as such will perform faster. In contrast, this line, `g.V.has("name", "marko")`, will iterate over all vertices checking the `name` property of each vertex for a match and will be significantly slower than the key index approach.
 
@@ -839,17 +841,18 @@ gremlin> g.V.has("name", "marko").name
 gremlin> g.v(1).outE.has("weight", T.gte, 0.5f).weight
 ==>0.5
 ==>1.0
-gremlin> g.V.has('age').name   
+gremlin> g.V.has('age').name
 ==>vadas
 ==>marko
 ==>peter
 ==>josh
-gremlin> g.V.has('age',Contains.IN, [27,35]).name
-==>vadas
-==>peter
-gremlin> g.V.has('age').has('age',Contains.NOT_IN, [27,35]).name
+gremlin> g.V.has('age',T.in,[29,32])
+==>v[1]
+==>v[4]
+gremlin> g.V.has('age').has('age',T.notin, [27,35]).name
 ==>marko
 ==>josh
+
 ```
 
 #### See Also
@@ -870,6 +873,8 @@ Allows an element if it does not have a particular property.  Utilizes several o
 * T.neq - not equal to
 * T.lte - less than or equal to
 * T.lt - less than
+* T.in - contained in a list
+* T.notin - not contained in a list
 
 ```text
 gremlin> g.v(1).outE.hasNot("weight", T.eq, 0.5f).weight
