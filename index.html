@@ -1012,6 +1012,8 @@ gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_v
 <li>T.neq - not equal to</li>
 <li>T.lte - less than or equal to</li>
 <li>T.lt - less than</li>
+<li>T.in - contained in a list</li>
+<li>T.notin - not contained in a list</li>
 </ul>
 <p>It is worth noting that the syntax of <code>has</code> is similar to <code>g.V(&quot;name&quot;, &quot;marko&quot;)</code>, which has the difference of being a <a href="https://github.com/tinkerpop/blueprints/wiki/Graph-Indices">key index</a> lookup and as such will perform faster. In contrast, this line, <code>g.V.has(&quot;name&quot;, &quot;marko&quot;)</code>, will iterate over all vertices checking the <code>name</code> property of each vertex for a match and will be significantly slower than the key index approach.</p>
 <pre><code class="lang-text">gremlin&gt; g.V.has(<span class="string">"name"</span>, <span class="string">"marko"</span>).<span class="function"><span class="title">name</span></span>
@@ -1019,15 +1021,15 @@ gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_v
 gremlin&gt; g.v(<span class="number">1</span>).outE.has(<span class="string">"weight"</span>, T.gte, <span class="number">0.5</span>f).<span class="function"><span class="title">weight</span></span>
 ==&gt;<span class="number">0.5</span>
 ==&gt;<span class="number">1.0</span>
-gremlin&gt; g.V.has(<span class="string">'age'</span>).<span class="function"><span class="title">name</span></span>   
+gremlin&gt; g.V.has(<span class="string">'age'</span>).<span class="function"><span class="title">name</span></span>
 ==&gt;<span class="function"><span class="title">vadas</span></span>
 ==&gt;<span class="function"><span class="title">marko</span></span>
 ==&gt;<span class="function"><span class="title">peter</span></span>
 ==&gt;josh
-gremlin&gt; g.V.has(<span class="string">'age'</span>,Contains.IN, [<span class="number">27</span>,<span class="number">35</span>]).<span class="function"><span class="title">name</span></span>
-==&gt;<span class="function"><span class="title">vadas</span></span>
-==&gt;peter
-gremlin&gt; g.V.has(<span class="string">'age'</span>).has(<span class="string">'age'</span>,Contains.NOT_IN, [<span class="number">27</span>,<span class="number">35</span>]).<span class="function"><span class="title">name</span></span>
+gremlin&gt; g.V.has(<span class="string">'age'</span>,T.<span class="keyword">in</span>,[<span class="number">29</span>,<span class="number">32</span>])
+==&gt;v[<span class="number">1</span>]
+==&gt;v[<span class="number">4</span>]
+gremlin&gt; g.V.has(<span class="string">'age'</span>).has(<span class="string">'age'</span>,T.notin, [<span class="number">27</span>,<span class="number">35</span>]).<span class="function"><span class="title">name</span></span>
 ==&gt;<span class="function"><span class="title">marko</span></span>
 ==&gt;josh</code></pre>
 <h4>See Also</h4>
@@ -1045,6 +1047,8 @@ gremlin&gt; g.V.has(<span class="string">'age'</span>).has(<span class="string">
 <li>T.neq - not equal to</li>
 <li>T.lte - less than or equal to</li>
 <li>T.lt - less than</li>
+<li>T.in - contained in a list</li>
+<li>T.notin - not contained in a list</li>
 </ul>
 <pre><code class="lang-text">gremlin&gt; g.v(<span class="number">1</span>).outE.hasNot(<span class="string">"weight"</span>, T.eq, <span class="number">0.5</span>f).<span class="function"><span class="title">weight</span></span>
 ==&gt;<span class="number">1.0</span>
