@@ -1761,6 +1761,35 @@ gremlin> g.v(1).bothE.as('x').bothV.retain([g.v(3)]).back('x')
 
 ***
 
+### Happy Birthday
+
+Some Gremlin for that special occassion when you don't know what other gift to give.
+
+```text
+g = new TinkerGraph()
+v01 = g.addVertex(["UC":"B","i":2]); v02 = g.addVertex(["UC":"H","i":1])
+v03 = g.addVertex(["LC":"a"]); v04 = g.addVertex(["LC":"a"]);
+v05 = g.addVertex(["LC":"d"]); v06 = g.addVertex(["LC":"h"]); 
+v07 = g.addVertex(["LC":"i"]); v08 = g.addVertex(["LC":"p"]);
+v09 = g.addVertex(["LC":"p"]); v10 = g.addVertex(["LC":"r"]); 
+v11 = g.addVertex(["LC":"t"]); v12 = g.addVertex(["LC":"y"]); 
+v13 = g.addVertex(["LC":"y"]); v14 = g.addVertex(["LC":"!"]);
+v02.addEdge("followedBy", v03); v03.addEdge("followedBy", v08); 
+v08.addEdge("followedBy", v09); v09.addEdge("followedBy", v12);
+v01.addEdge("followedBy", v07); v07.addEdge("followedBy", v10); 
+v10.addEdge("followedBy", v11); v11.addEdge("followedBy", v06);
+v06.addEdge("followedBy", v05); v05.addEdge("followedBy", v04); 
+v04.addEdge("followedBy", v13); v13.addEdge("followedBy", v14);
+
+g.V().has("UC").order({ it.a.i <=> it.b.i }).transform({
+  it.as("x").out("followedBy").loop("x", {true}, {true}).path().toList().reverse()[0]._().transform({ it.UC ?: it.LC }).join()
+}).join(" ")
+```
+
+[top](#)
+
+***
+
 ### Hiding Console Output
 
 The Gremlin Console automatically iterates the pipe and outputs the results to the console.  In some cases, this can lead to lots of screen output that isn't terribly useful.  To suppress the output, consider the following:
@@ -1899,12 +1928,12 @@ gremlin> g.addEdge(g.v(3), g.v(5), 'created')
 ==>e[0][3-created->5]
 gremlin> g.addEdge(g.v(1), g.v(5), 'created')
 ==>e[1][1-created->5]
-gremlin> g.v(1).out.loop(1){it.object.id!="5" && it.loops < 6}.path{it.name}
+gremlin> g.v(1).out.loop(1){it.object.id!="5" && it.loops < 6}.path.filter{it.last().id=="5"}.transform{it.name}
 ==>[marko, ripple]
 ==>[marko, josh, ripple]
 ==>[marko, lop, ripple]
 ==>[marko, josh, lop, ripple]
-gremlin> g.v(1).out.loop(1){it.object.id!="5" && it.loops < 6}.path{it.name}.groupBy{it.size()}{it}.cap.next()
+gremlin> g.v(1).out.loop(1){it.object.id!="5" && it.loops < 6}.path.filter{it.last().id=="5"}.transform{it.name}.groupBy{it.size()}{it}.cap.next()
 ==>2=[[marko, ripple]]
 ==>3=[[marko, josh, ripple], [marko, lop, ripple]]
 ==>4=[[marko, josh, lop, ripple]]
@@ -1915,7 +1944,7 @@ Starting with a new "toy" TinkerGraph, calculating the "cost" of the path (in th
 ```text
 gremlin> g = TinkerGraphFactory.createTinkerGraph()
 ==>tinkergraph[vertices:6 edges:6]
-gremlin> g.v(1).outE.inV.loop(2){it.object.id!="3" && it.loops < 6}.path.transform{[it.findAll{it instanceof Edge}.sum{it.weight}, it]}
+gremlin> g.v(1).outE.inV.loop(2){it.object.id!="3" && it.loops < 6}.path.filter{it.last().id=="3"}.transform{[it.findAll{it instanceof Edge}.sum{it.weight}, it]}
 ==>[0.4, [v[1], e[9][1-created->3], v[3]]]
 ==>[1.4000000059604645, [v[1], e[8][1-knows->4], v[4], e[11][4-created->3], v[3]]]
 ```
