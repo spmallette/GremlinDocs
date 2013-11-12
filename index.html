@@ -392,6 +392,10 @@
                 </li>
               
                 <li>
+                  <a href="#recipes/finding-edges-between-vertices">Finding Edges Between Vertices</a>
+                </li>
+              
+                <li>
                   <a href="#recipes/happy-birthday">Happy Birthday</a>
                 </li>
               
@@ -1651,6 +1655,14 @@ gremlin&gt; e = g.e(<span class="number">9</span>)
 ==&gt;e[<span class="number">9</span>][<span class="number">1</span>-created-&gt;<span class="number">3</span>]
 gremlin&gt; e.outV.outE(e.label).filter{ElementHelper.haveEqualProperties(e,it)}.<span class="keyword">as</span>(<span class="string">'e'</span>).inV.filter{it==e.inV.next()}.back(<span class="string">'e'</span>).except([e])
 ==&gt;e[<span class="number">0</span>][<span class="number">1</span>-created-&gt;<span class="number">3</span>]</code></pre>
+<p><a href="#">top</a></p>
+<hr>
+<h3 id='recipes/finding-edges-between-vertices'>Finding Edges Between Vertices</h3 id='recipes/finding-edges-between-vertices'>
+<p>It is often useful to determine if there is an edge between one vertex and another.</p>
+<pre><code class="lang-text">gremlin&gt; g<span class="variable">.v</span>(<span class="number">1</span>)<span class="variable">.both</span><span class="variable">.retain</span>([g<span class="variable">.v</span>(<span class="number">3</span>)])<span class="variable">.hasNext</span>()
+==&gt;<span class="literal">true</span>
+gremlin&gt; g<span class="variable">.v</span>(<span class="number">1</span>)<span class="variable">.bothE</span><span class="variable">.as</span>(<span class="string">'x'</span>)<span class="variable">.bothV</span><span class="variable">.retain</span>([g<span class="variable">.v</span>(<span class="number">3</span>)])<span class="variable">.back</span>(<span class="string">'x'</span>)
+==&gt;e[<span class="number">9</span>][<span class="number">1</span>-created-&gt;<span class="number">3</span>]</code></pre>
 <p><a href="#">top</a></p>
 <hr>
 <h3 id='recipes/happy-birthday'>Happy Birthday</h3 id='recipes/happy-birthday'>
