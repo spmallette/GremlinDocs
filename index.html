@@ -392,6 +392,10 @@
                 </li>
               
                 <li>
+                  <a href="#recipes/happy-birthday">Happy Birthday</a>
+                </li>
+              
+                <li>
                   <a href="#recipes/hiding-console-output">Hiding Console Output</a>
                 </li>
               
@@ -1647,6 +1651,28 @@ gremlin&gt; e = g.e(<span class="number">9</span>)
 ==&gt;e[<span class="number">9</span>][<span class="number">1</span>-created-&gt;<span class="number">3</span>]
 gremlin&gt; e.outV.outE(e.label).filter{ElementHelper.haveEqualProperties(e,it)}.<span class="keyword">as</span>(<span class="string">'e'</span>).inV.filter{it==e.inV.next()}.back(<span class="string">'e'</span>).except([e])
 ==&gt;e[<span class="number">0</span>][<span class="number">1</span>-created-&gt;<span class="number">3</span>]</code></pre>
+<p><a href="#">top</a></p>
+<hr>
+<h3 id='recipes/happy-birthday'>Happy Birthday</h3 id='recipes/happy-birthday'>
+<p>Some Gremlin for that special occassions when you don&#39;t know what other gift to give.</p>
+<pre><code class="lang-text">g = new TinkerGraph()
+v01 = g<span class="variable">.addVertex</span>([<span class="string">"UC"</span>:<span class="string">"B"</span>,<span class="string">"i"</span>:<span class="number">2</span>]); v02 = g<span class="variable">.addVertex</span>([<span class="string">"UC"</span>:<span class="string">"H"</span>,<span class="string">"i"</span>:<span class="number">1</span>])
+v03 = g<span class="variable">.addVertex</span>([<span class="string">"LC"</span>:<span class="string">"a"</span>]); v04 = g<span class="variable">.addVertex</span>([<span class="string">"LC"</span>:<span class="string">"a"</span>]);
+v05 = g<span class="variable">.addVertex</span>([<span class="string">"LC"</span>:<span class="string">"d"</span>]); v06 = g<span class="variable">.addVertex</span>([<span class="string">"LC"</span>:<span class="string">"h"</span>]); 
+v07 = g<span class="variable">.addVertex</span>([<span class="string">"LC"</span>:<span class="string">"i"</span>]); v08 = g<span class="variable">.addVertex</span>([<span class="string">"LC"</span>:<span class="string">"p"</span>]);
+v09 = g<span class="variable">.addVertex</span>([<span class="string">"LC"</span>:<span class="string">"p"</span>]); v10 = g<span class="variable">.addVertex</span>([<span class="string">"LC"</span>:<span class="string">"r"</span>]); 
+v11 = g<span class="variable">.addVertex</span>([<span class="string">"LC"</span>:<span class="string">"t"</span>]); v12 = g<span class="variable">.addVertex</span>([<span class="string">"LC"</span>:<span class="string">"y"</span>]); 
+v13 = g<span class="variable">.addVertex</span>([<span class="string">"LC"</span>:<span class="string">"y"</span>]); v14 = g<span class="variable">.addVertex</span>([<span class="string">"LC"</span>:<span class="string">"!"</span>]);
+v02<span class="variable">.addEdge</span>(<span class="string">"followedBy"</span>, v03); v03<span class="variable">.addEdge</span>(<span class="string">"followedBy"</span>, v08); 
+v08<span class="variable">.addEdge</span>(<span class="string">"followedBy"</span>, v09); v09<span class="variable">.addEdge</span>(<span class="string">"followedBy"</span>, v12);
+v01<span class="variable">.addEdge</span>(<span class="string">"followedBy"</span>, v07); v07<span class="variable">.addEdge</span>(<span class="string">"followedBy"</span>, v10); 
+v10<span class="variable">.addEdge</span>(<span class="string">"followedBy"</span>, v11); v11<span class="variable">.addEdge</span>(<span class="string">"followedBy"</span>, v06);
+v06<span class="variable">.addEdge</span>(<span class="string">"followedBy"</span>, v05); v05<span class="variable">.addEdge</span>(<span class="string">"followedBy"</span>, v04); 
+v04<span class="variable">.addEdge</span>(<span class="string">"followedBy"</span>, v13); v13<span class="variable">.addEdge</span>(<span class="string">"followedBy"</span>, v14);
+
+g<span class="variable">.V</span>()<span class="variable">.has</span>(<span class="string">"UC"</span>)<span class="variable">.order</span>({ it<span class="variable">.a</span><span class="variable">.i</span> &lt;=&gt; it<span class="variable">.b</span><span class="variable">.i</span> })<span class="variable">.transform</span>({
+  it<span class="variable">.as</span>(<span class="string">"x"</span>)<span class="variable">.out</span>(<span class="string">"followedBy"</span>)<span class="variable">.loop</span>(<span class="string">"x"</span>, {<span class="literal">true</span>}, {<span class="literal">true</span>})<span class="variable">.path</span>()<span class="variable">.toList</span>()<span class="variable">.reverse</span>()[<span class="number">0</span>]<span class="variable">._</span>()<span class="variable">.transform</span>({ it<span class="variable">.UC</span> ?: it<span class="variable">.LC</span> })<span class="variable">.join</span>()
+})<span class="variable">.join</span>(<span class="string">" "</span>)</code></pre>
 <p><a href="#">top</a></p>
 <hr>
 <h3 id='recipes/hiding-console-output'>Hiding Console Output</h3 id='recipes/hiding-console-output'>
