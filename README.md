@@ -1746,6 +1746,35 @@ gremlin> e.outV.outE(e.label).filter{ElementHelper.haveEqualProperties(e,it)}.as
 
 ***
 
+### Happy Birthday
+
+Some Gremlin for that special occassions when you don't know what other gift to give.
+
+```text
+g = new TinkerGraph()
+v01 = g.addVertex(["UC":"B","i":2]); v02 = g.addVertex(["UC":"H","i":1])
+v03 = g.addVertex(["LC":"a"]); v04 = g.addVertex(["LC":"a"]);
+v05 = g.addVertex(["LC":"d"]); v06 = g.addVertex(["LC":"h"]); 
+v07 = g.addVertex(["LC":"i"]); v08 = g.addVertex(["LC":"p"]);
+v09 = g.addVertex(["LC":"p"]); v10 = g.addVertex(["LC":"r"]); 
+v11 = g.addVertex(["LC":"t"]); v12 = g.addVertex(["LC":"y"]); 
+v13 = g.addVertex(["LC":"y"]); v14 = g.addVertex(["LC":"!"]);
+v02.addEdge("followedBy", v03); v03.addEdge("followedBy", v08); 
+v08.addEdge("followedBy", v09); v09.addEdge("followedBy", v12);
+v01.addEdge("followedBy", v07); v07.addEdge("followedBy", v10); 
+v10.addEdge("followedBy", v11); v11.addEdge("followedBy", v06);
+v06.addEdge("followedBy", v05); v05.addEdge("followedBy", v04); 
+v04.addEdge("followedBy", v13); v13.addEdge("followedBy", v14);
+
+g.V().has("UC").order({ it.a.i <=> it.b.i }).transform({
+  it.as("x").out("followedBy").loop("x", {true}, {true}).path().toList().reverse()[0]._().transform({ it.UC ?: it.LC }).join()
+}).join(" ")
+```
+
+[top](#)
+
+***
+
 ### Hiding Console Output
 
 The Gremlin Console automatically iterates the pipe and outputs the results to the console.  In some cases, this can lead to lots of screen output that isn't terribly useful.  To suppress the output, consider the following:
