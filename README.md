@@ -1884,12 +1884,12 @@ gremlin> g.addEdge(g.v(3), g.v(5), 'created')
 ==>e[0][3-created->5]
 gremlin> g.addEdge(g.v(1), g.v(5), 'created')
 ==>e[1][1-created->5]
-gremlin> g.v(1).out.loop(1){it.object.id!="5" && it.loops < 6}.path{it.name}
+gremlin> g.v(1).out.loop(1){it.object.id!="5" && it.loops < 6}.path.filter{it.last().id=="5"}.transform{it.name}
 ==>[marko, ripple]
 ==>[marko, josh, ripple]
 ==>[marko, lop, ripple]
 ==>[marko, josh, lop, ripple]
-gremlin> g.v(1).out.loop(1){it.object.id!="5" && it.loops < 6}.path{it.name}.groupBy{it.size()}{it}.cap.next()
+gremlin> g.v(1).out.loop(1){it.object.id!="5" && it.loops < 6}.path.filter{it.last().id=="5"}.transform{it.name}.groupBy{it.size()}{it}.cap.next()
 ==>2=[[marko, ripple]]
 ==>3=[[marko, josh, ripple], [marko, lop, ripple]]
 ==>4=[[marko, josh, lop, ripple]]
@@ -1900,7 +1900,7 @@ Starting with a new "toy" TinkerGraph, calculating the "cost" of the path (in th
 ```text
 gremlin> g = TinkerGraphFactory.createTinkerGraph()
 ==>tinkergraph[vertices:6 edges:6]
-gremlin> g.v(1).outE.inV.loop(2){it.object.id!="3" && it.loops < 6}.path.transform{[it.findAll{it instanceof Edge}.sum{it.weight}, it]}
+gremlin> g.v(1).outE.inV.loop(2){it.object.id!="3" && it.loops < 6}.path.filter{it.last().id=="3"}.transform{[it.findAll{it instanceof Edge}.sum{it.weight}, it]}
 ==>[0.4, [v[1], e[9][1-created->3], v[3]]]
 ==>[1.4000000059604645, [v[1], e[8][1-knows->4], v[4], e[11][4-created->3], v[3]]]
 ```
