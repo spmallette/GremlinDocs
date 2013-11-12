@@ -1748,7 +1748,7 @@ gremlin> e.outV.outE(e.label).filter{ElementHelper.haveEqualProperties(e,it)}.as
 
 ### Happy Birthday
 
-Some Gremlin for that special occassions when you don't know what other gift to give.
+Some Gremlin for that special occassion when you don't know what other gift to give.
 
 ```text
 g = new TinkerGraph()
