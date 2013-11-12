@@ -1746,6 +1746,21 @@ gremlin> e.outV.outE(e.label).filter{ElementHelper.haveEqualProperties(e,it)}.as
 
 ***
 
+### Finding Edges Between Vertices
+
+It is often useful to determine if there is an edge between one vertex and another.
+
+```text
+gremlin> g.v(1).both.retain([g.v(3)]).hasNext()
+==>true
+gremlin> g.v(1).bothE.as('x').bothV.retain([g.v(3)]).back('x')
+==>e[9][1-created->3]
+```
+
+[top](#)
+
+***
+
 ### Hiding Console Output
 
 The Gremlin Console automatically iterates the pipe and outputs the results to the console.  In some cases, this can lead to lots of screen output that isn't terribly useful.  To suppress the output, consider the following:
