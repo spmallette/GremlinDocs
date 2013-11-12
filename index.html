@@ -1748,23 +1748,23 @@ gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1<
 <pre><code class="lang-text">gremlin&gt; g<span class="variable">.v</span>(<span class="number">1</span>)<span class="variable">.out</span><span class="variable">.loop</span>(<span class="number">1</span>){it<span class="variable">.object</span><span class="variable">.id</span> != <span class="string">"5"</span> &amp;&amp; it<span class="variable">.loops</span> &lt; <span class="number">6</span>}<span class="variable">.path</span>
 ==&gt;[v[<span class="number">1</span>], v[<span class="number">4</span>], v[<span class="number">5</span>]]</code></pre>
 <p>In the event there are multiple paths to <code>5</code>, all paths will be output and the shortest path will need to be selected.  The following example adds some edges to the toy graph to demonstrate a path length distribution:</p>
-<pre><code class="lang-text">gremlin&gt; g.addEdge(g.v(<span class="number">3</span>), g.v(<span class="number">5</span>), <span class="string">'created'</span>)
-==&gt;e[<span class="number">0</span>][<span class="number">3</span>-created-&gt;<span class="number">5</span>]
-gremlin&gt; g.addEdge(g.v(<span class="number">1</span>), g.v(<span class="number">5</span>), <span class="string">'created'</span>)
-==&gt;e[<span class="number">1</span>][<span class="number">1</span>-created-&gt;<span class="number">5</span>]
-gremlin&gt; g.v(<span class="number">1</span>).out.loop(<span class="number">1</span>){it.object.id!=<span class="string">"5"</span> &amp;&amp; it.loops &lt; <span class="number">6</span>}.path{it.name}
-==&gt;[marko, ripple]
-==&gt;[marko, josh, ripple]
-==&gt;[marko, lop, ripple]
-==&gt;[marko, josh, lop, ripple]
-gremlin&gt; g.v(<span class="number">1</span>).out.loop(<span class="number">1</span>){it.object.id!=<span class="string">"5"</span> &amp;&amp; it.loops &lt; <span class="number">6</span>}.path{it.name}.groupBy{it.size()}{it}.cap.<span class="built_in">next</span>()
-==&gt;<span class="number">2</span>=<span class="string">[[marko, ripple]]</span>
-==&gt;<span class="number">3</span>=<span class="string">[[marko, josh, ripple], [marko, lop, ripple]]</span>
-==&gt;<span class="number">4</span>=<span class="string">[[marko, josh, lop, ripple]]</span></code></pre>
+<pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span>addEdge(<span class="transposed_variable">g.</span>v(<span class="number">3</span>), <span class="transposed_variable">g.</span>v(<span class="number">5</span>), <span class="string">'created'</span>)
+==&gt;e<span class="matrix">[<span class="number">0</span>]</span><span class="matrix">[<span class="number">3</span>-created-&gt;<span class="number">5</span>]</span>
+gremlin&gt; <span class="transposed_variable">g.</span>addEdge(<span class="transposed_variable">g.</span>v(<span class="number">1</span>), <span class="transposed_variable">g.</span>v(<span class="number">5</span>), <span class="string">'created'</span>)
+==&gt;e<span class="matrix">[<span class="number">1</span>]</span><span class="matrix">[<span class="number">1</span>-created-&gt;<span class="number">5</span>]</span>
+gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).<span class="transposed_variable">out.</span>loop(<span class="number">1</span>)<span class="cell">{it.object.id!="<span class="number">5</span>" &amp;&amp; it.loops &lt; <span class="number">6</span>}.</span><span class="transposed_variable">path.</span>filter<span class="cell">{it.last().id=="<span class="number">5</span>"}.</span>transform<span class="cell">{it.name}</span>
+==&gt;<span class="matrix">[marko, ripple]</span>
+==&gt;<span class="matrix">[marko, josh, ripple]</span>
+==&gt;<span class="matrix">[marko, lop, ripple]</span>
+==&gt;<span class="matrix">[marko, josh, lop, ripple]</span>
+gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).<span class="transposed_variable">out.</span>loop(<span class="number">1</span>)<span class="cell">{it.object.id!="<span class="number">5</span>" &amp;&amp; it.loops &lt; <span class="number">6</span>}.</span><span class="transposed_variable">path.</span>filter<span class="cell">{it.last().id=="<span class="number">5</span>"}.</span>transform<span class="cell">{it.name}.</span>groupBy<span class="cell">{it.size()}</span><span class="cell">{it}.</span><span class="transposed_variable">cap.</span>next()
+==&gt;<span class="number">2</span>=<span class="matrix">[[marko, ripple]</span>]
+==&gt;<span class="number">3</span>=<span class="matrix">[[marko, josh, ripple]</span>, <span class="matrix">[marko, lop, ripple]</span>]
+==&gt;<span class="number">4</span>=<span class="matrix">[[marko, josh, lop, ripple]</span>]</code></pre>
 <p>Starting with a new &quot;toy&quot; TinkerGraph, calculating the &quot;cost&quot; of the path (in this case utilizing the <code>weight</code> stored on the edges), can be accomplished with:</p>
 <pre><code class="lang-text">gremlin&gt; g = <span class="transposed_variable">TinkerGraphFactory.</span>createTinkerGraph()
 ==&gt;tinkergraph<span class="matrix">[vertices:<span class="number">6</span> edges:<span class="number">6</span>]</span>
-gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).<span class="transposed_variable">outE.</span><span class="transposed_variable">inV.</span>loop(<span class="number">2</span>)<span class="cell">{it.object.id!="<span class="number">3</span>" &amp;&amp; it.loops &lt; <span class="number">6</span>}.</span><span class="transposed_variable">path.</span>transform<span class="cell">{[it.findAll{it instanceof Edge}.</span>sum<span class="cell">{it.weight}</span>, it]}
+gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).<span class="transposed_variable">outE.</span><span class="transposed_variable">inV.</span>loop(<span class="number">2</span>)<span class="cell">{it.object.id!="<span class="number">3</span>" &amp;&amp; it.loops &lt; <span class="number">6</span>}.</span><span class="transposed_variable">path.</span>filter<span class="cell">{it.last().id=="<span class="number">3</span>"}.</span>transform<span class="cell">{[it.findAll{it instanceof Edge}.</span>sum<span class="cell">{it.weight}</span>, it]}
 ==&gt;<span class="matrix">[<span class="number">0.4</span>, [v[<span class="number">1</span>]</span>, e<span class="matrix">[<span class="number">9</span>]</span><span class="matrix">[<span class="number">1</span>-created-&gt;<span class="number">3</span>]</span>, v<span class="matrix">[<span class="number">3</span>]</span>]]
 ==&gt;<span class="matrix">[<span class="number">1.4000000059604645</span>, [v[<span class="number">1</span>]</span>, e<span class="matrix">[<span class="number">8</span>]</span><span class="matrix">[<span class="number">1</span>-knows-&gt;<span class="number">4</span>]</span>, v<span class="matrix">[<span class="number">4</span>]</span>, e<span class="matrix">[<span class="number">11</span>]</span><span class="matrix">[<span class="number">4</span>-created-&gt;<span class="number">3</span>]</span>, v<span class="matrix">[<span class="number">3</span>]</span>]]</code></pre>
 <p>Evaluating a shortest path between two vertices in both directions (in and out edges) can be expensive.  Consider this example:</p>
