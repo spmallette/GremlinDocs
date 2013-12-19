@@ -842,7 +842,7 @@ Allows an element if it has a particular property.  Utilizes several options for
 * T.in - contained in a list
 * T.notin - not contained in a list
 
-It is worth noting that the syntax of `has` is similar to `g.V("name", "marko")`, which has the difference of being a [key index](https://github.com/tinkerpop/blueprints/wiki/Graph-Indices) lookup and as such will perform faster. In contrast, this line, `g.V.has("name", "marko")`, will iterate over all vertices checking the `name` property of each vertex for a match and will be significantly slower than the key index approach.
+It is worth noting that the syntax of `has` is similar to `g.V("name", "marko")`, which has the difference of being a [key index](https://github.com/tinkerpop/blueprints/wiki/Graph-Indices) lookup and as such will perform faster. In contrast, this line, `g.V.has("name", "marko")`, will iterate over all vertices checking the `name` property of each vertex for a match and will be significantly slower than the key index approach.  All that said, the behavior of `has` is dependent upon the underlying implementation and the above description is representative of _most_ Blueprints implementations.  For instance, Titan will actually try to use indices where it sees the opportunity to do so.  It is therefore important to understand the functionality of the underlying database when writing traversals.
 
 ```text
 gremlin> g.V.has("name", "marko").name
