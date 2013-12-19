@@ -10,9 +10,9 @@ Unless otherwise noted, all samples are derived from the TinkerPop "toy" graph g
 gremlin> g = TinkerGraphFactory.createTinkerGraph()
 ```
 
-This produces a hardcoded representation of the graph diagrammed [here](http://github.com/tinkerpop/blueprints/wiki/Property-Graph-Model).  
+This produces a hardcoded representation of the graph diagrammed [here](http://github.com/tinkerpop/blueprints/wiki/Property-Graph-Model).
 
-The documentation and samples presented here attempt to stay current with the most current, stable release of Gremlin.  Please note that this is not the *official* Gremlin documentation.  The official documentation resides in the Gremlin [wiki](https://github.com/tinkerpop/gremlin/wiki).  Other Gremlin documentation can be found at [Sql2Gremlin](http://sql2gremlin.com/), which is focused on teaching those familiar with SQL how to think in Gremlin and graphs.
+The documentation and samples presented here attempt to stay current with the most recent, stable release of Gremlin.  Please note that this is not the *official* Gremlin documentation.  The official documentation resides in the Gremlin [wiki](https://github.com/tinkerpop/gremlin/wiki).  Other Gremlin documentation can be found at [Sql2Gremlin](http://sql2gremlin.com/), which is focused on teaching those familiar with SQL how to think in Gremlin and graphs.
 
 GremlinDocs is a [GitHub repository](https://github.com/spmallette/GremlinDocs).  Pull requests will be considered. 
 
@@ -189,7 +189,7 @@ gremlin> g.v(1).out.gather{it.size()}
 
 ### id
 
-Gets the unique identifier of the element.  
+Gets the unique identifier of the element.
 
 ```text
 gremlin> v = g.V("name", "marko").next()
@@ -1036,7 +1036,7 @@ gremlin> g.V.as('x').outE('knows').inV.has('age', T.gt, 30).back('x').age
 
 ### groupBy
 
-Emits input, but groups input after processing it by provided key-closure and value-closure.  It is also possible to supply an optional reduce-closure.  
+Emits input, but groups input after processing it by provided key-closure and value-closure.  It is also possible to supply an optional reduce-closure.
 
 ```text
 gremlin> g.V.groupBy{it}{it.out}.cap
@@ -1170,7 +1170,7 @@ gremlin> x
 Emits input, but stores row of as values (constrained by column names if provided) in a table.  Accepts an optional set of closures that are applied in round-robin fashion to each column of the table.
 
 ```text
-gremlin> t = new Table()  
+gremlin> t = new Table()
 gremlin> g.V.as('x').name.as('name').back('x').age.as('age').table(t)
 ==>null
 ==>27
@@ -1196,7 +1196,7 @@ gremlin> t
 ==>[x:v[1], name:marko, age:under thirty]
 ==>[x:v[6], name:peter, age:over thirty]
 ==>[x:v[4], name:josh, age:over thirty]
-gremlin> t.get(0,'name')      
+gremlin> t.get(0,'name')
 ==>vadas
 ```
 
@@ -1215,8 +1215,8 @@ gremlin> g.v(1).out.out.tree{it.name}.cap
 ==>{marko={josh={lop={}, ripple={}}}}
 gremlin> g.v(1).out.out.tree{it.name}{"child1:" + it.name}{"child2:" + it.name}.cap
 ==>{marko={child1:josh={child2:lop={}, child2:ripple={}}}}
-gremlin> t = new Tree()                                                               
-gremlin> g.v(1).out.out.tree(t){it.name}{"child1:" + it.name}{"child2:" + it.name}    
+gremlin> t = new Tree()
+gremlin> g.v(1).out.out.tree(t){it.name}{"child1:" + it.name}{"child2:" + it.name}
 ==>v[5]
 ==>v[3]
 gremlin> t.get('marko')
@@ -1321,7 +1321,7 @@ Loop over a particular set of steps in the pipeline.  The first argument is eith
 The final argument is known as the "emit" closure. This boolean-based closure will determine wether the current object in the loop structure is emitted or not. As such, it is possible to emit intermediate objects, not simply those at the end of the loop.
 
 ```text
-gremlin> g.v(1).out.out                         
+gremlin> g.v(1).out.out
 ==>v[5]
 ==>v[3]
 gremlin> g.v(1).out.loop(1){it.loops<3}
@@ -1393,18 +1393,18 @@ gremlin> g.v(1).values()
 
 ### Graph.addEdge
 
-Adds an edge to the graph.  Note that most graph implementations ignore the identifier supplied to `addEdge`.  
+Adds an edge to the graph.  Note that most graph implementations ignore the identifier supplied to `addEdge`.
 
 ```text
-gremlin> g = new TinkerGraph()                     
+gremlin> g = new TinkerGraph()
 ==>tinkergraph[vertices:0 edges:0]
-gremlin> v1 = g.addVertex(100)                     
+gremlin> v1 = g.addVertex(100)
 ==>v[100]
 gremlin> v2 = g.addVertex(200)
 ==>v[200]
-gremlin> g.addEdge(v1,v2,'friend')                 
+gremlin> g.addEdge(v1,v2,'friend')
 ==>e[0][100-friend->200]
-gremlin> g.addEdge(1000,v1,v2,'buddy')             
+gremlin> g.addEdge(1000,v1,v2,'buddy')
 ==>e[1000][100-buddy->200]
 gremlin> g.addEdge(null,v1,v2,'pal',[weight:0.75f])
 ==>e[1][100-pal->200]
@@ -1416,10 +1416,10 @@ gremlin> g.addEdge(null,v1,v2,'pal',[weight:0.75f])
 
 ### Graph.addVertex
 
-Adds a vertex to the graph.  Note that most graph implementations ignore the identifier supplied to `addVertex`.  
+Adds a vertex to the graph.  Note that most graph implementations ignore the identifier supplied to `addVertex`.
 
 ```text
-gremlin> g = new TinkerGraph()                     
+gremlin> g = new TinkerGraph()
 ==>tinkergraph[vertices:0 edges:0]
 gremlin> g.addVertex()
 ==>v[0]
@@ -1514,13 +1514,13 @@ gremlin> g.V
 Remove an edge. 
 
 ```text
-gremlin> g = new TinkerGraph()                     
+gremlin> g = new TinkerGraph()
 ==>tinkergraph[vertices:0 edges:0]
-gremlin> v1 = g.addVertex()                     
+gremlin> v1 = g.addVertex()
 ==>v[100]
 gremlin> v2 = g.addVertex()
 ==>v[200]
-gremlin> g.addEdge(v1,v2,'friend')                 
+gremlin> g.addEdge(v1,v2,'friend')
 ==>e[0][100-friend->200]
 gremlin> g.removeEdge(g.e(0))
 ==>null
@@ -1566,7 +1566,7 @@ gremlin> g.saveGraphML('data/graph.xml')
 Get a vertex or set of vertices by providing one or more vertex identifiers.  The identifiers must be the identifiers assigned by the underlying graph implementation.
 
 ```text
-gremlin> g.v(1)  
+gremlin> g.v(1)
 ==>v[1]
 gremlin> g.v(1,2,3)
 ==>v[1]
@@ -1599,7 +1599,7 @@ gremlin> g.createIndex("my-index", Vertex.class)
 ==>index[my-index:Vertex]
 gremlin> g.idx("my-index").put("name", "marko", g.v(1))
 ==>null
-gremlin> g.idx("my-index")[[name:"marko"]]  
+gremlin> g.idx("my-index")[[name:"marko"]]
 ==>v[1]
 ```
 
@@ -1616,7 +1616,7 @@ gremlin> g.idx("my-index")[[name:"marko"]]
 If the path information is required internal to a closure, Gremlin doesn’t know that as it can not interpret what is in a closure. As such, be sure to use `GremlinPipeline.enablePath()` if path information will be required by the expression.
 
 ```text
-gremlin> g.v(1).out.loop(1){it.loops < 3}{it.path.contains(g.v(4))}             
+gremlin> g.v(1).out.loop(1){it.loops < 3}{it.path.contains(g.v(4))}
 Cannot invoke method contains() on null object
 Display stack trace? [yN] 
 gremlin> g.v(1).out.loop(1){it.loops < 3}{it.path.contains(g.v(4))}.enablePath()
@@ -1664,14 +1664,14 @@ Calls [Pipe.next](#methods/pipe-next) for all objects in the pipe. This is an im
 There are some important things to note in the example below.  Had the the first line of Gremlin been executed separately, as opposed to being placed on the same line separated by a semi-colon, the names of all the vertices would have changed because the Gremlin Console would have automatically iterated the pipe and processed the side-effects.
 
 ```text
-gremlin> g.V.sideEffect{it.name="same-again"};g.V.name          
+gremlin> g.V.sideEffect{it.name="same-again"};g.V.name
 ==>lop
 ==>vadas
 ==>marko
 ==>peter
 ==>ripple
 ==>josh
-gremlin> g.V.sideEffect{it.name="same"}.iterate();g.V.name      
+gremlin> g.V.sideEffect{it.name="same"}.iterate();g.V.name
 ==>same
 ==>same
 ==>same
@@ -1697,7 +1697,7 @@ There are some important things to note in the example below.  Had the the first
 ```text
 gremlin> g.v(1).sideEffect{it.name="same"};g.v(1).name
 ==>marko
-gremlin> g.v(1).sideEffect{it.name="same"}.next();g.v(1).name   
+gremlin> g.v(1).sideEffect{it.name="same"}.next();g.v(1).name
 ==>same
 gremlin> g.V.sideEffect{it.name="same-again"}.next(3);g.V.name
 ==>same-again
@@ -1795,14 +1795,14 @@ g.V().has("UC").order({ it.a.i <=> it.b.i }).transform({
 The Gremlin Console automatically iterates the pipe and outputs the results to the console.  In some cases, this can lead to lots of screen output that isn't terribly useful.  To suppress the output, consider the following:
 
 ```text
-gremlin> g.V.sideEffect{it.name='changed'}                          
+gremlin> g.V.sideEffect{it.name='changed'}
 ==>v[3]
 ==>v[2]
 ==>v[1]
 ==>v[6]
 ==>v[5]
 ==>v[4]
-gremlin> g.V.sideEffect{it.name='changed-again'}.iterate()    
+gremlin> g.V.sideEffect{it.name='changed-again'}.iterate()
 ==>null
 gremlin> g.V.name
 ==>changed-again
@@ -1914,7 +1914,7 @@ gremlin> g.v(1).out.random(0.5)
 
 ### Shortest Path
 
-Finding the shortest path between two vertices can be accomplished with a loop.  The following example shows the shortest path between vertex `1` and vertex `5` and if such path cannot be found in five steps, break out of the computation.  
+Finding the shortest path between two vertices can be accomplished with a loop.  The following example shows the shortest path between vertex `1` and vertex `5` and if such path cannot be found in five steps, break out of the computation.
 
 ```text
 gremlin> g.v(1).out.loop(1){it.object.id != "5" && it.loops < 6}.path
