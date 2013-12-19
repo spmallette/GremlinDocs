@@ -379,6 +379,15 @@ gremlin> g.v(1).map
 gremlin> g.v(1).map()
 ==>name=marko
 ==>age=29
+gremlin> g.V.map('id','age')
+==>{id=3, age=null}
+==>{id=2, age=27}
+==>{id=1, age=29}
+==>{id=6, age=35}
+==>{id=5, age=null}
+==>{id=4, age=32}
+gremlin> g.v(1)._().map('id','age')
+==>{id=1, age=29}
 ```
 
 [top](#)
