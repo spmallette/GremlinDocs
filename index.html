@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GremlinDocs</title>
     
-    <link rel="stylesheet" type="text/css" href="http://documentup.com/stylesheets/screen.css">
+    <link rel="stylesheet" type="text/css" href="//documentup.com/stylesheets/screen.css">
     
     
 
@@ -454,9 +454,9 @@
 <p>The documentation and samples presented here attempt to stay current with the most recent, stable release of Gremlin.  Please note that this is not the <em>official</em> Gremlin documentation.  The official documentation resides in the Gremlin <a href="https://github.com/tinkerpop/gremlin/wiki">wiki</a>.  Other Gremlin documentation can be found at <a href="http://sql2gremlin.com/">Sql2Gremlin</a>, which is focused on teaching those familiar with SQL how to think in Gremlin and graphs.</p>
 <p>GremlinDocs is a <a href="https://github.com/spmallette/GremlinDocs">GitHub repository</a>.  Pull requests will be considered. </p>
 <p><em>Acknowledgements</em>: Gremlin artwork by <a href="http://ketrinadrawsalot.tumblr.com/">Ketrina Yim</a> and font by Maelle Keita.</p>
-<h2 id='transform'>Transform</h2 id='transform'>
+<h2 id='transform' id="transform">Transform</h2 id='transform'>
 <p>Transform steps take an object and emit a transformation of it.</p>
-<h3 id='transform/_'>_</h3 id='transform/_'>
+<h3 id='transform/_' id="_">_</h3 id='transform/_'>
 <p>Identity turns an arbitrary object into a &quot;pipeline&quot;.</p>
 <pre><code class="lang-text">gremlin&gt; x = <span class="matrix">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span>
 ==&gt;<span class="number">1</span>
@@ -477,7 +477,7 @@ gremlin&gt; <span class="transposed_variable">x.</span>_().inV
 ==&gt;v<span class="matrix">[<span class="number">4</span>]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/both'>both</h3 id='transform/both'>
+<h3 id='transform/both' id="both">both</h3 id='transform/both'>
 <p>Get both adjacent vertices of the vertex, the in and the out.</p>
 <pre><code class="lang-text">gremlin&gt; v = <span class="transposed_variable">g.</span>v(<span class="number">4</span>)
 ==&gt;v<span class="matrix">[<span class="number">4</span>]</span>
@@ -495,7 +495,7 @@ gremlin&gt; <span class="transposed_variable">v.</span>both(<span class="number"
 ==&gt;v<span class="matrix">[<span class="number">1</span>]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/bothe'>bothE</h3 id='transform/bothe'>
+<h3 id='transform/bothe' id="bothe">bothE</h3 id='transform/bothe'>
 <p>Get both incoming and outgoing edges of the vertex.</p>
 <pre><code class="lang-text">gremlin&gt; v = <span class="transposed_variable">g.</span>v(<span class="number">4</span>)
 ==&gt;v<span class="matrix">[<span class="number">4</span>]</span>
@@ -513,7 +513,7 @@ gremlin&gt; <span class="transposed_variable">v.</span>bothE(<span class="number
 ==&gt;e<span class="matrix">[<span class="number">8</span>]</span><span class="matrix">[<span class="number">1</span>-knows-&gt;<span class="number">4</span>]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/bothv'>bothV</h3 id='transform/bothv'>
+<h3 id='transform/bothv' id="bothv">bothV</h3 id='transform/bothv'>
 <p>Get both incoming and outgoing vertices of the edge.</p>
 <pre><code class="lang-text">gremlin&gt; e = <span class="transposed_variable">g.</span>e(<span class="number">12</span>)
 ==&gt;e<span class="matrix">[<span class="number">12</span>]</span><span class="matrix">[<span class="number">6</span>-created-&gt;<span class="number">3</span>]</span>
@@ -526,7 +526,7 @@ gremlin&gt; <span class="transposed_variable">e.</span>bothV
 ==&gt;v<span class="matrix">[<span class="number">3</span>]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/cap'>cap</h3 id='transform/cap'>
+<h3 id='transform/cap' id="cap">cap</h3 id='transform/cap'>
 <p>Gets the side-effect of the pipe prior.  In other words, it emits the value of the previous step and not the values that flow through it.</p>
 <pre><code class="lang-text">gremlin&gt; g.V(<span class="string">'lang'</span>, <span class="string">'java'</span>).<span class="keyword">in</span>(<span class="string">'created'</span>).name.<span class="function"><span class="title">groupCount</span></span>
 ==&gt;<span class="function"><span class="title">marko</span></span>
@@ -537,7 +537,7 @@ gremlin&gt; g.V(<span class="string">'lang'</span>, <span class="string">'java'<
 ==&gt;{marko=<span class="number">1</span>, peter=<span class="number">1</span>, josh=<span class="number">2</span>}</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/e'>E</h3 id='transform/e'>
+<h3 id='transform/e' id="e">E</h3 id='transform/e'>
 <p>The edge iterator for the graph.  Utilize this to iterate through all the edges in the graph.  Use with care on large graphs.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span>E
 ==&gt;e<span class="matrix">[<span class="number">10</span>]</span><span class="matrix">[<span class="number">4</span>-created-&gt;<span class="number">5</span>]</span>
@@ -555,7 +555,7 @@ gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_v
 ==&gt;<span class="number">0.2</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/gather'>gather</h3 id='transform/gather'>
+<h3 id='transform/gather' id="gather">gather</h3 id='transform/gather'>
 <p>Collect all objects up to that step and process the gathered list with the provided closure.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).out
 ==&gt;v<span class="matrix">[<span class="number">2</span>]</span>
@@ -565,13 +565,13 @@ gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1<
 ==&gt;<span class="matrix">[v[<span class="number">2</span>]</span>, v<span class="matrix">[<span class="number">4</span>]</span>, v<span class="matrix">[<span class="number">3</span>]</span>]
 gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).<span class="transposed_variable">out.</span>gather<span class="cell">{it.size()}</span>
 ==&gt;<span class="number">3</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#transform/scatter">scatter</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/id'>id</h3 id='transform/id'>
+<h3 id='transform/id' id="id">id</h3 id='transform/id'>
 <p>Gets the unique identifier of the element.</p>
 <pre><code class="lang-text">gremlin&gt; v = g<span class="variable">.V</span>(<span class="string">"name"</span>, <span class="string">"marko"</span>)<span class="variable">.next</span>()
 ==&gt;v[<span class="number">1</span>]
@@ -581,7 +581,7 @@ gremlin&gt; g<span class="variable">.v</span>(<span class="number">1</span>)<spa
 ==&gt;<span class="number">1</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/in'>in</h3 id='transform/in'>
+<h3 id='transform/in' id="in">in</h3 id='transform/in'>
 <p>Gets the adjacent vertices to the vertex.</p>
 <pre><code class="lang-text">gremlin&gt; v = g.v(<span class="number">4</span>)
 ==&gt;v[<span class="number">4</span>]
@@ -606,7 +606,7 @@ gremlin&gt; v.inE(<span class="number">2</span>,<span class="string">'created'</
 ==&gt;v[<span class="number">1</span>]</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/ine'>inE</h3 id='transform/ine'>
+<h3 id='transform/ine' id="ine">inE</h3 id='transform/ine'>
 <p>Gets the incoming edges of the vertex.</p>
 <pre><code class="lang-text">gremlin&gt; v = g.v(<span class="number">4</span>)
 ==&gt;v[<span class="number">4</span>]
@@ -631,7 +631,7 @@ gremlin&gt; v.inE(<span class="number">2</span>,<span class="string">'created'</
 ==&gt;v[<span class="number">1</span>]</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/inv'>inV</h3 id='transform/inv'>
+<h3 id='transform/inv' id="inv">inV</h3 id='transform/inv'>
 <p>Get both incoming head vertex of the edge.</p>
 <pre><code class="lang-text">gremlin&gt; e = <span class="transposed_variable">g.</span>e(<span class="number">12</span>)
 ==&gt;e<span class="matrix">[<span class="number">12</span>]</span><span class="matrix">[<span class="number">6</span>-created-&gt;<span class="number">3</span>]</span>
@@ -644,7 +644,7 @@ gremlin&gt; <span class="transposed_variable">e.</span>bothV
 ==&gt;v<span class="matrix">[<span class="number">3</span>]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/key'>key</h3 id='transform/key'>
+<h3 id='transform/key' id="key">key</h3 id='transform/key'>
 <p>Get the property value of an element.  The property value can be obtained by simply appending the name to the end of the element or by referencing it as a Groovy map element with square brackets.  For best performance, drop down to the Blueprints API and use <code>getProperty(key)</code>.</p>
 <pre><code class="lang-text">gremlin&gt; v = g.v(<span class="number">3</span>)
 ==&gt;v[<span class="number">3</span>]
@@ -660,7 +660,7 @@ gremlin&gt; v.getProperty(<span class="string">'name'</span>)
 ==&gt;lop</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/label'>label</h3 id='transform/label'>
+<h3 id='transform/label' id="label">label</h3 id='transform/label'>
 <p>Gets the label of an edge.</p>
 <pre><code class="lang-text">gremlin&gt; g.v(<span class="number">6</span>).outE.label
 ==&gt;created
@@ -672,7 +672,7 @@ gremlin&gt; g.v(<span class="number">1</span>).outE.has(<span class="string">'la
 ==&gt;e[<span class="number">9</span>][<span class="number">1</span>-created-&gt;<span class="number">3</span>]</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/linkboth-in-out'>linkBoth[In/Out]</h3 id='transform/linkboth-in-out'>
+<h3 id='transform/linkboth-in-out' id="linkboth-in-out-">linkBoth[In/Out]</h3 id='transform/linkboth-in-out'>
 <p>An element-centric mutation that takes every incoming vertex and creates an edge to the provided vertex. It can be used with both a Vertex object or a named step.</p>
 <pre><code class="lang-text">gremlin&gt; marko = <span class="transposed_variable">g.</span>v(<span class="number">1</span>)
 ==&gt;v<span class="matrix">[<span class="number">1</span>]</span>
@@ -704,7 +704,7 @@ gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_v
 ==&gt;e<span class="matrix">[<span class="number">0</span>]</span><span class="matrix">[<span class="number">1</span>-cocreator-&gt;<span class="number">4</span>]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/map'>map</h3 id='transform/map'>
+<h3 id='transform/map' id="map">map</h3 id='transform/map'>
 <p>Gets the property map of the graph element.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).map
 ==&gt;<span class="cell">{name=marko, age=<span class="number">29</span>}</span>
@@ -722,7 +722,7 @@ gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1<
 ==&gt;<span class="cell">{id=<span class="number">1</span>, age=<span class="number">29</span>}</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/memoize'>memoize</h3 id='transform/memoize'>
+<h3 id='transform/memoize' id="memoize">memoize</h3 id='transform/memoize'>
 <p>Remembers a particular mapping from input to output.  Long or expensive expressions with no side effects can use this step to remember a mapping, which helps reduce load when previously processed objects are passed into it.</p>
 <p>For situations where memoization may consume large amounts of RAM, consider using an embedded key-value store like <a href="http://code.google.com/p/jdbm2/">JDBM</a> or some other persistent Map implementation.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_variable">V.</span><span class="transposed_variable">out.</span><span class="transposed_variable">out.</span>memoize(<span class="number">1</span>).name
@@ -737,7 +737,7 @@ gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_v
 ==&gt;lop</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/order'>order</h3 id='transform/order'>
+<h3 id='transform/order' id="order">order</h3 id='transform/order'>
 <p>Order the items in the stream according to the closure if provided.  If no closure is provided, then a default sort order is used.</p>
 <pre><code class="lang-text">gremlin&gt; g.V.name.<span class="function"><span class="title">order</span></span>
 ==&gt;<span class="function"><span class="title">josh</span></span>
@@ -758,7 +758,7 @@ gremlin&gt; g.V.order{it.b.name &lt;=&gt; it.a.name}.out(<span class="string">'k
 ==&gt;v[<span class="number">4</span>]</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/ordermap'>orderMap</h3 id='transform/ordermap'>
+<h3 id='transform/ordermap' id="ordermap">orderMap</h3 id='transform/ordermap'>
 <p>For every incoming map, sort with supplied closure or <code>T.decr</code> or <code>T.incr</code> and emit keys.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_variable">V.</span><span class="transposed_variable">both.</span><span class="transposed_variable">groupCount.</span><span class="transposed_variable">cap.</span>next()
 ==&gt;v<span class="matrix">[<span class="number">3</span>]</span>=<span class="number">3</span>
@@ -782,7 +782,7 @@ gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_v
 ==&gt;marko</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/out'>out</h3 id='transform/out'>
+<h3 id='transform/out' id="out">out</h3 id='transform/out'>
 <p>Gets the out adjacent vertices to the vertex.</p>
 <pre><code class="lang-text">gremlin&gt; v = <span class="transposed_variable">g.</span>v(<span class="number">1</span>)
 ==&gt;v<span class="matrix">[<span class="number">1</span>]</span>
@@ -804,7 +804,7 @@ gremlin&gt; <span class="transposed_variable">v.</span>out(<span class="number">
 ==&gt;v<span class="matrix">[<span class="number">2</span>]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/oute'>outE</h3 id='transform/oute'>
+<h3 id='transform/oute' id="oute">outE</h3 id='transform/oute'>
 <p>Gets the outgoing edges to the vertex.</p>
 <pre><code class="lang-text">gremlin&gt; v = <span class="transposed_variable">g.</span>v(<span class="number">1</span>)
 ==&gt;v<span class="matrix">[<span class="number">1</span>]</span>
@@ -826,7 +826,7 @@ gremlin&gt; <span class="transposed_variable">v.</span>outE(<span class="number"
 ==&gt;e<span class="matrix">[<span class="number">7</span>]</span><span class="matrix">[<span class="number">1</span>-knows-&gt;<span class="number">2</span>]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/outv'>outV</h3 id='transform/outv'>
+<h3 id='transform/outv' id="outv">outV</h3 id='transform/outv'>
 <p>Get both outgoing tail vertex of the edge.</p>
 <pre><code class="lang-text">gremlin&gt; e = <span class="transposed_variable">g.</span>e(<span class="number">12</span>)
 ==&gt;e<span class="matrix">[<span class="number">12</span>]</span><span class="matrix">[<span class="number">6</span>-created-&gt;<span class="number">3</span>]</span>
@@ -839,7 +839,7 @@ gremlin&gt; <span class="transposed_variable">e.</span>bothV
 ==&gt;v<span class="matrix">[<span class="number">3</span>]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/path'>path</h3 id='transform/path'>
+<h3 id='transform/path' id="path">path</h3 id='transform/path'>
 <p>Gets the path through the pipeline up to this point, where closures are post-processing for each object in the path.  If the path step is provided closures then, in a round robin fashion, the closures are evaluated over each object of the path and that post-processed path is returned.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).<span class="transposed_variable">out.</span>path
 ==&gt;<span class="matrix">[v[<span class="number">1</span>]</span>, v<span class="matrix">[<span class="number">2</span>]</span>]
@@ -857,13 +857,13 @@ gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1<
 ==&gt;<span class="matrix">[v[<span class="number">1</span>]</span>, e<span class="matrix">[<span class="number">7</span>]</span><span class="matrix">[<span class="number">1</span>-knows-&gt;<span class="number">2</span>]</span>, v<span class="matrix">[<span class="number">2</span>]</span>, vadas]
 ==&gt;<span class="matrix">[v[<span class="number">1</span>]</span>, e<span class="matrix">[<span class="number">8</span>]</span><span class="matrix">[<span class="number">1</span>-knows-&gt;<span class="number">4</span>]</span>, v<span class="matrix">[<span class="number">4</span>]</span>, josh]
 ==&gt;<span class="matrix">[v[<span class="number">1</span>]</span>, e<span class="matrix">[<span class="number">9</span>]</span><span class="matrix">[<span class="number">1</span>-created-&gt;<span class="number">3</span>]</span>, v<span class="matrix">[<span class="number">3</span>]</span>, lop]</code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#methods/pipe-enablepath">Pipe.enablePath</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/scatter'>scatter</h3 id='transform/scatter'>
+<h3 id='transform/scatter' id="scatter">scatter</h3 id='transform/scatter'>
 <p>Unroll all objects in the iterable at that step. Gather/Scatter is good for breadth-first traversals where the gather closure filters out unwanted elements at the current radius.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).out
 ==&gt;v<span class="matrix">[<span class="number">2</span>]</span>
@@ -874,13 +874,13 @@ gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1<
 gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).<span class="transposed_variable">out.</span>gather<span class="cell">{it[<span class="number">1.</span><span class="number">.2</span>]}.</span>scatter
 ==&gt;v<span class="matrix">[<span class="number">4</span>]</span>
 ==&gt;v<span class="matrix">[<span class="number">3</span>]</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#transform/gather">gather</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/select'>select</h3 id='transform/select'>
+<h3 id='transform/select' id="select">select</h3 id='transform/select'>
 <p>Select the named steps to emit after select with post-processing closures.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).as(<span class="string">'x'</span>).out(<span class="string">'knows'</span>).as(<span class="string">'y'</span>).select
 ==&gt;<span class="matrix">[x:v[<span class="number">1</span>]</span>, y:v<span class="matrix">[<span class="number">2</span>]</span>]
@@ -896,7 +896,7 @@ gremlin&gt;  <span class="transposed_variable">g.</span>v(<span class="number">1
 ==&gt;<span class="matrix">[x:<span class="number">1</span>, y:josh]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/shuffle'>shuffle</h3 id='transform/shuffle'>
+<h3 id='transform/shuffle' id="shuffle">shuffle</h3 id='transform/shuffle'>
 <p>Collect all objects up to that step into a list and randomize their order.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).<span class="transposed_variable">out.</span>shuffle
 ==&gt;v<span class="matrix">[<span class="number">2</span>]</span>
@@ -906,13 +906,13 @@ gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1<
 ==&gt;v<span class="matrix">[<span class="number">3</span>]</span>
 ==&gt;v<span class="matrix">[<span class="number">2</span>]</span>
 ==&gt;v<span class="matrix">[<span class="number">4</span>]</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#filter/random">random</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/transform'>transform</h3 id='transform/transform'>
+<h3 id='transform/transform' id="transform">transform</h3 id='transform/transform'>
 <p>Transform emits the result of a closure.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_variable">E.</span>has(<span class="string">'weight'</span>, <span class="transposed_variable">T.</span>gt, <span class="number">0.5</span>f).<span class="transposed_variable">outV.</span>age
 ==&gt;<span class="number">32</span>
@@ -928,7 +928,7 @@ gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_v
 ==&gt;<span class="cell">{id=<span class="number">1</span>, age=<span class="number">29</span>}</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='transform/v'>V</h3 id='transform/v'>
+<h3 id='transform/v' id="v">V</h3 id='transform/v'>
 <p>The vertex iterator for the graph.  Utilize this to iterate through all the vertices in the graph.  Use with care on large graphs unless used in combination with a key index lookup.</p>
 <pre><code class="lang-text">gremlin&gt; g.V
 ==&gt;v[<span class="number">3</span>]
@@ -943,15 +943,15 @@ gremlin&gt; g.V(<span class="string">"name"</span>, <span class="string">"marko"
 ==&gt;marko</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h2 id='filter'>Filter</h2 id='filter'>
+<h2 id='filter' id="filter">Filter</h2 id='filter'>
 <p>Filter steps decide whether to allow an object to pass to the next step or not.</p>
-<h3 id='filter/i'>[i]</h3 id='filter/i'>
+<h3 id='filter/i' id="-i-">[i]</h3 id='filter/i'>
 <p>A index filter that emits the particular indexed object.</p>
 <pre><code class="lang-text">gremlin&gt; g<span class="variable">.V</span>[<span class="number">0</span>]<span class="variable">.name</span>
 ==&gt;lop</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='filter/i-j'>[i..j]</h3 id='filter/i-j'>
+<h3 id='filter/i-j' id="-i-j-">[i..j]</h3 id='filter/i-j'>
 <p>A range filter that emits the objects within a range.</p>
 <pre><code class="lang-text">gremlin&gt; g.V[<span class="number">0.</span><span class="number">.2</span>].<span class="function"><span class="title">name</span></span>
 ==&gt;<span class="function"><span class="title">lop</span></span>
@@ -962,7 +962,7 @@ gremlin&gt; g.V[<span class="number">0.</span>.&lt;<span class="number">2</span>
 ==&gt;vadas</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='filter/and'>and</h3 id='filter/and'>
+<h3 id='filter/and' id="and">and</h3 id='filter/and'>
 <p>Takes a collection of pipes and emits incoming objects that are true for all of the pipes.</p>
 <pre><code class="lang-text">gremlin&gt; g.v(<span class="number">1</span>).outE.<span class="keyword">and</span>(_().has(<span class="string">'weight'</span>, T.gt, <span class="number">0.4</span>f), _().has(<span class="string">'weight'</span>, T.lt, <span class="number">0.8</span>f))
 ==&gt;e[<span class="number">7</span>][<span class="number">1</span>-knows-&gt;<span class="number">2</span>]
@@ -971,13 +971,13 @@ gremlin&gt; g.V.<span class="keyword">and</span>(_().both(<span class="string">"
 ==&gt;v[<span class="number">4</span>]</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='filter/back'>back</h3 id='filter/back'>
+<h3 id='filter/back' id="back">back</h3 id='filter/back'>
 <p>Go back to the results of a named step.</p>
 <pre><code class="lang-text">gremlin&gt; g.V.as(<span class="literal">'x'</span>).outE(<span class="attribute">'knows</span>').inV.has(<span class="attribute">'age</span>', T.gt, <span class="number">30</span>).back(<span class="literal">'x'</span>).age
 ==&gt;<span class="number">29</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='filter/dedup'>dedup</h3 id='filter/dedup'>
+<h3 id='filter/dedup' id="dedup">dedup</h3 id='filter/dedup'>
 <p>Emit only incoming objects that have not been seen before with an optional closure being the object to check on.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).<span class="transposed_variable">out.</span>in
 ==&gt;v<span class="matrix">[<span class="number">1</span>]</span>
@@ -991,7 +991,7 @@ gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1<
 ==&gt;v<span class="matrix">[<span class="number">6</span>]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='filter/except'>except</h3 id='filter/except'>
+<h3 id='filter/except' id="except">except</h3 id='filter/except'>
 <p>Emit everything to pass except what is in the supplied collection or in the results of a named step.</p>
 <pre><code class="lang-text">gremlin&gt; x = <span class="matrix">[g.v(<span class="number">1</span>), g.v(<span class="number">2</span>), g.v(<span class="number">3</span>)]</span>
 ==&gt;v<span class="matrix">[<span class="number">1</span>]</span>
@@ -1007,20 +1007,20 @@ gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1<
 gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_variable">V.</span>has(<span class="string">'age'</span>,<span class="transposed_variable">T.</span>lt,<span class="number">30</span>).as(<span class="string">'x'</span>).out(<span class="string">'created'</span>).in(<span class="string">'created'</span>).except(<span class="string">'x'</span>)
 ==&gt;v<span class="matrix">[<span class="number">4</span>]</span>
 ==&gt;v<span class="matrix">[<span class="number">6</span>]</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#filter/retain">retain</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='filter/filter'>filter</h3 id='filter/filter'>
+<h3 id='filter/filter' id="filter">filter</h3 id='filter/filter'>
 <p>Decide whether to allow an object to pass.  Return true from the closure to allow an object to pass.</p>
 <pre><code class="lang-text">gremlin&gt; g<span class="variable">.V</span><span class="variable">.filter</span>{it<span class="variable">.age</span> &gt; <span class="number">29</span>}<span class="variable">.name</span>
 ==&gt;peter
 ==&gt;josh</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='filter/has'>has</h3 id='filter/has'>
+<h3 id='filter/has' id="has">has</h3 id='filter/has'>
 <p>Allows an element if it has a particular property.  Utilizes several options for comparisons through <code>T</code>:</p>
 <ul>
 <li>T.gt - greater than </li>
@@ -1049,13 +1049,13 @@ gremlin&gt; g.V.has(<span class="string">'age'</span>,T.<span class="keyword">in
 gremlin&gt; g.V.has(<span class="string">'age'</span>).has(<span class="string">'age'</span>,T.notin, [<span class="number">27</span>,<span class="number">35</span>]).<span class="function"><span class="title">name</span></span>
 ==&gt;<span class="function"><span class="title">marko</span></span>
 ==&gt;josh</code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#filter/hasnot">hasNot</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='filter/hasnot'>hasNot</h3 id='filter/hasnot'>
+<h3 id='filter/hasnot' id="hasnot">hasNot</h3 id='filter/hasnot'>
 <p>Allows an element if it does not have a particular property.  Utilizes several options for comparisons on through <code>T</code>:</p>
 <ul>
 <li>T.gt - greater than </li>
@@ -1075,26 +1075,26 @@ gremlin&gt; g.V.hasNot(<span class="string">'age'</span>).<span class="function"
 ==&gt;ripple</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='filter/interval'>interval</h3 id='filter/interval'>
+<h3 id='filter/interval' id="interval">interval</h3 id='filter/interval'>
 <p>Allow elements to pass that have their property in the provided start and end interval.</p>
 <pre><code class="lang-text">gremlin&gt; g.E.interval(<span class="string">"weight"</span>, <span class="number">0.3</span>f, <span class="number">0.9</span>f).weight
 ==&gt;<span class="number">0.5</span>
 ==&gt;<span class="number">0.4</span>
 ==&gt;<span class="number">0.4</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#filter/has">has</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='filter/or'>or</h3 id='filter/or'>
+<h3 id='filter/or' id="or">or</h3 id='filter/or'>
 <p>Takes a collection of pipes and emits incoming objects that are true for any of the pipes.</p>
 <pre><code class="lang-text">gremlin&gt; g.v(<span class="number">1</span>).outE.<span class="keyword">or</span>(<span class="number">_</span>().has(<span class="string">'id'</span>, T.eq, <span class="string">"9"</span>), <span class="number">_</span>().has(<span class="string">'weight'</span>, T.<span class="keyword">lt</span>, <span class="number">0</span>.<span class="number">6</span>f))
 ==&gt;e[<span class="number">7</span>][<span class="number">1</span>-knows-&gt;<span class="number">2</span>]
 ==&gt;e[<span class="number">9</span>][<span class="number">1</span>-created-&gt;<span class="number">3</span>]</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='filter/random'>random</h3 id='filter/random'>
+<h3 id='filter/random' id="random">random</h3 id='filter/random'>
 <p>Emits the incoming object if biased coin toss is heads.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_variable">V.</span>random(<span class="number">0.5</span>)
 ==&gt;v<span class="matrix">[<span class="number">3</span>]</span>
@@ -1106,7 +1106,7 @@ gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_v
 ==&gt;v<span class="matrix">[<span class="number">4</span>]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='filter/retain'>retain</h3 id='filter/retain'>
+<h3 id='filter/retain' id="retain">retain</h3 id='filter/retain'>
 <p>Allow everything to pass except what is not in the supplied collection or in the results of a named step.</p>
 <pre><code class="lang-text">gremlin&gt; x = <span class="matrix">[g.v(<span class="number">1</span>), g.v(<span class="number">2</span>), g.v(<span class="number">3</span>)]</span>
 ==&gt;v<span class="matrix">[<span class="number">1</span>]</span>
@@ -1126,13 +1126,13 @@ gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_v
 ==&gt;v<span class="matrix">[<span class="number">1</span>]</span>
 ==&gt;v<span class="matrix">[<span class="number">4</span>]</span>
 ==&gt;v<span class="matrix">[<span class="number">4</span>]</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#filter/except">except</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='filter/simplepath'>simplePath</h3 id='filter/simplepath'>
+<h3 id='filter/simplepath' id="simplepath">simplePath</h3 id='filter/simplepath'>
 <p>Emit the object only if the current path has no repeated elements.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).<span class="transposed_variable">out.</span>in
 ==&gt;v<span class="matrix">[<span class="number">1</span>]</span>
@@ -1145,9 +1145,9 @@ gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1<
 ==&gt;v<span class="matrix">[<span class="number">6</span>]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h2 id='side-effect'>Side Effect</h2 id='side-effect'>
+<h2 id='side-effect' id="side-effect">Side Effect</h2 id='side-effect'>
 <p>Side Effect steps pass the object, but yield some kind of side effect while doing so.</p>
-<h3 id='side-effect/aggregate'>aggregate</h3 id='side-effect/aggregate'>
+<h3 id='side-effect/aggregate' id="aggregate">aggregate</h3 id='side-effect/aggregate'>
 <p>Emits input, but adds input in collection, where provided closure processes input prior to insertion (greedy). In being &quot;greedy&quot;, &#39;aggregate&#39; will exhaust all the items that come to it from previous steps before emitting the next element.</p>
 <pre><code class="lang-text">gremlin&gt; x = <span class="matrix">[]</span>
 gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).<span class="transposed_variable">out.</span>aggregate(x).next()
@@ -1156,20 +1156,20 @@ gremlin&gt; x
 ==&gt;v<span class="matrix">[<span class="number">2</span>]</span>
 ==&gt;v<span class="matrix">[<span class="number">4</span>]</span>
 ==&gt;v<span class="matrix">[<span class="number">3</span>]</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#side-effect/store">store</a></li>
 <li><a href="#methods/pipe-fill">fill</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='side-effect/as'>as</h3 id='side-effect/as'>
+<h3 id='side-effect/as' id="as">as</h3 id='side-effect/as'>
 <p>Emits input, but names the previous step.</p>
 <pre><code class="lang-text">gremlin&gt; g.V.as(<span class="literal">'x'</span>).outE(<span class="attribute">'knows</span>').inV.has(<span class="attribute">'age</span>', T.gt, <span class="number">30</span>).back(<span class="literal">'x'</span>).age
 ==&gt;<span class="number">29</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='side-effect/groupby'>groupBy</h3 id='side-effect/groupby'>
+<h3 id='side-effect/groupby' id="groupby">groupBy</h3 id='side-effect/groupby'>
 <p>Emits input, but groups input after processing it by provided key-closure and value-closure.  It is also possible to supply an optional reduce-closure.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_variable">V.</span>groupBy<span class="cell">{it}</span><span class="cell">{it.out}.</span>cap
 ==&gt;<span class="cell">{v[<span class="number">3</span>]=[], v[<span class="number">2</span>]=[], v[<span class="number">1</span>]=[v[<span class="number">2</span>], v[<span class="number">4</span>], v[<span class="number">3</span>]], v[<span class="number">6</span>]=[v[<span class="number">3</span>]], v[<span class="number">5</span>]=[], v[<span class="number">4</span>]=[v[<span class="number">5</span>], v[<span class="number">3</span>]]}</span>
@@ -1187,13 +1187,13 @@ gremlin&gt; m
 ==&gt;v<span class="matrix">[<span class="number">4</span>]</span>=<span class="matrix">[v[<span class="number">5</span>]</span>, v<span class="matrix">[<span class="number">3</span>]</span>]
 gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_variable">V.</span><span class="transposed_variable">out.</span>groupBy<span class="cell">{it.name}</span><span class="cell">{it.in}</span><span class="cell">{it.unique().findAll{i -&gt; i.age &gt; <span class="number">30</span>}.</span>name}.cap
 ==&gt;<span class="cell">{lop=[josh, peter], ripple=[josh], josh=[], vadas=[]}</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#side-effect/groupcount">groupCount</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='side-effect/groupcount'>groupCount</h3 id='side-effect/groupcount'>
+<h3 id='side-effect/groupcount' id="groupcount">groupCount</h3 id='side-effect/groupcount'>
 <p>Emits input, but updates a map for each input, where closures provides generic map update.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_variable">V.</span><span class="transposed_variable">out.</span>groupCount(m)
 ==&gt;v<span class="matrix">[<span class="number">2</span>]</span>
@@ -1215,13 +1215,13 @@ gremlin&gt; m
 ==&gt;v<span class="matrix">[<span class="number">4</span>]</span>=<span class="number">1.0</span>
 ==&gt;v<span class="matrix">[<span class="number">5</span>]</span>=<span class="number">0.5</span>
 ==&gt;v<span class="matrix">[<span class="number">3</span>]</span>=<span class="number">1.5</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#side-effect/groupby">groupBy</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='side-effect/optional'>optional</h3 id='side-effect/optional'>
+<h3 id='side-effect/optional' id="optional">optional</h3 id='side-effect/optional'>
 <p>Behaves similar to <code>back</code> except that it does not filter. It will go down a particular path and back up to where it left off. As such, its useful for yielding a side-effect down a particular branch.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_variable">V.</span>as(<span class="string">'x'</span>).outE(<span class="string">'knows'</span>).<span class="transposed_variable">inV.</span>has(<span class="string">'age'</span>, <span class="transposed_variable">T.</span>gt, <span class="number">30</span>).back(<span class="string">'x'</span>)
 ==&gt;v<span class="matrix">[<span class="number">1</span>]</span>
@@ -1232,13 +1232,13 @@ gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_v
 ==&gt;v<span class="matrix">[<span class="number">6</span>]</span>
 ==&gt;v<span class="matrix">[<span class="number">5</span>]</span>
 ==&gt;v<span class="matrix">[<span class="number">4</span>]</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#filter/back">back</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='side-effect/sideeffect'>sideEffect</h3 id='side-effect/sideeffect'>
+<h3 id='side-effect/sideeffect' id="sideeffect">sideEffect</h3 id='side-effect/sideeffect'>
 <p>Emits input, but calls a side effect closure on each input.</p>
 <pre><code class="lang-text">gremlin&gt; youngest = <span class="transposed_variable">Integer.</span>MAX_VALUE
 ==&gt;<span class="number">2147483647</span>
@@ -1251,21 +1251,21 @@ gremlin&gt; youngest
 ==&gt;<span class="number">27</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='side-effect/store'>store</h3 id='side-effect/store'>
+<h3 id='side-effect/store' id="store">store</h3 id='side-effect/store'>
 <p>Emits input, but adds input to collection, where provided closure processes input prior to insertion (lazy).  In being &quot;lazy&quot;, &#39;store&#39; will keep element as they are being requested.</p>
 <pre><code class="lang-text">gremlin&gt; x = <span class="matrix">[]</span>
 gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).<span class="transposed_variable">out.</span>store(x).next()
 ==&gt;v<span class="matrix">[<span class="number">2</span>]</span>
 gremlin&gt; x
 ==&gt;v<span class="matrix">[<span class="number">2</span>]</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#side-effect/aggregate">aggregate</a></li>
 <li><a href="#methods/pipe-fill">fill</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='side-effect/table'>table</h3 id='side-effect/table'>
+<h3 id='side-effect/table' id="table">table</h3 id='side-effect/table'>
 <p>Emits input, but stores row of as values (constrained by column names if provided) in a table.  Accepts an optional set of closures that are applied in round-robin fashion to each column of the table.</p>
 <pre><code class="lang-text">gremlin&gt; t = <span class="keyword">new</span> Table()
 gremlin&gt; g.V.<span class="keyword">as</span>(<span class="string">'x'</span>).name.<span class="keyword">as</span>(<span class="string">'name'</span>).back(<span class="string">'x'</span>).age.<span class="keyword">as</span>(<span class="string">'age'</span>).table(t)
@@ -1295,7 +1295,7 @@ gremlin&gt; t
 ==&gt;[x:v[<span class="number">4</span>], name:josh, age:over thirty]
 gremlin&gt; t.get(<span class="number">0</span>,<span class="string">'name'</span>)
 ==&gt;vadas</code></pre>
-<h3 id='side-effect/tree'>tree</h3 id='side-effect/tree'>
+<h3 id='side-effect/tree' id="tree">tree</h3 id='side-effect/tree'>
 <p><a href="#">top</a></p>
 <hr>
 <p>Emit input, but stores the tree formed by the traversal as a map.  Accepts an optional set of closures to be applied in round-robin fashion over each level of the tree.</p>
@@ -1311,9 +1311,9 @@ gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1<
 ==&gt;v<span class="matrix">[<span class="number">3</span>]</span>
 gremlin&gt; <span class="transposed_variable">t.</span>get(<span class="string">'marko'</span>)
 ==&gt;child1:josh=<span class="cell">{child2:lop={}</span>, child2:ripple=<span class="cell">{}</span>}</code></pre>
-<h2 id='branch'>Branch</h2 id='branch'>
+<h2 id='branch' id="branch">Branch</h2 id='branch'>
 <p>Branch steps decide which step to take.</p>
-<h3 id='branch/copysplit'>copySplit</h3 id='branch/copysplit'>
+<h3 id='branch/copysplit' id="copysplit">copySplit</h3 id='branch/copysplit'>
 <p>Copies incoming object to internal pipes.</p>
 <pre><code class="lang-text">gremlin&gt; g.v(<span class="number">1</span>).out(<span class="string">'knows'</span>).copySplit(_().out(<span class="string">'created'</span>).name, _().age).<span class="function"><span class="title">fairMerge</span></span>
 ==&gt;<span class="function"><span class="title">ripple</span></span>
@@ -1325,42 +1325,42 @@ gremlin&gt; g.v(<span class="number">1</span>).out(<span class="string">'knows'<
 ==&gt;<span class="function"><span class="title">lop</span></span>
 ==&gt;<span class="number">27</span>
 ==&gt;<span class="number">32</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#branch/exhaustmerge">exhaustMerge</a></li>
 <li><a href="#branch/fairmerge">fairMerge</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='branch/exhaustmerge'>exhaustMerge</h3 id='branch/exhaustmerge'>
+<h3 id='branch/exhaustmerge' id="exhaustmerge">exhaustMerge</h3 id='branch/exhaustmerge'>
 <p>Used in combination with a <code>copySplit</code>, merging the parallel traversals by exhaustively getting the objects of the first, then the second, etc.</p>
 <pre><code class="lang-text">gremlin&gt; g.v(<span class="number">1</span>).out(<span class="string">'knows'</span>).copySplit(_().out(<span class="string">'created'</span>).name, _().age).<span class="function"><span class="title">exhaustMerge</span></span>
 ==&gt;<span class="function"><span class="title">ripple</span></span>
 ==&gt;<span class="function"><span class="title">lop</span></span>
 ==&gt;<span class="number">27</span>
 ==&gt;<span class="number">32</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#branch/copysplit">copySplit</a></li>
 <li><a href="#branch/fairmerge">fairMerge</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='branch/fairmerge'>fairMerge</h3 id='branch/fairmerge'>
+<h3 id='branch/fairmerge' id="fairmerge">fairMerge</h3 id='branch/fairmerge'>
 <p>Used in combination with a <code>copySplit</code>, merging the parallel traversals in a round-robin fashion.</p>
 <pre><code class="lang-text">gremlin&gt; g.v(<span class="number">1</span>).out(<span class="string">'knows'</span>).copySplit(_().out(<span class="string">'created'</span>).name, _().age).<span class="function"><span class="title">fairMerge</span></span>
 ==&gt;<span class="function"><span class="title">ripple</span></span>
 ==&gt;<span class="number">27</span>
 ==&gt;<span class="function"><span class="title">lop</span></span>
 ==&gt;<span class="number">32</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#branch/copysplit">copySplit</a></li>
 <li><a href="#branch/exhaustmerge">exaustMerge</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='branch/ifthenelse'>ifThenElse</h3 id='branch/ifthenelse'>
+<h3 id='branch/ifthenelse' id="ifthenelse">ifThenElse</h3 id='branch/ifthenelse'>
 <p>Allows for if-then-else conditional logic.</p>
 <pre><code class="lang-text">gremlin&gt; g.v(<span class="number">1</span>).out.ifThenElse{<span class="keyword">it</span>.<span class="property">name</span>=='josh'}{<span class="keyword">it</span>.age}{<span class="keyword">it</span>.<span class="property">name</span>}
 ==&gt;vadas
@@ -1368,7 +1368,7 @@ gremlin&gt; g.v(<span class="number">1</span>).out(<span class="string">'knows'<
 ==&gt;lop</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='branch/loop'>loop</h3 id='branch/loop'>
+<h3 id='branch/loop' id="loop">loop</h3 id='branch/loop'>
 <p>Loop over a particular set of steps in the pipeline.  The first argument is either the number of steps back in the pipeline to go or a named step.  The second argument is a while closure evaluating the current object.  The <code>it</code> component of the loop step closure has three properties that are accessible. These properties can be used to reason about when to break out of the loop.</p>
 <ul>
 <li><code>it.object</code>: the current object of the traverser.</li>
@@ -1386,16 +1386,16 @@ gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1<
 ==&gt;v<span class="matrix">[<span class="number">4</span>]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h2 id='methods'>Methods</h2 id='methods'>
+<h2 id='methods' id="methods">Methods</h2 id='methods'>
 <p>Methods represent functions that make it faster and easier to work with <a href="http://blueprints.tinkerpop.com">Blueprints</a> and <a href="http://pipes.tinkerpop.com">Pipes</a> APIs.  It is important to keep in mind that the full <a href="http://download.oracle.com/javase/6/docs/api/">Java API</a> and <a href="http://groovy.codehaus.org/groovy-jdk">Groovy API</a> are accessible from Gremlin.</p>
-<h3 id='methods/element-keys'>Element.keys</h3 id='methods/element-keys'>
+<h3 id='methods/element-keys' id="element-keys">Element.keys</h3 id='methods/element-keys'>
 <p>Get the property keys of an element.</p>
 <pre><code class="lang-text">gremlin&gt; g.v(<span class="number">1</span>).keys()
 ==&gt;name
 ==&gt;age</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='methods/element-remove'>Element.remove</h3 id='methods/element-remove'>
+<h3 id='methods/element-remove' id="element-remove">Element.remove</h3 id='methods/element-remove'>
 <p>Remove an element from the graph.</p>
 <pre><code class="lang-text">gremlin&gt; g.E.weight
 ==&gt;<span class="number">1.0</span>
@@ -1412,14 +1412,14 @@ gremlin&gt; g.E.weight
 ==&gt;<span class="number">1.0</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='methods/element-values'>Element.values</h3 id='methods/element-values'>
+<h3 id='methods/element-values' id="element-values">Element.values</h3 id='methods/element-values'>
 <p>Gets the property values of an element.</p>
 <pre><code class="lang-text">gremlin&gt; g.v(<span class="number">1</span>).values()
 ==&gt;marko
 ==&gt;<span class="number">29</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='methods/graph-addedge'>Graph.addEdge</h3 id='methods/graph-addedge'>
+<h3 id='methods/graph-addedge' id="graph-addedge">Graph.addEdge</h3 id='methods/graph-addedge'>
 <p>Adds an edge to the graph.  Note that most graph implementations ignore the identifier supplied to <code>addEdge</code>.</p>
 <pre><code class="lang-text">gremlin&gt; g = new TinkerGraph()
 ==&gt;tinkergraph<span class="matrix">[vertices:<span class="number">0</span> edges:<span class="number">0</span>]</span>
@@ -1435,7 +1435,7 @@ gremlin&gt; <span class="transposed_variable">g.</span>addEdge(null,v1,v2,<span 
 ==&gt;e<span class="matrix">[<span class="number">1</span>]</span><span class="matrix">[<span class="number">100</span>-pal-&gt;<span class="number">200</span>]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='methods/graph-addvertex'>Graph.addVertex</h3 id='methods/graph-addvertex'>
+<h3 id='methods/graph-addvertex' id="graph-addvertex">Graph.addVertex</h3 id='methods/graph-addvertex'>
 <p>Adds a vertex to the graph.  Note that most graph implementations ignore the identifier supplied to <code>addVertex</code>.</p>
 <pre><code class="lang-text">gremlin&gt; g = new TinkerGraph()
 ==&gt;tinkergraph<span class="matrix">[vertices:<span class="number">0</span> edges:<span class="number">0</span>]</span>
@@ -1447,7 +1447,7 @@ gremlin&gt; <span class="transposed_variable">g.</span>addVertex(null,<span clas
 ==&gt;v<span class="matrix">[<span class="number">1</span>]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='methods/graph-e'>Graph.e</h3 id='methods/graph-e'>
+<h3 id='methods/graph-e' id="graph-e">Graph.e</h3 id='methods/graph-e'>
 <p>Get an edge or set of edges by providing one or more edge identifiers.  The identifiers must be the identifiers assigned by the underlying graph implementation.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span>e(<span class="number">10</span>)
 ==&gt;e<span class="matrix">[<span class="number">10</span>]</span><span class="matrix">[<span class="number">4</span>-created-&gt;<span class="number">5</span>]</span>
@@ -1463,13 +1463,13 @@ gremlin&gt; <span class="transposed_variable">g.</span>e(<span class="transposed
 ==&gt;e<span class="matrix">[<span class="number">10</span>]</span><span class="matrix">[<span class="number">4</span>-created-&gt;<span class="number">5</span>]</span>
 ==&gt;e<span class="matrix">[<span class="number">11</span>]</span><span class="matrix">[<span class="number">4</span>-created-&gt;<span class="number">3</span>]</span>
 ==&gt;e<span class="matrix">[<span class="number">12</span>]</span><span class="matrix">[<span class="number">6</span>-created-&gt;<span class="number">3</span>]</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#methods/graph-v">Graph.v</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='methods/graph-idx-string'>Graph.idx(String)</h3 id='methods/graph-idx-string'>
+<h3 id='methods/graph-idx-string' id="graph-idx-string-">Graph.idx(String)</h3 id='methods/graph-idx-string'>
 <p>Get an manual index by its name.</p>
 <pre><code class="lang-text">gremlin&gt; g<span class="variable">.createIndex</span>(<span class="string">"my-index"</span>, Vertex<span class="variable">.class</span>)
 ==&gt;index[my-index:Vertex]
@@ -1477,13 +1477,13 @@ gremlin&gt; myIdx = g<span class="variable">.idx</span>(<span class="string">"my
 ==&gt;null
 gremlin&gt; myIdx<span class="variable">.getIndexName</span>()
 ==&gt;my-index</code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#methods/index-map-entry">Index[Map.Entry]</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='methods/graph-load'>Graph.load</h3 id='methods/graph-load'>
+<h3 id='methods/graph-load' id="graph-load">Graph.load</h3 id='methods/graph-load'>
 <p>Load a file from one of several standard formats such as <a href="http://graphml.graphdrawing.org/">GraphML</a>, <a href="http://www.fim.uni-passau.de/en/fim/faculty/chairs/theoretische-informatik/projects.html">GML</a>, or <a href="https://github.com/tinkerpop/blueprints/wiki/GraphSON-Reader-and-Writer-Library">GraphSON</a>.</p>
 <pre><code class="lang-text">gremlin&gt; g = <span class="keyword">new</span> TinkerGraph()
 ==&gt;tinkergraph[vertices:<span class="number">0</span> edges:<span class="number">0</span>]
@@ -1496,13 +1496,13 @@ gremlin&gt; g.V
 ==&gt;v[<span class="number">6</span>]
 ==&gt;v[<span class="number">5</span>]
 ==&gt;v[<span class="number">4</span>]</code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#methods/graph-save">Graph.save</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='methods/graph-removeedge'>Graph.removeEdge</h3 id='methods/graph-removeedge'>
+<h3 id='methods/graph-removeedge' id="graph-removeedge">Graph.removeEdge</h3 id='methods/graph-removeedge'>
 <p>Remove an edge. </p>
 <pre><code class="lang-text">gremlin&gt; g = new TinkerGraph()
 ==&gt;tinkergraph<span class="matrix">[vertices:<span class="number">0</span> edges:<span class="number">0</span>]</span>
@@ -1516,7 +1516,7 @@ gremlin&gt; <span class="transposed_variable">g.</span>removeEdge(<span class="t
 ==&gt;null</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='methods/graph-removevertex'>Graph.removeVertex</h3 id='methods/graph-removevertex'>
+<h3 id='methods/graph-removevertex' id="graph-removevertex">Graph.removeVertex</h3 id='methods/graph-removevertex'>
 <p>Remove a vertex. </p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span>addVertex()
 ==&gt;v<span class="matrix">[<span class="number">128</span>]</span>
@@ -1524,17 +1524,17 @@ gremlin&gt; <span class="transposed_variable">g.</span>removeVertex(<span class=
 ==&gt;null</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='methods/graph-save'>Graph.save</h3 id='methods/graph-save'>
+<h3 id='methods/graph-save' id="graph-save">Graph.save</h3 id='methods/graph-save'>
 <p>Save a graph to file given one of several standard formats such as <a href="http://graphml.graphdrawing.org/">GraphML</a>, <a href="http://www.fim.uni-passau.de/en/fim/faculty/chairs/theoretische-informatik/projects.html">GML</a>, or <a href="https://github.com/tinkerpop/blueprints/wiki/GraphSON-Reader-and-Writer-Library">GraphSON</a>.</p>
 <pre><code class="lang-text"><span class="title">gremlin</span>&gt; g.saveGraphML('<span class="typedef"><span class="keyword">data</span>/graph.xml')</span>
 ==&gt;null</code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#methods/graph-load">Graph.load</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='methods/graph-v'>Graph.v</h3 id='methods/graph-v'>
+<h3 id='methods/graph-v' id="graph-v">Graph.v</h3 id='methods/graph-v'>
 <p>Get a vertex or set of vertices by providing one or more vertex identifiers.  The identifiers must be the identifiers assigned by the underlying graph implementation.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>)
 ==&gt;v<span class="matrix">[<span class="number">1</span>]</span>
@@ -1550,13 +1550,13 @@ gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="transposed
 ==&gt;v<span class="matrix">[<span class="number">1</span>]</span>
 ==&gt;v<span class="matrix">[<span class="number">2</span>]</span>
 ==&gt;v<span class="matrix">[<span class="number">3</span>]</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#methods/graph-e">Graph.e</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='methods/index-map-entry'>Index[Map.Entry]</h3 id='methods/index-map-entry'>
+<h3 id='methods/index-map-entry' id="index-map-entry-">Index[Map.Entry]</h3 id='methods/index-map-entry'>
 <p>Look up a value in an index.</p>
 <pre><code class="lang-text">gremlin&gt; g.createIndex(<span class="string">"my-index"</span>, Vertex.class)
 ==&gt;index[my-index:Vertex]
@@ -1564,13 +1564,13 @@ gremlin&gt; g.idx(<span class="string">"my-index"</span>).put(<span class="strin
 ==&gt;null
 gremlin&gt; g.idx(<span class="string">"my-index"</span>)<span class="string">[[name:"marko"]]</span>
 ==&gt;v[<span class="number">1</span>]</code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#methods/graph-idx-string">Graph.idx(String)</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='methods/pipe-enablepath'>Pipe.enablePath</h3 id='methods/pipe-enablepath'>
+<h3 id='methods/pipe-enablepath' id="pipe-enablepath">Pipe.enablePath</h3 id='methods/pipe-enablepath'>
 <p>If the path information is required internal to a closure, Gremlin doesn’t know that as it can not interpret what is in a closure. As such, be sure to use <code>GremlinPipeline.enablePath()</code> if path information will be required by the expression.</p>
 <pre><code class="lang-text">gremlin&gt; g<span class="variable">.v</span>(<span class="number">1</span>)<span class="variable">.out</span><span class="variable">.loop</span>(<span class="number">1</span>){it<span class="variable">.loops</span> &lt; <span class="number">3</span>}{it<span class="variable">.path</span><span class="variable">.contains</span>(g<span class="variable">.v</span>(<span class="number">4</span>))}
 Cannot invoke method contains() on null object
@@ -1578,13 +1578,13 @@ Display stack trace? [yN]
 gremlin&gt; g<span class="variable">.v</span>(<span class="number">1</span>)<span class="variable">.out</span><span class="variable">.loop</span>(<span class="number">1</span>){it<span class="variable">.loops</span> &lt; <span class="number">3</span>}{it<span class="variable">.path</span><span class="variable">.contains</span>(g<span class="variable">.v</span>(<span class="number">4</span>))}<span class="variable">.enablePath</span>()
 ==&gt;v[<span class="number">5</span>]
 ==&gt;v[<span class="number">3</span>]</code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#transform/path">path</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='methods/pipe-fill'>Pipe.fill</h3 id='methods/pipe-fill'>
+<h3 id='methods/pipe-fill' id="pipe-fill">Pipe.fill</h3 id='methods/pipe-fill'>
 <p>Takes all the results in the pipeline and puts them into the provided collection.</p>
 <pre><code class="lang-text">gremlin&gt; m = <span class="matrix">[]</span>
 gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).<span class="transposed_variable">out.</span>fill(m)
@@ -1595,14 +1595,14 @@ gremlin&gt; m
 ==&gt;v<span class="matrix">[<span class="number">2</span>]</span>
 ==&gt;v<span class="matrix">[<span class="number">4</span>]</span>
 ==&gt;v<span class="matrix">[<span class="number">3</span>]</span></code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#side-effect/aggregate">aggregate</a></li>
 <li><a href="#side-effect/store">store</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='methods/pipe-iterate'>Pipe.iterate</h3 id='methods/pipe-iterate'>
+<h3 id='methods/pipe-iterate' id="pipe-iterate">Pipe.iterate</h3 id='methods/pipe-iterate'>
 <p>Calls <a href="#methods/pipe-next">Pipe.next</a> for all objects in the pipe. This is an important notion to follow when considering the behavior of the Gremlin Console.  The Gremlin Console iterates through the pipeline automatically and outputs the results.  Outside of the Gremlin Console or if more than one statement is present on a single line of the Gremlin Console, iterating the pipe must be done manually.  Read more about this topic in the Gremlin Wiki <a href="https://github.com/tinkerpop/gremlin/wiki/Troubleshooting">Troubleshooting Page</a>.</p>
 <p>There are some important things to note in the example below.  Had the the first line of Gremlin been executed separately, as opposed to being placed on the same line separated by a semi-colon, the names of all the vertices would have changed because the Gremlin Console would have automatically iterated the pipe and processed the side-effects.</p>
 <pre><code class="lang-text">gremlin&gt; g.V.sideEffect{it.name=<span class="string">"same-again"</span>};g.V.<span class="function"><span class="title">name</span></span>
@@ -1619,13 +1619,13 @@ gremlin&gt; g.V.sideEffect{it.name=<span class="string">"same"</span>}.iterate()
 ==&gt;<span class="function"><span class="title">same</span></span>
 ==&gt;<span class="function"><span class="title">same</span></span>
 ==&gt;same</code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#methods/pipe-next">Pipe.next</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='methods/pipe-next'>Pipe.next</h3 id='methods/pipe-next'>
+<h3 id='methods/pipe-next' id="pipe-next">Pipe.next</h3 id='methods/pipe-next'>
 <p>Gets the next object in the pipe or the next <em>n</em> objects.  This is an important notion to follow when considering the behavior of the Gremlin Console.  The Gremlin Console iterates through the pipeline automatically and outputs the results.  Outside of the Gremlin Console or if more than one statement is present on a single line of the Gremlin Console, iterating the pipe must be done manually.  Read more about this topic in the Gremlin Wiki <a href="https://github.com/tinkerpop/gremlin/wiki/Troubleshooting">Troubleshooting Page</a>.</p>
 <p>There are some important things to note in the example below.  Had the the first line of Gremlin been executed separately, as opposed to being placed on the same line separated by a semi-colon, the name of the vertex would have changed because the Gremlin Console would have automatically iterated the pipe and processed the side-effect.</p>
 <pre><code class="lang-text">gremlin&gt; g<span class="variable">.v</span>(<span class="number">1</span>)<span class="variable">.sideEffect</span>{it<span class="variable">.name</span>=<span class="string">"same"</span>};g<span class="variable">.v</span>(<span class="number">1</span>)<span class="variable">.name</span>
@@ -1639,15 +1639,15 @@ gremlin&gt; g<span class="variable">.V</span><span class="variable">.sideEffect<
 ==&gt;peter
 ==&gt;ripple
 ==&gt;josh</code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#methods/pipe-iterate">Pipe.iterate</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h2 id='recipes'>Recipes</h2 id='recipes'>
+<h2 id='recipes' id="recipes">Recipes</h2 id='recipes'>
 <p>Recipes are common patterns that are seen in using Gremlin.</p>
-<h3 id='recipes/duplicate-edges'>Duplicate Edges</h3 id='recipes/duplicate-edges'>
+<h3 id='recipes/duplicate-edges' id="duplicate-edges">Duplicate Edges</h3 id='recipes/duplicate-edges'>
 <p>Strictly speaking, you cannot have duplicated egdes with the same id.  This example finds edges with same <code>outV/inV/label</code> properties.</p>
 <pre><code class="lang-text">gremlin&gt; g = TinkerGraphFactory.createTinkerGraph()
 ==&gt;tinkergraph[vertices:<span class="number">6</span> edges:<span class="number">6</span>]
@@ -1666,7 +1666,7 @@ gremlin&gt; e.outV.outE(e.label).filter{ElementHelper.haveEqualProperties(e,it)}
 ==&gt;e[<span class="number">0</span>][<span class="number">1</span>-created-&gt;<span class="number">3</span>]</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='recipes/finding-edges-between-vertices'>Finding Edges Between Vertices</h3 id='recipes/finding-edges-between-vertices'>
+<h3 id='recipes/finding-edges-between-vertices' id="finding-edges-between-vertices">Finding Edges Between Vertices</h3 id='recipes/finding-edges-between-vertices'>
 <p>It is often useful to determine if there is an edge between one vertex and another.</p>
 <pre><code class="lang-text">gremlin&gt; g<span class="variable">.v</span>(<span class="number">1</span>)<span class="variable">.both</span><span class="variable">.retain</span>([g<span class="variable">.v</span>(<span class="number">3</span>)])<span class="variable">.hasNext</span>()
 ==&gt;<span class="literal">true</span>
@@ -1674,7 +1674,7 @@ gremlin&gt; g<span class="variable">.v</span>(<span class="number">1</span>)<spa
 ==&gt;e[<span class="number">9</span>][<span class="number">1</span>-created-&gt;<span class="number">3</span>]</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='recipes/happy-birthday'>Happy Birthday</h3 id='recipes/happy-birthday'>
+<h3 id='recipes/happy-birthday' id="happy-birthday">Happy Birthday</h3 id='recipes/happy-birthday'>
 <p>Some Gremlin for that special occassion when you don&#39;t know what other gift to give.</p>
 <pre><code class="lang-text">g = new TinkerGraph()
 v01 = g<span class="variable">.addVertex</span>([<span class="string">"UC"</span>:<span class="string">"B"</span>,<span class="string">"i"</span>:<span class="number">2</span>]); v02 = g<span class="variable">.addVertex</span>([<span class="string">"UC"</span>:<span class="string">"H"</span>,<span class="string">"i"</span>:<span class="number">1</span>])
@@ -1696,7 +1696,7 @@ g<span class="variable">.V</span>()<span class="variable">.has</span>(<span clas
 })<span class="variable">.join</span>(<span class="string">" "</span>)</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='recipes/hiding-console-output'>Hiding Console Output</h3 id='recipes/hiding-console-output'>
+<h3 id='recipes/hiding-console-output' id="hiding-console-output">Hiding Console Output</h3 id='recipes/hiding-console-output'>
 <p>The Gremlin Console automatically iterates the pipe and outputs the results to the console.  In some cases, this can lead to lots of screen output that isn&#39;t terribly useful.  To suppress the output, consider the following:</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span><span class="transposed_variable">V.</span>sideEffect<span class="cell">{it.name=<span class="string">'changed'</span>}</span>
 ==&gt;v<span class="matrix">[<span class="number">3</span>]</span>
@@ -1722,14 +1722,14 @@ gremlin&gt; s = <span class="transposed_variable">g.</span>v(<span class="number
 ==&gt;null
 gremlin&gt; s
 ==&gt;v<span class="matrix">[<span class="number">1</span>]</span>=<span class="cell">{v[<span class="number">3</span>]={}</span>, v<span class="matrix">[<span class="number">2</span>]</span>=<span class="cell">{}</span>, v<span class="matrix">[<span class="number">4</span>]</span>=<span class="cell">{}</span>}</code></pre>
-<h4>See Also</h4>
+<h4 id="see-also">See Also</h4>
 <ul>
 <li><a href="#methods/pipe-iterate">Pipe.iterate</a></li>
 <li><a href="#methods/pipe-next">Pipe.next</a></li>
 </ul>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='recipes/paging-results'>Paging Results</h3 id='recipes/paging-results'>
+<h3 id='recipes/paging-results' id="paging-results">Paging Results</h3 id='recipes/paging-results'>
 <p>It is sometimes desireable to not return an entire results set.  Results can be paged or limited as follows:</p>
 <pre><code class="lang-text">gremlin&gt; g<span class="variable">.V</span><span class="variable">.has</span>(<span class="string">"age"</span>, T<span class="variable">.gte</span>, <span class="number">25</span>)
 ==&gt;v[<span class="number">2</span>]
@@ -1750,7 +1750,7 @@ gremlin&gt; g<span class="variable">.V</span><span class="variable">.has</span>(
 ==&gt;v[<span class="number">4</span>]</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='recipes/reading-from-a-file'>Reading From a File</h3 id='recipes/reading-from-a-file'>
+<h3 id='recipes/reading-from-a-file' id="reading-from-a-file">Reading From a File</h3 id='recipes/reading-from-a-file'>
 <p>Reading data from an edge file formatted as CSV is easy to do with Gremlin.</p>
 <pre><code class="lang-text">gremlin&gt; g = <span class="keyword">new</span> TinkerGraph()
 ==&gt;tinkergraph[vertices:<span class="number">0</span> edges:<span class="number">0</span>]
@@ -1773,7 +1773,7 @@ gremlin&gt; g.E
 ==&gt;e[<span class="number">0</span>][<span class="number">1</span>-friend-&gt;<span class="number">2</span>]</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='recipes/sampling'>Sampling</h3 id='recipes/sampling'>
+<h3 id='recipes/sampling' id="sampling">Sampling</h3 id='recipes/sampling'>
 <p>It is sometimes useful to grab a random sample of the items in a collection.  That can be done to some degree with the <a href="#filter.random">random</a> step, but getting an explicit number of items is not supported using that step.</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1</span>).<span class="transposed_variable">out.</span>shuffle
 ==&gt;v<span class="matrix">[<span class="number">2</span>]</span>
@@ -1790,7 +1790,7 @@ gremlin&gt; <span class="transposed_variable">g.</span>v(<span class="number">1<
 ==&gt;v<span class="matrix">[<span class="number">3</span>]</span></code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='recipes/shortest-path'>Shortest Path</h3 id='recipes/shortest-path'>
+<h3 id='recipes/shortest-path' id="shortest-path">Shortest Path</h3 id='recipes/shortest-path'>
 <p>Finding the shortest path between two vertices can be accomplished with a loop.  The following example shows the shortest path between vertex <code>1</code> and vertex <code>5</code> and if such path cannot be found in five steps, break out of the computation.</p>
 <pre><code class="lang-text">gremlin&gt; g<span class="variable">.v</span>(<span class="number">1</span>)<span class="variable">.out</span><span class="variable">.loop</span>(<span class="number">1</span>){it<span class="variable">.object</span><span class="variable">.id</span> != <span class="string">"5"</span> &amp;&amp; it<span class="variable">.loops</span> &lt; <span class="number">6</span>}<span class="variable">.path</span>
 ==&gt;[v[<span class="number">1</span>], v[<span class="number">4</span>], v[<span class="number">5</span>]]</code></pre>
@@ -1840,7 +1840,7 @@ gremlin&gt; target = '99'; c = 0; root.both().except(s).store(s).sideEffect{c++}
 =<span class="value">=</span>&gt;</span>100</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='recipes/subgraphing'>Subgraphing</h3 id='recipes/subgraphing'>
+<h3 id='recipes/subgraphing' id="subgraphing">Subgraphing</h3 id='recipes/subgraphing'>
 <p>Extracting a portion of a graph out of another graph by side-effecting out graph elements to another graph.  Using a TinkerGraph as the host for the subgraph is best (as memory allows), since TinkerGraph will preserve element identifiers after the extractions.</p>
 <pre><code class="lang-text">// <span class="keyword">the</span> goal <span class="keyword">is</span> <span class="keyword">to</span> extract <span class="keyword">the</span> <span class="string">"knows"</span> subgraph
 gremlin&gt; g.E.has('label','knows')
@@ -1863,7 +1863,7 @@ gremlin&gt; sg.E
 ==&gt;e[<span class="number">8</span>][<span class="number">1</span>-knows-&gt;<span class="number">4</span>]</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='recipes/using-external-classes'>Using External Classes</h3 id='recipes/using-external-classes'>
+<h3 id='recipes/using-external-classes' id="using-external-classes">Using External Classes</h3 id='recipes/using-external-classes'>
 <p>Classes in external <code>jar</code> files can be referenced in the Gremlin REPL, making it possible to expand the capabilities of the REPL itself.  Either copy the <code>jar</code> file to the <code>GREMLIN_HOME/lib</code> directory before starting the REPL so that the <code>jar</code> is on the Gremlin classpath or use <a href="http://groovy.codehaus.org/Grape">Grape</a> to help manage <code>jar</code> files and their related dependencies.  The following example demonstrates how to use <a href="http://www.mongodb.org">MongoDB</a> from the Gremlin REPL:</p>
 <pre><code class="lang-text">gremlin&gt; <span class="transposed_variable">Grape.</span>grab(group:<span class="string">'com.gmongo'</span>,module:<span class="string">'gmongo'</span>,version:<span class="string">'1.2'</span>)
 ==&gt;null
@@ -1877,7 +1877,7 @@ gremlin&gt; mongo = new GMongo()
 ==&gt;<span class="transposed_variable">com.</span><span class="transposed_variable">gmongo.</span>GMongo@<span class="number">3717</span>ee94</code></pre>
 <p><a href="#">top</a></p>
 <hr>
-<h3 id='recipes/writing-to-file'>Writing To File</h3 id='recipes/writing-to-file'>
+<h3 id='recipes/writing-to-file' id="writing-to-file">Writing To File</h3 id='recipes/writing-to-file'>
 <p>TinkerPop supports a number of different graph file formats, like <a href="https://github.com/tinkerpop/blueprints/wiki/GraphML-Reader-and-Writer-Library">GraphML</a>, <a href="https://github.com/tinkerpop/blueprints/wiki/GML-Reader-and-Writer-Library">GML</a>, and <a href="https://github.com/tinkerpop/blueprints/wiki/GraphSON-Reader-and-Writer-Library">GraphSON</a>, but sometimes a custom format or just a simple edge list is desireable.  The following code shows how to open a file and side-effect out a comma-separated file of in and out vertices for each edge in the graph.</p>
 <pre><code class="lang-text">gremlin&gt; new File(<span class="string">"/tmp/edge-set.txt"</span>).withWriter{f -&gt; g.E.sideEffect{f &lt;&lt; <span class="string">"<span class="subst">${it.outV.id.<span class="keyword">next</span>()}</span>,<span class="subst">${it.inV.id.<span class="keyword">next</span>()}</span>\r\n"</span>}.iterate()}
 ==&gt;null</code></pre>
