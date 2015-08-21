@@ -18,6 +18,7 @@ GremlinDocs is a [GitHub repository](https://github.com/spmallette/GremlinDocs).
 
 _Acknowledgements_: Gremlin artwork by [Ketrina Yim](http://ketrinadrawsalot.tumblr.com/) and font by Maelle Keita.
 
+__IMPORTANT__ - The Gremlin examples shown here refer to TinkerPop 2.x.  Note that TinkerPop 3.x has been released under the Apache Software Foundation.  Find the latest information for Gremlin on the [Apache TinkerPop homepage](http://tinkerpop.incubator.apache.org/) and expect GremlinDocs to be updated to reflect TinkerPop 3.x features in the near future.
 
 ## Transform
 
